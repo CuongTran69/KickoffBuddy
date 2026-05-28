@@ -1,0 +1,392 @@
+{
+  "version": "1.0.0",
+  "tournament": "FIFA World Cup 2026",
+  "lastUpdated": "2026-05-28",
+  "source": "docs/data/03-team-reference.md",
+  "teams": [
+    {
+      "fifa_code": "MEX",
+      "name_en": "Mexico",
+      "name_vi": "Mexico",
+      "iso_alpha2": "MX",
+      "group": "A",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "RSA",
+      "name_en": "South Africa",
+      "name_vi": "Nam Phi",
+      "iso_alpha2": "ZA",
+      "group": "A",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "KOR",
+      "name_en": "South Korea",
+      "name_vi": "Hàn Quốc",
+      "iso_alpha2": "KR",
+      "group": "A",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "CZE",
+      "name_en": "Czechia",
+      "name_vi": "Cộng Hòa Séc",
+      "iso_alpha2": "CZ",
+      "group": "A",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "CAN",
+      "name_en": "Canada",
+      "name_vi": "Canada",
+      "iso_alpha2": "CA",
+      "group": "B",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "SUI",
+      "name_en": "Switzerland",
+      "name_vi": "Thụy Sĩ",
+      "iso_alpha2": "CH",
+      "group": "B",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "QAT",
+      "name_en": "Qatar",
+      "name_vi": "Qatar",
+      "iso_alpha2": "QA",
+      "group": "B",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "BIH",
+      "name_en": "Bosnia and Herzegovina",
+      "name_vi": "Bosnia & Herzegovina",
+      "iso_alpha2": "BA",
+      "group": "B",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "BRA",
+      "name_en": "Brazil",
+      "name_vi": "Brazil",
+      "iso_alpha2": "BR",
+      "group": "C",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "MAR",
+      "name_en": "Morocco",
+      "name_vi": "Maroc",
+      "iso_alpha2": "MA",
+      "group": "C",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "HAI",
+      "name_en": "Haiti",
+      "name_vi": "Haiti",
+      "iso_alpha2": "HT",
+      "group": "C",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "SCO",
+      "name_en": "Scotland",
+      "name_vi": "Scotland",
+      "iso_alpha2": "GB-SCT",
+      "group": "C",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "USA",
+      "name_en": "USA",
+      "name_vi": "Mỹ",
+      "iso_alpha2": "US",
+      "group": "D",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "PAR",
+      "name_en": "Paraguay",
+      "name_vi": "Paraguay",
+      "iso_alpha2": "PY",
+      "group": "D",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "AUS",
+      "name_en": "Australia",
+      "name_vi": "Úc",
+      "iso_alpha2": "AU",
+      "group": "D",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "TUR",
+      "name_en": "Türkiye",
+      "name_vi": "Thổ Nhĩ Kỳ",
+      "iso_alpha2": "TR",
+      "group": "D",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "GER",
+      "name_en": "Germany",
+      "name_vi": "Đức",
+      "iso_alpha2": "DE",
+      "group": "E",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "CUW",
+      "name_en": "Curaçao",
+      "name_vi": "Curaçao",
+      "iso_alpha2": "CW",
+      "group": "E",
+      "needsReview": true
+    },
+    {
+      "fifa_code": "CIV",
+      "name_en": "Ivory Coast",
+      "name_vi": "Bờ Biển Ngà",
+      "iso_alpha2": "CI",
+      "group": "E",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "ECU",
+      "name_en": "Ecuador",
+      "name_vi": "Ecuador",
+      "iso_alpha2": "EC",
+      "group": "E",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "NED",
+      "name_en": "Netherlands",
+      "name_vi": "Hà Lan",
+      "iso_alpha2": "NL",
+      "group": "F",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "JPN",
+      "name_en": "Japan",
+      "name_vi": "Nhật Bản",
+      "iso_alpha2": "JP",
+      "group": "F",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "TUN",
+      "name_en": "Tunisia",
+      "name_vi": "Tunisia",
+      "iso_alpha2": "TN",
+      "group": "F",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "SWE",
+      "name_en": "Sweden",
+      "name_vi": "Thụy Điển",
+      "iso_alpha2": "SE",
+      "group": "F",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "BEL",
+      "name_en": "Belgium",
+      "name_vi": "Bỉ",
+      "iso_alpha2": "BE",
+      "group": "G",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "EGY",
+      "name_en": "Egypt",
+      "name_vi": "Ai Cập",
+      "iso_alpha2": "EG",
+      "group": "G",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "IRN",
+      "name_en": "Iran",
+      "name_vi": "Iran",
+      "iso_alpha2": "IR",
+      "group": "G",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "NZL",
+      "name_en": "New Zealand",
+      "name_vi": "New Zealand",
+      "iso_alpha2": "NZ",
+      "group": "G",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "ESP",
+      "name_en": "Spain",
+      "name_vi": "Tây Ban Nha",
+      "iso_alpha2": "ES",
+      "group": "H",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "CPV",
+      "name_en": "Cape Verde",
+      "name_vi": "Cape Verde",
+      "iso_alpha2": "CV",
+      "group": "H",
+      "needsReview": true
+    },
+    {
+      "fifa_code": "KSA",
+      "name_en": "Saudi Arabia",
+      "name_vi": "Ả Rập Xê Út",
+      "iso_alpha2": "SA",
+      "group": "H",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "URU",
+      "name_en": "Uruguay",
+      "name_vi": "Uruguay",
+      "iso_alpha2": "UY",
+      "group": "H",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "FRA",
+      "name_en": "France",
+      "name_vi": "Pháp",
+      "iso_alpha2": "FR",
+      "group": "I",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "SEN",
+      "name_en": "Senegal",
+      "name_vi": "Senegal",
+      "iso_alpha2": "SN",
+      "group": "I",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "NOR",
+      "name_en": "Norway",
+      "name_vi": "Na Uy",
+      "iso_alpha2": "NO",
+      "group": "I",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "IRQ",
+      "name_en": "Iraq",
+      "name_vi": "Iraq",
+      "iso_alpha2": "IQ",
+      "group": "I",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "ARG",
+      "name_en": "Argentina",
+      "name_vi": "Argentina",
+      "iso_alpha2": "AR",
+      "group": "J",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "ALG",
+      "name_en": "Algeria",
+      "name_vi": "Algeria",
+      "iso_alpha2": "DZ",
+      "group": "J",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "AUT",
+      "name_en": "Austria",
+      "name_vi": "Áo",
+      "iso_alpha2": "AT",
+      "group": "J",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "JOR",
+      "name_en": "Jordan",
+      "name_vi": "Jordan",
+      "iso_alpha2": "JO",
+      "group": "J",
+      "needsReview": true
+    },
+    {
+      "fifa_code": "POR",
+      "name_en": "Portugal",
+      "name_vi": "Bồ Đào Nha",
+      "iso_alpha2": "PT",
+      "group": "K",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "UZB",
+      "name_en": "Uzbekistan",
+      "name_vi": "Uzbekistan",
+      "iso_alpha2": "UZ",
+      "group": "K",
+      "needsReview": true
+    },
+    {
+      "fifa_code": "COL",
+      "name_en": "Colombia",
+      "name_vi": "Colombia",
+      "iso_alpha2": "CO",
+      "group": "K",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "COD",
+      "name_en": "DR Congo",
+      "name_vi": "CHDC Congo",
+      "iso_alpha2": "CD",
+      "group": "K",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "ENG",
+      "name_en": "England",
+      "name_vi": "Anh",
+      "iso_alpha2": "GB-ENG",
+      "group": "L",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "CRO",
+      "name_en": "Croatia",
+      "name_vi": "Croatia",
+      "iso_alpha2": "HR",
+      "group": "L",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "GHA",
+      "name_en": "Ghana",
+      "name_vi": "Ghana",
+      "iso_alpha2": "GH",
+      "group": "L",
+      "needsReview": false
+    },
+    {
+      "fifa_code": "PAN",
+      "name_en": "Panama",
+      "name_vi": "Panama",
+      "iso_alpha2": "PA",
+      "group": "L",
+      "needsReview": false
+    }
+  ]
+}

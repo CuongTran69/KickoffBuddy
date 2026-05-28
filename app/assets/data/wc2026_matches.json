@@ -1,0 +1,53 @@
+{
+  "tournament": "FIFA World Cup 2026",
+  "version": "0.1.0-skeleton",
+  "lastUpdated": "2026-05-28",
+  "source": "openfootball/worldcup (CC0) — https://github.com/openfootball/worldcup/tree/master/2026--usa",
+  "_note": "skeleton only — replace before Sprint 2. Import from openfootball cup.txt + cup_finals.txt. Map UTC offsets to IANA timezones per docs/data/03-team-reference.md.",
+  "matches": [
+    {
+      "id": "match_001",
+      "title": "Mexico vs South Africa",
+      "teamA": "Mexico",
+      "teamB": "South Africa",
+      "kickoffAtUtc": "2026-06-11T19:00:00Z",
+      "sourceTimezone": "America/Mexico_City",
+      "userTimezone": "Asia/Ho_Chi_Minh",
+      "reminders": [1440, 180, 30, 5],
+      "replayPlannerEnabled": false,
+      "replayPlannedAt": null,
+      "sourceText": null,
+      "notes": "",
+      "createdAt": "2026-05-28T00:00:00Z",
+      "isSeeded": true,
+      "tournamentId": "wc2026",
+      "worldCupGroup": "A",
+      "worldCupRound": "group_stage",
+      "matchday": 1,
+      "venueCity": "Mexico City",
+      "venueIanaTimezone": "America/Mexico_City"
+    },
+    {
+      "id": "match_104",
+      "title": "TBD vs TBD",
+      "teamA": "TBD",
+      "teamB": "TBD",
+      "kickoffAtUtc": "2026-07-19T19:00:00Z",
+      "sourceTimezone": "America/New_York",
+      "userTimezone": "Asia/Ho_Chi_Minh",
+      "reminders": [1440, 180, 30, 5],
+      "replayPlannerEnabled": false,
+      "replayPlannedAt": null,
+      "sourceText": null,
+      "notes": "",
+      "createdAt": "2026-05-28T00:00:00Z",
+      "isSeeded": true,
+      "tournamentId": "wc2026",
+      "worldCupGroup": null,
+      "worldCupRound": "final",
+      "matchday": null,
+      "venueCity": "East Rutherford, NJ",
+      "venueIanaTimezone": "America/New_York"
+    }
+  ]
+}

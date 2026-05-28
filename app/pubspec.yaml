@@ -1,0 +1,61 @@
+name: kickoff_buddy
+description: "Football companion: timezone-aware kickoff, spoiler protection, rule cards"
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # State
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+
+  # Routing
+  go_router: ^14.6.2
+
+  # Storage
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+  shared_preferences: ^2.3.4
+  path_provider: ^2.1.5
+
+  # Time
+  timezone: ^0.10.0
+  flutter_timezone: ^4.1.0
+
+  # Notifications
+  flutter_local_notifications: ^18.0.1
+
+  # i18n
+  intl: ^0.20.2
+
+  # UI
+  google_fonts: ^6.2.1
+  material_symbols_icons: ^4.2807.0
+  flag: ^7.0.0
+
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.13
+  riverpod_generator: ^2.6.3
+  # isar_generator: deferred to Sprint 2 — conflicts with riverpod_lint analyzer version
+  # custom_lint + riverpod_lint: deferred to Sprint 2 alongside isar_generator resolution
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/data/
+
+  # Inter loaded via google_fonts package, no manual font files needed
