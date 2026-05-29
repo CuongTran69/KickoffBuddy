@@ -38,10 +38,11 @@ abstract final class AppTypography {
   static TextStyle tabularNumbers({
     double fontSize = 16,
     Color? color,
+    FontWeight? fontWeight,
   }) {
     return GoogleFonts.inter(
       fontSize: fontSize,
-      fontWeight: FontWeight.w600,
+      fontWeight: fontWeight ?? FontWeight.w600,
       color: color,
       fontFeatures: const [FontFeature.tabularFigures()],
     );

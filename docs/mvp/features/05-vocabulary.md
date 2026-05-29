@@ -1,11 +1,11 @@
 ---
 id: feat-vocabulary
 title: Football Vocabulary Anh - Việt
-status: planned
+status: done
 phase: mvp
 depends-on: [mvp-scope, content-vocabulary-spec]
 related: [feat-rule-cards, future-fan-etiquette]
-last-updated: 2026-05-25
+last-updated: 2026-05-29
 ---
 
 ## Mục đích
@@ -38,11 +38,11 @@ Cung cấp từ điển thuật ngữ bóng đá Anh - Việt cho người xem s
 
 ## Acceptance criteria
 
-- [ ] Có ít nhất 17 term từ bảng MVP
-- [ ] Mỗi term có: tiếng Anh, tiếng Việt, mô tả ngắn, ví dụ câu
-- [ ] Search hoạt động theo cả tiếng Anh và tiếng Việt
-- [ ] Vocabulary load offline, không cần mạng
-- [ ] Hiển thị rõ ràng trên màn hình nhỏ (font đủ lớn)
+- [x] Có ít nhất 17 term từ bảng MVP
+- [x] Mỗi term có: tiếng Anh, tiếng Việt, mô tả ngắn, ví dụ câu
+- [x] Search hoạt động theo cả tiếng Anh và tiếng Việt
+- [x] Vocabulary load offline, không cần mạng
+- [x] Hiển thị rõ ràng trên màn hình nhỏ (font đủ lớn)
 
 ---
 

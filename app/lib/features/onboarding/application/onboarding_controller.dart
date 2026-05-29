@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../core/analytics/analytics_events.dart';
+import '../../../core/analytics/analytics_provider.dart';
 import '../../../core/storage/prefs_provider.dart';
 
 /// State for the onboarding flow.
@@ -66,6 +68,11 @@ class OnboardingController extends Notifier<OnboardingState> {
     }
     await prefs.setBool('onboarding_completed', true);
     state = state.copyWith(isCompleted: true);
+
+    // Fire analytics event after persisting.
+    await ref
+        .read(analyticsServiceProvider)
+        .logEvent(AnalyticsEvents.onboardingCompleted);
   }
 }
 
@@ -74,8 +81,8 @@ final onboardingControllerProvider =
   OnboardingController.new,
 );
 
-/// Convenience provider to access SharedPreferences synchronously within
-/// onboarding (falls back gracefully if not yet loaded).
-final onboardingPrefsProvider = Provider<AsyncValue<SharedPreferences>>((ref) {
+/// Convenience provider to access SharedPreferences within onboarding.
+/// Delegates to [sharedPreferencesProvider], which is preloaded in main.dart.
+final onboardingPrefsProvider = Provider<SharedPreferences>((ref) {
   return ref.watch(sharedPreferencesProvider);
 });

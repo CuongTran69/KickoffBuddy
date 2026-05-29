@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../../application/onboarding_controller.dart';
 
 /// Step 2 — Detect and confirm device timezone.
@@ -46,6 +47,7 @@ class _TimezoneStepState extends ConsumerState<TimezoneStep> {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -59,7 +61,7 @@ class _TimezoneStepState extends ConsumerState<TimezoneStep> {
           ),
           const SizedBox(height: 32),
           Text(
-            'Your Timezone',
+            l10n.onboarding_timezone_title,
             style: textTheme.headlineMedium,
             textAlign: TextAlign.center,
           ),
@@ -82,7 +84,7 @@ class _TimezoneStepState extends ConsumerState<TimezoneStep> {
             ),
           const SizedBox(height: 24),
           Text(
-            'Match times will be shown in your local timezone.',
+            l10n.onboarding_timezone_body,
             style: textTheme.bodyMedium?.copyWith(
               color: colorScheme.onSurface.withValues(alpha: 0.7),
             ),
@@ -92,10 +94,11 @@ class _TimezoneStepState extends ConsumerState<TimezoneStep> {
           // "Change" is a no-op for Sprint 1 — Sprint 2 adds manual override
           TextButton(
             onPressed: null, // TODO(Sprint 2): manual timezone override
-            child: const Text('Change timezone'),
+            child: Text(l10n.onboarding_timezone_changeBtn),
           ),
         ],
       ),
     );
   }
 }
+

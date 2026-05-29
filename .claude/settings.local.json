@@ -66,7 +66,17 @@
       "Bash(python3 -c \"import json; json.load\\(open\\('assets/data/rule_cards.json'\\)\\)\")",
       "Bash(python3 -c \"import json; json.load\\(open\\('assets/data/vocabulary.json'\\)\\)\")",
       "Bash(python3 -c \"import json; json.load\\(open\\('assets/data/wc2026_matches.json'\\)\\)\")",
-      "Bash(python3 -c \"import json; json.load\\(open\\('assets/data/team_names_vi.json'\\)\\)\")"
+      "Bash(python3 -c \"import json; json.load\\(open\\('assets/data/team_names_vi.json'\\)\\)\")",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(openspec list *)",
+      "Bash(openspec new *)",
+      "Bash(openspec status *)",
+      "Bash(openspec instructions *)",
+      "mcp__claude-api-web-search-mcp__web-search",
+      "WebFetch(domain:m3.material.io)",
+      "Bash(grep '\\\\.dart$')",
+      "Bash(grep -v '\\\\.g\\\\.dart$')",
+      "WebFetch(domain:worldcupjson.net)"
     ]
   }
 }

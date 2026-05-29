@@ -1,11 +1,11 @@
 ---
 id: feat-replay-planner
 title: Replay Planner
-status: planned
+status: in-progress
 phase: mvp
 depends-on: [mvp-scope, feat-match-scheduler, feat-reminders]
 related: [future-sleep-plan, ops-testing]
-last-updated: 2026-05-25
+last-updated: 2026-05-29
 ---
 
 ## Mục đích
@@ -45,14 +45,14 @@ Giúp người dùng lên kế hoạch xem lại trận đấu mà không bị l
 
 ## Acceptance criteria
 
-- [ ] User có thể bật Replay Planner cho từng trận riêng lẻ
-- [ ] User có thể chọn giờ xem lại (time picker)
-- [ ] Khi Replay Planner bật: match card không hiển thị tỉ số, trạng thái thắng/thua
-- [ ] Khi Replay Planner bật: không hiển thị từ khóa "eliminated", "won", "lost", "goal scored"
-- [ ] Reminder fires vào giờ xem lại đã chọn
-- [ ] Notification copy không chứa thông tin lộ kết quả
-- [ ] User có thể bấm "Đã xem" để tắt Replay Planner và xem recap
-- [ ] Checklist gợi ý hiển thị khi bật Replay Planner
+- [x] User có thể bật Replay Planner cho từng trận riêng lẻ
+- [x] User có thể chọn giờ xem lại (time picker)
+- [x] Khi Replay Planner bật: match card không hiển thị tỉ số, trạng thái thắng/thua
+- [x] Khi Replay Planner bật: không hiển thị từ khóa "eliminated", "won", "lost", "goal scored"
+- [x] Reminder fires vào giờ xem lại đã chọn
+- [x] Notification copy không chứa thông tin lộ kết quả
+- [ ] User có thể bấm "Đã xem" để tắt Replay Planner và xem recap _(deferred → Phase 2)_
+- [ ] Checklist gợi ý hiển thị khi bật Replay Planner _(deferred → Phase 2)_
 
 ---
 

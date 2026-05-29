@@ -1,0 +1,966 @@
+{
+  "@@locale": "en",
+
+  "appName": "Kickoff Buddy",
+  "@appName": {
+    "description": "The application name shown in the app bar and store listing"
+  },
+
+  "home_title": "Kickoff Buddy",
+  "@home_title": {
+    "description": "Home screen app bar title"
+  },
+  "home_subtitle": "Track your World Cup schedule",
+  "@home_subtitle": {
+    "description": "Home screen subtitle tagline"
+  },
+  "home_cta_matches": "Match Schedule",
+  "@home_cta_matches": {
+    "description": "Home screen CTA button label for navigating to matches"
+  },
+  "home_cta_rules": "Football Rules",
+  "@home_cta_rules": {
+    "description": "Home screen CTA button label for navigating to rules"
+  },
+  "home_cta_vocabulary": "Vocabulary",
+  "@home_cta_vocabulary": {
+    "description": "Home screen CTA button label for navigating to vocabulary"
+  },
+
+  "onboarding_welcome_title": "Kickoff Buddy",
+  "@onboarding_welcome_title": {
+    "description": "Welcome step app name title"
+  },
+  "onboarding_welcome_tagline": "Never miss a kickoff.\nNo spoilers. No confusion.",
+  "@onboarding_welcome_tagline": {
+    "description": "Welcome step tagline below the app name"
+  },
+  "onboarding_timezone_title": "Your Timezone",
+  "@onboarding_timezone_title": {
+    "description": "Timezone step heading"
+  },
+  "onboarding_timezone_body": "Match times will be shown in your local timezone.",
+  "@onboarding_timezone_body": {
+    "description": "Timezone step explanatory body text"
+  },
+  "onboarding_timezone_changeBtn": "Change timezone",
+  "@onboarding_timezone_changeBtn": {
+    "description": "Timezone step change button label (currently disabled)"
+  },
+  "onboarding_language_title": "Choose your language",
+  "@onboarding_language_title": {
+    "description": "Language step heading in English"
+  },
+  "onboarding_language_subtitle": "Chọn ngôn ngữ của bạn",
+  "@onboarding_language_subtitle": {
+    "description": "Language step subtitle in Vietnamese (bilingual display)"
+  },
+  "onboarding_language_vietnamese": "Tiếng Việt",
+  "@onboarding_language_vietnamese": {
+    "description": "Language option label for Vietnamese"
+  },
+  "onboarding_language_english": "English",
+  "@onboarding_language_english": {
+    "description": "Language option label for English"
+  },
+  "onboarding_ready_title": "You're all set!",
+  "@onboarding_ready_title": {
+    "description": "Ready step heading"
+  },
+  "onboarding_ready_body": "Kickoff Buddy is ready.\nMatch times in your timezone, no spoilers.",
+  "@onboarding_ready_body": {
+    "description": "Ready step body text"
+  },
+  "onboarding_ready_letsGo": "Let's go",
+  "@onboarding_ready_letsGo": {
+    "description": "Ready step CTA button label"
+  },
+  "onboarding_btn_next": "Next",
+  "@onboarding_btn_next": {
+    "description": "Onboarding next button label"
+  },
+
+  "matches_appBar_title": "Match Schedule",
+  "@matches_appBar_title": {
+    "description": "Match list screen app bar title"
+  },
+  "matches_filter_all": "All",
+  "@matches_filter_all": {
+    "description": "Match list filter chip: show all matches"
+  },
+  "matches_filter_groupStage": "Group Stage",
+  "@matches_filter_groupStage": {
+    "description": "Match list filter chip: group stage matches only"
+  },
+  "matches_filter_knockouts": "Knockouts",
+  "@matches_filter_knockouts": {
+    "description": "Match list filter chip: knockout round matches only"
+  },
+  "matches_section_today": "Today",
+  "@matches_section_today": {
+    "description": "Date section header for today's matches"
+  },
+  "matches_section_tomorrow": "Tomorrow",
+  "@matches_section_tomorrow": {
+    "description": "Date section header for tomorrow's matches"
+  },
+  "matches_section_thisWeek": "This Week",
+  "@matches_section_thisWeek": {
+    "description": "Date section header for matches this week"
+  },
+  "matches_section_later": "Later",
+  "@matches_section_later": {
+    "description": "Date section header for matches further in the future"
+  },
+  "matches_section_past": "Past",
+  "@matches_section_past": {
+    "description": "Date section header for past matches"
+  },
+  "matches_empty_title": "No matches yet",
+  "@matches_empty_title": {
+    "description": "Empty state title on match list screen"
+  },
+  "matches_retry": "Retry",
+  "@matches_retry": {
+    "description": "Retry button label on error state"
+  },
+  "matches_tooltip_magicAdd": "Magic Add",
+  "@matches_tooltip_magicAdd": {
+    "description": "Tooltip for the Magic Add icon button in match list app bar"
+  },
+  "matches_tooltip_add": "Add match",
+  "@matches_tooltip_add": {
+    "description": "Tooltip for the add match icon button in match list app bar"
+  },
+
+  "matches_badge_group": "Group {group}",
+  "@matches_badge_group": {
+    "description": "Match card badge label for group stage matches",
+    "placeholders": {
+      "group": {
+        "type": "String",
+        "description": "The group letter, e.g. A, B, C"
+      }
+    }
+  },
+  "matches_badge_roundOf32": "Round of 32",
+  "@matches_badge_roundOf32": {
+    "description": "Match card badge label for round of 32"
+  },
+  "matches_badge_roundOf16": "Round of 16",
+  "@matches_badge_roundOf16": {
+    "description": "Match card badge label for round of 16"
+  },
+  "matches_badge_quarterFinal": "Quarter-final",
+  "@matches_badge_quarterFinal": {
+    "description": "Match card badge label for quarter-final"
+  },
+  "matches_badge_semiFinal": "Semi-final",
+  "@matches_badge_semiFinal": {
+    "description": "Match card badge label for semi-final"
+  },
+  "matches_badge_thirdPlace": "Third place",
+  "@matches_badge_thirdPlace": {
+    "description": "Match card badge label for third place match"
+  },
+  "matches_badge_final": "Final",
+  "@matches_badge_final": {
+    "description": "Match card badge label for the final"
+  },
+
+  "matchDetail_appBar_title": "Match Detail",
+  "@matchDetail_appBar_title": {
+    "description": "Match detail screen app bar title"
+  },
+  "matchDetail_label_date": "Date",
+  "@matchDetail_label_date": {
+    "description": "Match detail info row label for date"
+  },
+  "matchDetail_label_time": "Time (local)",
+  "@matchDetail_label_time": {
+    "description": "Match detail info row label for kickoff time"
+  },
+  "matchDetail_label_venue": "Venue",
+  "@matchDetail_label_venue": {
+    "description": "Match detail info row label for venue"
+  },
+  "matchDetail_label_group": "Group",
+  "@matchDetail_label_group": {
+    "description": "Match detail info row label for group"
+  },
+  "matchDetail_label_groupValue": "Group {group}",
+  "@matchDetail_label_groupValue": {
+    "description": "Match detail group value with group letter",
+    "placeholders": {
+      "group": {
+        "type": "String",
+        "description": "The group letter, e.g. A, B, C"
+      }
+    }
+  },
+  "matchDetail_label_round": "Round",
+  "@matchDetail_label_round": {
+    "description": "Match detail info row label for round"
+  },
+  "matchDetail_label_matchday": "Matchday",
+  "@matchDetail_label_matchday": {
+    "description": "Match detail info row label for matchday"
+  },
+  "matchDetail_label_matchdayValue": "Matchday {day}",
+  "@matchDetail_label_matchdayValue": {
+    "description": "Match detail matchday value",
+    "placeholders": {
+      "day": {
+        "type": "int",
+        "description": "The matchday number"
+      }
+    }
+  },
+  "matchDetail_label_notes": "Notes",
+  "@matchDetail_label_notes": {
+    "description": "Match detail info row label for notes"
+  },
+  "matchDetail_btn_addToMyMatches": "Add to my matches",
+  "@matchDetail_btn_addToMyMatches": {
+    "description": "Button label to add a match to the user's list"
+  },
+  "matchDetail_btn_removeFromMyMatches": "Remove from my matches",
+  "@matchDetail_btn_removeFromMyMatches": {
+    "description": "Button label to remove a match from the user's list"
+  },
+  "matchDetail_btn_setReminder": "Set reminder",
+  "@matchDetail_btn_setReminder": {
+    "description": "Button label to open the reminder sheet"
+  },
+  "matchDetail_btn_matchStarted": "Match started",
+  "@matchDetail_btn_matchStarted": {
+    "description": "Disabled button label shown when the match has already kicked off"
+  },
+  "matchDetail_btn_planReplay": "Plan replay",
+  "@matchDetail_btn_planReplay": {
+    "description": "Button label to open the replay planner dialog"
+  },
+  "matchDetail_btn_cancelReplayPlan": "Cancel replay plan",
+  "@matchDetail_btn_cancelReplayPlan": {
+    "description": "Button label to cancel an existing replay plan"
+  },
+  "matchDetail_btn_edit": "Edit",
+  "@matchDetail_btn_edit": {
+    "description": "Button label to edit a user-created match"
+  },
+  "matchDetail_btn_delete": "Delete",
+  "@matchDetail_btn_delete": {
+    "description": "Button label to delete a user-created match"
+  },
+  "matchDetail_dialog_cancelPlan_title": "Cancel replay plan?",
+  "@matchDetail_dialog_cancelPlan_title": {
+    "description": "Confirmation dialog title for cancelling a replay plan"
+  },
+  "matchDetail_dialog_cancelPlan_body": "The reminder notification will be cancelled.",
+  "@matchDetail_dialog_cancelPlan_body": {
+    "description": "Confirmation dialog body for cancelling a replay plan"
+  },
+  "matchDetail_dialog_delete_title": "Delete match?",
+  "@matchDetail_dialog_delete_title": {
+    "description": "Confirmation dialog title for deleting a match"
+  },
+  "matchDetail_dialog_delete_body": "This action cannot be undone.",
+  "@matchDetail_dialog_delete_body": {
+    "description": "Confirmation dialog body for deleting a match"
+  },
+  "matchDetail_snackbar_cancelledPlan": "Replay plan cancelled",
+  "@matchDetail_snackbar_cancelledPlan": {
+    "description": "Snackbar message after cancelling a replay plan"
+  },
+  "matchDetail_notFound": "Match not found",
+  "@matchDetail_notFound": {
+    "description": "Message shown when a match ID cannot be found"
+  },
+  "matchDetail_btn_backToList": "Back to list",
+  "@matchDetail_btn_backToList": {
+    "description": "Button label to navigate back to the match list"
+  },
+  "matchDetail_round_groupStage": "Group Stage",
+  "@matchDetail_round_groupStage": {
+    "description": "Round label for group stage"
+  },
+  "matchDetail_round_roundOf32": "Round of 32",
+  "@matchDetail_round_roundOf32": {
+    "description": "Round label for round of 32"
+  },
+  "matchDetail_round_roundOf16": "Round of 16",
+  "@matchDetail_round_roundOf16": {
+    "description": "Round label for round of 16"
+  },
+  "matchDetail_round_quarterFinal": "Quarter-final",
+  "@matchDetail_round_quarterFinal": {
+    "description": "Round label for quarter-final"
+  },
+  "matchDetail_round_semiFinal": "Semi-final",
+  "@matchDetail_round_semiFinal": {
+    "description": "Round label for semi-final"
+  },
+  "matchDetail_round_thirdPlace": "Third place",
+  "@matchDetail_round_thirdPlace": {
+    "description": "Round label for third place match"
+  },
+  "matchDetail_round_final": "Final",
+  "@matchDetail_round_final": {
+    "description": "Round label for the final"
+  },
+
+  "manualAdd_appBar_title": "Add match",
+  "@manualAdd_appBar_title": {
+    "description": "Manual add screen app bar title"
+  },
+  "manualAdd_appBar_title_edit": "Edit match",
+  "@manualAdd_appBar_title_edit": {
+    "description": "Manual add screen app bar title in edit mode"
+  },
+  "manualAdd_field_homeTeam": "Home team *",
+  "@manualAdd_field_homeTeam": {
+    "description": "Manual add form field label for home team"
+  },
+  "manualAdd_field_homeTeam_hint": "e.g. Brazil",
+  "@manualAdd_field_homeTeam_hint": {
+    "description": "Manual add form field hint for home team"
+  },
+  "manualAdd_field_awayTeam": "Away team *",
+  "@manualAdd_field_awayTeam": {
+    "description": "Manual add form field label for away team"
+  },
+  "manualAdd_field_awayTeam_hint": "e.g. Argentina",
+  "@manualAdd_field_awayTeam_hint": {
+    "description": "Manual add form field hint for away team"
+  },
+  "manualAdd_field_venue": "Venue (optional)",
+  "@manualAdd_field_venue": {
+    "description": "Manual add form field label for venue"
+  },
+  "manualAdd_field_venue_hint": "e.g. Estadio Azteca",
+  "@manualAdd_field_venue_hint": {
+    "description": "Manual add form field hint for venue"
+  },
+  "manualAdd_field_notes": "Notes (optional)",
+  "@manualAdd_field_notes": {
+    "description": "Manual add form field label for notes"
+  },
+  "manualAdd_field_date": "Match date *",
+  "@manualAdd_field_date": {
+    "description": "Manual add form subtitle for date picker"
+  },
+  "manualAdd_field_time": "Kickoff time (local) *",
+  "@manualAdd_field_time": {
+    "description": "Manual add form subtitle for time picker"
+  },
+  "manualAdd_placeholder_date": "Select date",
+  "@manualAdd_placeholder_date": {
+    "description": "Placeholder text for date picker before a date is selected"
+  },
+  "manualAdd_placeholder_time": "Select time",
+  "@manualAdd_placeholder_time": {
+    "description": "Placeholder text for time picker before a time is selected"
+  },
+  "manualAdd_validation_required": "Required",
+  "@manualAdd_validation_required": {
+    "description": "Validation error message for required fields"
+  },
+  "manualAdd_validation_sameTeam": "Home and away teams must be different",
+  "@manualAdd_validation_sameTeam": {
+    "description": "Validation error when home and away team names are the same"
+  },
+  "manualAdd_btn_save": "Save",
+  "@manualAdd_btn_save": {
+    "description": "Save button label on manual add screen"
+  },
+  "manualAdd_btn_retry": "Retry",
+  "@manualAdd_btn_retry": {
+    "description": "Retry button label after a save error"
+  },
+  "manualAdd_snackbar_saved": "Match added",
+  "@manualAdd_snackbar_saved": {
+    "description": "Snackbar message after successfully adding a match"
+  },
+  "manualAdd_error_prefix": "Error saving: ",
+  "@manualAdd_error_prefix": {
+    "description": "Prefix for save error messages"
+  },
+
+  "magicAdd_appBar_title": "Magic Add",
+  "@magicAdd_appBar_title": {
+    "description": "Magic Add screen app bar title"
+  },
+  "magicAdd_instruction": "Paste a text snippet containing match information",
+  "@magicAdd_instruction": {
+    "description": "Magic Add screen instruction text"
+  },
+
+  "magicAdd_btn_paste": "Paste from clipboard",
+  "@magicAdd_btn_paste": {
+    "description": "Magic Add paste button label"
+  },
+  "magicAdd_btn_analyze": "Analyze",
+  "@magicAdd_btn_analyze": {
+    "description": "Magic Add analyze button label"
+  },
+  "magicAdd_result_teamsFound": "Teams found:",
+  "@magicAdd_result_teamsFound": {
+    "description": "Magic Add result label when teams are found"
+  },
+  "magicAdd_result_missingDateTime": "Date/time not found — please fill in.",
+  "@magicAdd_result_missingDateTime": {
+    "description": "Magic Add result hint when date/time is missing"
+  },
+  "magicAdd_btn_fillMore": "Fill in more details",
+  "@magicAdd_btn_fillMore": {
+    "description": "Magic Add button to navigate to manual add with prefilled fields"
+  },
+  "magicAdd_result_failed": "Could not parse — try a format like:\n\"Team A vs Team B, June 11, 8 PM ET\"",
+  "@magicAdd_result_failed": {
+    "description": "Magic Add failure message"
+  },
+  "magicAdd_result_failedHint": "Could not parse — try a format like:\n\"Team A vs Team B, June 11, 8 PM ET\"",
+  "@magicAdd_result_failedHint": {
+    "description": "Magic Add failure hint text"
+  },
+  "magicAdd_btn_addManually": "Add manually",
+  "@magicAdd_btn_addManually": {
+    "description": "Magic Add button to navigate to manual add screen"
+  },
+  "magicAdd_confirmation_title": "Parse result:",
+  "@magicAdd_confirmation_title": {
+    "description": "Magic Add confirmation card title"
+  },
+  "magicAdd_field_home": "Home",
+  "@magicAdd_field_home": {
+    "description": "Magic Add confirmation card home team label"
+  },
+  "magicAdd_field_away": "Away",
+  "@magicAdd_field_away": {
+    "description": "Magic Add confirmation card away team label"
+  },
+  "magicAdd_field_date": "Date",
+  "@magicAdd_field_date": {
+    "description": "Magic Add confirmation card date label"
+  },
+  "magicAdd_field_time": "Time",
+  "@magicAdd_field_time": {
+    "description": "Magic Add confirmation card time label"
+  },
+  "magicAdd_field_timezone": "Timezone",
+  "@magicAdd_field_timezone": {
+    "description": "Magic Add confirmation card timezone label"
+  },
+  "magicAdd_field_timezone_local": "Local",
+  "@magicAdd_field_timezone_local": {
+    "description": "Magic Add timezone value when no timezone was parsed (uses local)"
+  },
+  "magicAdd_btn_save": "Save match",
+  "@magicAdd_btn_save": {
+    "description": "Magic Add save button label"
+  },
+  "magicAdd_btn_edit": "Edit",
+  "@magicAdd_btn_edit": {
+    "description": "Magic Add edit button label"
+  },
+  "magicAdd_snackbar_saved": "Match added",
+  "@magicAdd_snackbar_saved": {
+    "description": "Magic Add snackbar message after saving"
+  },
+  "magicAdd_snackbar_error": "Error saving: ",
+  "@magicAdd_snackbar_error": {
+    "description": "Magic Add snackbar error prefix"
+  },
+
+  "reminder_sheet_title": "Remind before kickoff",
+  "@reminder_sheet_title": {
+    "description": "Reminder bottom sheet title"
+  },
+  "reminder_btn_cancel": "Cancel",
+  "@reminder_btn_cancel": {
+    "description": "Cancel button label in reminder sheet"
+  },
+  "reminder_btn_save": "Save",
+  "@reminder_btn_save": {
+    "description": "Save button label in reminder sheet"
+  },
+  "reminder_snackbar_saved": "Reminders saved",
+  "@reminder_snackbar_saved": {
+    "description": "Snackbar message after saving reminder offsets"
+  },
+  "reminder_snackbar_cleared": "Reminders cleared",
+  "@reminder_snackbar_cleared": {
+    "description": "Snackbar message after clearing all reminder offsets"
+  },
+  "reminder_snackbar_skipped": "Skipped {labels} (already past)",
+  "@reminder_snackbar_skipped": {
+    "description": "Snackbar message when some reminder offsets were skipped because they are in the past",
+    "placeholders": {
+      "labels": {
+        "type": "String",
+        "description": "Comma-separated list of skipped offset labels"
+      }
+    }
+  },
+  "reminder_permission_title": "Notification permission required",
+  "@reminder_permission_title": {
+    "description": "Dialog title when notification permission is denied"
+  },
+  "reminder_permission_body": "Kickoff Buddy needs permission to send match notifications. Open Settings to enable notifications.",
+  "@reminder_permission_body": {
+    "description": "Dialog body when notification permission is denied"
+  },
+  "reminder_permission_openSettings": "Open Settings",
+  "@reminder_permission_openSettings": {
+    "description": "Button label to open app settings for notification permission"
+  },
+  "reminder_offset_1day": "1 day",
+  "@reminder_offset_1day": {
+    "description": "Reminder offset chip label for 1 day before kickoff"
+  },
+  "reminder_offset_3hours": "3 hours",
+  "@reminder_offset_3hours": {
+    "description": "Reminder offset chip label for 3 hours before kickoff"
+  },
+  "reminder_offset_30min": "30 min",
+  "@reminder_offset_30min": {
+    "description": "Reminder offset chip label for 30 minutes before kickoff"
+  },
+  "reminder_offset_5min": "5 min",
+  "@reminder_offset_5min": {
+    "description": "Reminder offset chip label for 5 minutes before kickoff"
+  },
+
+  "replayPlanner_dialog_title": "Plan replay",
+  "@replayPlanner_dialog_title": {
+    "description": "Replay planner dialog title"
+  },
+  "replayPlanner_btn_cancelPlan": "Cancel plan",
+  "@replayPlanner_btn_cancelPlan": {
+    "description": "Button label to cancel an existing replay plan in the dialog"
+  },
+  "replayPlanner_btn_close": "Close",
+  "@replayPlanner_btn_close": {
+    "description": "Close button label in replay planner dialog"
+  },
+  "replayPlanner_btn_save": "Save",
+  "@replayPlanner_btn_save": {
+    "description": "Save button label in replay planner dialog"
+  },
+  "replayPlanner_dialog_confirmCancel_title": "Cancel replay plan?",
+  "@replayPlanner_dialog_confirmCancel_title": {
+    "description": "Confirmation dialog title for cancelling a replay plan"
+  },
+  "replayPlanner_dialog_confirmCancel_body": "The reminder notification will be cancelled.",
+  "@replayPlanner_dialog_confirmCancel_body": {
+    "description": "Confirmation dialog body for cancelling a replay plan"
+  },
+  "replayPlanner_btn_no": "No",
+  "@replayPlanner_btn_no": {
+    "description": "No button in confirmation dialogs"
+  },
+  "replayPlanner_snackbar_saved": "Replay planned for {time}",
+  "@replayPlanner_snackbar_saved": {
+    "description": "Snackbar message after saving a replay plan",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "description": "Formatted replay time string"
+      }
+    }
+  },
+  "replayPlanner_snackbar_cancelled": "Replay plan cancelled",
+  "@replayPlanner_snackbar_cancelled": {
+    "description": "Snackbar message after cancelling a replay plan"
+  },
+  "replayPlanner_validation_mustBeAfterKickoff": "Replay time must be after kickoff",
+  "@replayPlanner_validation_mustBeAfterKickoff": {
+    "description": "Validation error when replay time is not after kickoff"
+  },
+  "replayPlanner_validation_mustBeInFuture": "Replay time must be in the future",
+  "@replayPlanner_validation_mustBeInFuture": {
+    "description": "Validation error when replay time is not in the future"
+  },
+  "replayPlanner_placeholder_date": "Select date",
+  "@replayPlanner_placeholder_date": {
+    "description": "Placeholder for date picker in replay planner"
+  },
+  "replayPlanner_placeholder_time": "Select time",
+  "@replayPlanner_placeholder_time": {
+    "description": "Placeholder for time picker in replay planner"
+  },
+
+  "spoiler_banner_text": "Spoiler-protected until {time}",
+  "@spoiler_banner_text": {
+    "description": "Spoiler banner text showing the protection end time",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "description": "Formatted replay time string"
+      }
+    }
+  },
+
+  "rules_appBar_title": "Football Rules",
+  "@rules_appBar_title": {
+    "description": "Rule cards screen app bar title"
+  },
+  "rules_error_load": "Could not load football rules",
+  "@rules_error_load": {
+    "description": "Error message when rule cards fail to load"
+  },
+  "rules_btn_retry": "Retry",
+  "@rules_btn_retry": {
+    "description": "Retry button on rule cards error state"
+  },
+  "rules_level_newbie": "Newbie",
+  "@rules_level_newbie": {
+    "description": "Rule card level filter chip: newbie level"
+  },
+  "rules_level_casual": "Casual",
+  "@rules_level_casual": {
+    "description": "Rule card level filter chip: casual level"
+  },
+  "rules_level_advanced": "Advanced",
+  "@rules_level_advanced": {
+    "description": "Rule card level filter chip: advanced level"
+  },
+  "rules_topic_offside": "Offside",
+  "@rules_topic_offside": {
+    "description": "Rule card topic label for offside"
+  },
+  "rules_topic_penalty": "Penalty",
+  "@rules_topic_penalty": {
+    "description": "Rule card topic label for penalty"
+  },
+  "rules_topic_var": "VAR",
+  "@rules_topic_var": {
+    "description": "Rule card topic label for VAR"
+  },
+  "rules_topic_cards": "Cards",
+  "@rules_topic_cards": {
+    "description": "Rule card topic label for cards (yellow/red)"
+  },
+  "rules_topic_stoppageTime": "Stoppage Time",
+  "@rules_topic_stoppageTime": {
+    "description": "Rule card topic label for stoppage time"
+  },
+  "rules_topic_extraTime": "Extra Time",
+  "@rules_topic_extraTime": {
+    "description": "Rule card topic label for extra time"
+  },
+  "rules_topic_penaltyShootout": "Penalty Shootout",
+  "@rules_topic_penaltyShootout": {
+    "description": "Rule card topic label for penalty shootout"
+  },
+  "rules_detail_appBar_title": "Football Rules",
+  "@rules_detail_appBar_title": {
+    "description": "Rule card detail screen app bar title"
+  },
+  "rules_detail_readTime": "Read in: {seconds} seconds",
+  "@rules_detail_readTime": {
+    "description": "Read time estimate on rule card detail",
+    "placeholders": {
+      "seconds": {
+        "type": "int",
+        "description": "Estimated read time in seconds"
+      }
+    }
+  },
+  "rules_detail_seeAlso": "See also",
+  "@rules_detail_seeAlso": {
+    "description": "Section heading for related rule cards"
+  },
+  "rules_detail_error_load": "Error loading data",
+  "@rules_detail_error_load": {
+    "description": "Error message when a rule card fails to load"
+  },
+  "rules_detail_notFound": "Rule not found",
+  "@rules_detail_notFound": {
+    "description": "Message when a rule card ID cannot be found"
+  },
+  "rules_detail_btn_back": "Back",
+  "@rules_detail_btn_back": {
+    "description": "Back button label on rule card detail error/not-found states"
+  },
+  "rules_detail_toggle_english": "English",
+  "@rules_detail_toggle_english": {
+    "description": "Label next to the EN/VN toggle switch on rule card detail"
+  },
+
+  "vocabulary_appBar_title": "Vocabulary",
+  "@vocabulary_appBar_title": {
+    "description": "Vocabulary screen app bar title"
+  },
+  "vocabulary_search_hint": "Search terms...",
+  "@vocabulary_search_hint": {
+    "description": "Search bar hint text on vocabulary screen"
+  },
+  "vocabulary_empty_title": "No results",
+  "@vocabulary_empty_title": {
+    "description": "Empty state title when vocabulary search returns no results"
+  },
+  "vocabulary_empty_clearSearch": "Clear search",
+  "@vocabulary_empty_clearSearch": {
+    "description": "Button label to clear the vocabulary search query"
+  },
+
+  "common_btn_cancel": "Cancel",
+  "@common_btn_cancel": {
+    "description": "Generic cancel button label used across dialogs and sheets"
+  },
+  "common_btn_no": "No",
+  "@common_btn_no": {
+    "description": "Generic no button label used in confirmation dialogs"
+  },
+  "common_btn_yes": "Yes",
+  "@common_btn_yes": {
+    "description": "Generic yes button label used in confirmation dialogs"
+  },
+  "common_btn_close": "Close",
+  "@common_btn_close": {
+    "description": "Generic close button label"
+  },
+
+  "a11y_changeLanguage": "Change language",
+  "@a11y_changeLanguage": {
+    "description": "Accessibility semantics label for the language toggle button"
+  },
+  "a11y_toggleEnVi": "Toggle English / Vietnamese",
+  "@a11y_toggleEnVi": {
+    "description": "Accessibility semantics label for the EN/VN toggle on rule card detail"
+  },
+
+  "nav_home": "Home",
+  "@nav_home": {
+    "description": "Bottom navigation bar label for the Home tab"
+  },
+  "nav_matches": "Matches",
+  "@nav_matches": {
+    "description": "Bottom navigation bar label for the Matches tab"
+  },
+  "nav_rules": "Rules",
+  "@nav_rules": {
+    "description": "Bottom navigation bar label for the Rules tab"
+  },
+  "nav_vocabulary": "Vocabulary",
+  "@nav_vocabulary": {
+    "description": "Bottom navigation bar label for the Vocabulary tab"
+  },
+  "nav_settings": "Settings",
+  "@nav_settings": {
+    "description": "Bottom navigation bar label for the Settings tab"
+  },
+  "nav_standings": "Standings",
+  "@nav_standings": {
+    "description": "Bottom navigation bar label for the Standings tab"
+  },
+  "settings_appBar_title": "Settings",
+  "@settings_appBar_title": {
+    "description": "Settings screen app bar title"
+  },
+  "settings_language": "Language",
+  "@settings_language": {
+    "description": "Settings section label for language selection"
+  },
+  "settings_themeMode": "Theme Mode",
+  "@settings_themeMode": {
+    "description": "Settings section label for theme selection"
+  },
+  "settings_theme_light": "Light Mode",
+  "@settings_theme_light": {
+    "description": "Label for light theme option"
+  },
+  "settings_theme_dark": "Dark Mode",
+  "@settings_theme_dark": {
+    "description": "Label for dark theme option"
+  },
+  "settings_theme_system": "System Default",
+  "@settings_theme_system": {
+    "description": "Label for system default theme option"
+  },
+  "settings_language_vi": "Tiếng Việt",
+  "@settings_language_vi": {
+    "description": "Label for Vietnamese language option"
+  },
+  "settings_language_en": "English",
+  "@settings_language_en": {
+    "description": "Label for English language option"
+  },
+
+  "home_section_nextMatch": "Next Match",
+  "@home_section_nextMatch": {
+    "description": "Home dashboard section heading for the next match hero"
+  },
+  "home_section_quickLearn": "Quick Learn",
+  "@home_section_quickLearn": {
+    "description": "Home dashboard section heading for quick learn rule chips"
+  },
+  "home_btn_setReminder": "Set Reminder",
+  "@home_btn_setReminder": {
+    "description": "Hero card button label to set a reminder for the next match"
+  },
+  "home_btn_viewDetail": "View Detail",
+  "@home_btn_viewDetail": {
+    "description": "Hero card button label to navigate to match detail"
+  },
+  "home_hero_noMatch_title": "No upcoming matches",
+  "@home_hero_noMatch_title": {
+    "description": "Hero card empty state title when no future match exists"
+  },
+  "home_hero_noMatch_cta": "Browse Schedule",
+  "@home_hero_noMatch_cta": {
+    "description": "Hero card empty state CTA button to browse the match list"
+  },
+  "home_countdown_days": "{days}d {hours}h",
+  "@home_countdown_days": {
+    "description": "Countdown format when more than 1 day remains (days + hours)",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "description": "Number of days remaining"
+      },
+      "hours": {
+        "type": "int",
+        "description": "Number of hours remaining (within the day)"
+      }
+    }
+  },
+  "home_countdown_hours": "{hours}h {minutes}m",
+  "@home_countdown_hours": {
+    "description": "Countdown format when less than 1 day remains (hours + minutes)",
+    "placeholders": {
+      "hours": {
+        "type": "int",
+        "description": "Number of hours remaining"
+      },
+      "minutes": {
+        "type": "int",
+        "description": "Number of minutes remaining (within the hour)"
+      }
+    }
+  },
+  "home_countdown_soon": "Starting soon",
+  "@home_countdown_soon": {
+    "description": "Countdown label when the match is imminent (less than 1 minute)"
+  },
+
+  "home_live_indicator": "LIVE",
+  "@home_live_indicator": {
+    "description": "Live match indicator badge label on the home screen hero card"
+  },
+  "home_live_viewDetail": "View detail",
+  "@home_live_viewDetail": {
+    "description": "Button label on the live match hero card to navigate to match detail"
+  },
+  "home_today_sectionHeader": "Today's matches",
+  "@home_today_sectionHeader": {
+    "description": "Section header for today's matches on the home screen"
+  },
+
+  "standings_empty_title": "No standings available",
+  "@standings_empty_title": {
+    "description": "Empty state title on the standings screen when no group data is returned"
+  },
+  "standings_error_title": "Could not load standings",
+  "@standings_error_title": {
+    "description": "Error state title on the standings screen"
+  },
+  "standings_btn_retry": "Retry",
+  "@standings_btn_retry": {
+    "description": "Retry button label on the standings error state"
+  },
+
+  "standings_col_group": "Group",
+  "@standings_col_group": {
+    "description": "Group standings card header label for the group column"
+  },
+  "standings_col_team": "Team",
+  "@standings_col_team": {
+    "description": "Group standings card header label for the team column"
+  },
+  "standings_col_played": "P",
+  "@standings_col_played": {
+    "description": "Group standings card header label for games played (abbreviated)"
+  },
+  "standings_col_wdl": "W-D-L",
+  "@standings_col_wdl": {
+    "description": "Group standings card header label for wins-draws-losses"
+  },
+  "standings_col_gfga": "GF:GA",
+  "@standings_col_gfga": {
+    "description": "Group standings card header label for goals for and goals against"
+  },
+  "standings_col_gd": "GD",
+  "@standings_col_gd": {
+    "description": "Group standings card header label for goal differential (abbreviated)"
+  },
+  "standings_col_points": "Pts",
+  "@standings_col_points": {
+    "description": "Group standings card header label for points (abbreviated)"
+  },
+  "standings_group_label": "Group {letter}",
+  "@standings_group_label": {
+    "description": "Group standings card group header label",
+    "placeholders": {
+      "letter": {
+        "type": "String",
+        "description": "The group letter, e.g. A, B, C"
+      }
+    }
+  },
+  "standings_hint_bestThird": "May advance (best 3rd)",
+  "@standings_hint_bestThird": {
+    "description": "Legend hint for rank-3 teams that may advance as best third-placed teams in WC2026"
+  },
+
+  "matches_syncError": "Score sync error: {reason}",
+  "@matches_syncError": {
+    "description": "Snackbar message when score sync fails, with the error reason",
+    "placeholders": {
+      "reason": {
+        "type": "String",
+        "description": "The error reason or message"
+      }
+    }
+  },
+
+  "matchDetail_status_live": "LIVE",
+  "@matchDetail_status_live": {
+    "description": "Status badge label for a match currently in progress"
+  },
+  "matchDetail_status_ft": "FT",
+  "@matchDetail_status_ft": {
+    "description": "Status badge label for a completed match (Full Time)"
+  },
+  "matchDetail_status_scheduled": "Scheduled",
+  "@matchDetail_status_scheduled": {
+    "description": "Status badge label for a match not yet started"
+  },
+  "matchDetail_label_winner": "Winner",
+  "@matchDetail_label_winner": {
+    "description": "Match detail info row label for the match winner"
+  },
+  "matchDetail_label_attendance": "Attendance",
+  "@matchDetail_label_attendance": {
+    "description": "Match detail info row label for attendance"
+  },
+  "matchDetail_label_penalties": "Penalties",
+  "@matchDetail_label_penalties": {
+    "description": "Match detail label for penalty shootout scores"
+  },
+  "matchDetail_score_penalties": "Pen {scoreA}–{scoreB}",
+  "@matchDetail_score_penalties": {
+    "description": "Penalty shootout score display, e.g. Pen 4–3",
+    "placeholders": {
+      "scoreA": {
+        "type": "int",
+        "description": "Home team penalty score"
+      },
+      "scoreB": {
+        "type": "int",
+        "description": "Away team penalty score"
+      }
+    }
+  }
+}

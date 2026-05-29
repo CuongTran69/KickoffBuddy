@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/analytics/analytics_events.dart';
+import '../../../../core/analytics/analytics_provider.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../application/onboarding_controller.dart';
 
 /// Step 3 — Language selection: Tiếng Việt or English.
@@ -13,6 +16,7 @@ class LanguageStep extends ConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final selectedLanguage =
         ref.watch(onboardingControllerProvider).selectedLanguage;
+    final l10n = AppLocalizations.of(context);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -26,35 +30,51 @@ class LanguageStep extends ConsumerWidget {
           ),
           const SizedBox(height: 32),
           Text(
-            'Choose your language',
+            l10n.onboarding_language_title,
             style: textTheme.headlineMedium,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8),
           Text(
-            'Chọn ngôn ngữ của bạn',
+            l10n.onboarding_language_subtitle,
             style: textTheme.bodyLarge?.copyWith(
               color: colorScheme.onSurface.withValues(alpha: 0.6),
             ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 40),
-          _LanguageButton(
-            label: 'Tiếng Việt',
-            languageCode: 'vi',
-            isSelected: selectedLanguage == 'vi',
-            onTap: () => ref
-                .read(onboardingControllerProvider.notifier)
-                .setLanguage('vi'),
+          Semantics(
+            label: l10n.a11y_changeLanguage,
+            child: _LanguageButton(
+              label: l10n.onboarding_language_vietnamese,
+              languageCode: 'vi',
+              isSelected: selectedLanguage == 'vi',
+              onTap: () {
+                ref
+                    .read(onboardingControllerProvider.notifier)
+                    .setLanguage('vi');
+                ref
+                    .read(analyticsServiceProvider)
+                    .logEvent(AnalyticsEvents.languageChanged, {'locale': 'vi'});
+              },
+            ),
           ),
           const SizedBox(height: 16),
-          _LanguageButton(
-            label: 'English',
-            languageCode: 'en',
-            isSelected: selectedLanguage == 'en',
-            onTap: () => ref
-                .read(onboardingControllerProvider.notifier)
-                .setLanguage('en'),
+          Semantics(
+            label: l10n.a11y_changeLanguage,
+            child: _LanguageButton(
+              label: l10n.onboarding_language_english,
+              languageCode: 'en',
+              isSelected: selectedLanguage == 'en',
+              onTap: () {
+                ref
+                    .read(onboardingControllerProvider.notifier)
+                    .setLanguage('en');
+                ref
+                    .read(analyticsServiceProvider)
+                    .logEvent(AnalyticsEvents.languageChanged, {'locale': 'en'});
+              },
+            ),
           ),
         ],
       ),
@@ -105,3 +125,4 @@ class _LanguageButton extends StatelessWidget {
     );
   }
 }
+

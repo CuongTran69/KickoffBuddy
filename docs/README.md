@@ -5,7 +5,7 @@ status: in-progress
 phase: foundational
 depends-on: []
 related: [glossary, product-vision, mvp-scope]
-last-updated: 2026-05-25
+last-updated: 2026-05-29
 ---
 
 ## Mục đích
@@ -44,6 +44,8 @@ Mỗi file bắt đầu bằng YAML frontmatter với các trường `id`, `titl
 | `done` | Hoàn thành |
 | `deferred` | Tạm hoãn, có lý do |
 
+> Statuses đã được đồng bộ với thực tế implementation vào 2026-05-29. Xem [mvp-status](mvp/01-status.md) để biết chi tiết.
+
 ## Phase legend
 
 | Phase | Ý nghĩa |
@@ -73,20 +75,21 @@ Mỗi file bắt đầu bằng YAML frontmatter với các trường `id`, `titl
 |---|---|---|---|
 | [01-vision.md](product/01-vision.md) | product-vision | foundational | planned |
 | [02-problems.md](product/02-problems.md) | product-problems | foundational | planned |
-| [03-roadmap.md](product/03-roadmap.md) | product-roadmap | foundational | planned |
-| [04-ux-flows.md](product/04-ux-flows.md) | product-ux-flows | mvp | planned |
+| [03-roadmap.md](product/03-roadmap.md) | product-roadmap | foundational | in-progress |
+| [04-ux-flows.md](product/04-ux-flows.md) | product-ux-flows | mvp | in-progress |
 | [05-risks.md](product/05-risks.md) | product-risks | foundational | planned |
 
 ### mvp/
 
 | File | ID | Phase | Status |
 |---|---|---|---|
-| [00-scope.md](mvp/00-scope.md) | mvp-scope | mvp | planned |
-| [features/01-match-scheduler.md](mvp/features/01-match-scheduler.md) | feat-match-scheduler | mvp | planned |
-| [features/02-reminders.md](mvp/features/02-reminders.md) | feat-reminders | mvp | planned |
-| [features/03-replay-planner.md](mvp/features/03-replay-planner.md) | feat-replay-planner | mvp | planned |
-| [features/04-rule-cards.md](mvp/features/04-rule-cards.md) | feat-rule-cards | mvp | planned |
-| [features/05-vocabulary.md](mvp/features/05-vocabulary.md) | feat-vocabulary | mvp | planned |
+| [00-scope.md](mvp/00-scope.md) | mvp-scope | mvp | in-progress |
+| [01-status.md](mvp/01-status.md) | mvp-status | mvp | in-progress |
+| [features/01-match-scheduler.md](mvp/features/01-match-scheduler.md) | feat-match-scheduler | mvp | in-progress |
+| [features/02-reminders.md](mvp/features/02-reminders.md) | feat-reminders | mvp | in-progress |
+| [features/03-replay-planner.md](mvp/features/03-replay-planner.md) | feat-replay-planner | mvp | in-progress |
+| [features/04-rule-cards.md](mvp/features/04-rule-cards.md) | feat-rule-cards | mvp | done |
+| [features/05-vocabulary.md](mvp/features/05-vocabulary.md) | feat-vocabulary | mvp | done |
 
 ### future/
 
@@ -131,10 +134,10 @@ Mỗi file bắt đầu bằng YAML frontmatter với các trường `id`, `titl
 
 | File | ID | Phase | Status |
 |---|---|---|---|
-| [01-analytics.md](ops/01-analytics.md) | ops-analytics | ops | planned |
-| [02-i18n.md](ops/02-i18n.md) | ops-i18n | foundational | planned |
+| [01-analytics.md](ops/01-analytics.md) | ops-analytics | ops | done |
+| [02-i18n.md](ops/02-i18n.md) | ops-i18n | foundational | done |
 | [03-accessibility.md](ops/03-accessibility.md) | ops-accessibility | foundational | planned |
-| [04-testing.md](ops/04-testing.md) | ops-testing | mvp | planned |
+| [04-testing.md](ops/04-testing.md) | ops-testing | mvp | in-progress |
 | [05-monetization.md](ops/05-monetization.md) | ops-monetization | phase-2 | planned |
 
 ### compliance/
