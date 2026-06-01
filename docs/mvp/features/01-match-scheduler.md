@@ -1,11 +1,11 @@
 ---
 id: feat-match-scheduler
 title: Match Scheduler
-status: planned
+status: in-progress
 phase: mvp
 depends-on: [mvp-scope, arch-data-model, arch-time-handling, data-seed-strategy]
 related: [feat-reminders, feat-replay-planner, future-magic-add-llm]
-last-updated: 2026-05-25
+last-updated: 2026-05-29
 ---
 
 ## Mục đích
@@ -44,15 +44,15 @@ Tính năng cốt lõi của Kickoff Buddy: cho phép người dùng thêm và q
 
 ## Acceptance criteria
 
-- [ ] 104 trận WC 2026 hiển thị đúng trong match list khi mở app lần đầu
-- [ ] Manual Add form có đủ các trường bắt buộc: Đội A, Đội B, Ngày, Giờ, Timezone gốc
-- [ ] Magic Add Lite nhận diện được 7 pattern (xem bảng bên dưới)
-- [ ] Confidence score được tính và hiển thị cảnh báo phù hợp
-- [ ] Confirm screen luôn hiển thị, có nút Sửa và Lưu trận
-- [ ] Kickoff được lưu theo UTC trong database
-- [ ] Hiển thị local time được convert đúng (kể cả DST)
-- [ ] Countdown hiển thị ngay sau khi lưu trận
-- [ ] Cảnh báo hiển thị khi trận rơi vào đêm khuya (22:00–05:00 local)
+- [x] 104 trận WC 2026 hiển thị đúng trong match list khi mở app lần đầu
+- [x] Manual Add form có đủ các trường bắt buộc: Đội A, Đội B, Ngày, Giờ, Timezone gốc _(dropdown "Timezone gốc" chưa có — deferred → Phase 2)_
+- [ ] Magic Add Lite nhận diện được 7 pattern (xem bảng bên dưới) _(6/7 done — "Xh sáng/tối giờ VN" deferred → Phase 2)_
+- [ ] Confidence score được tính và hiển thị cảnh báo phù hợp _(deferred → Phase 2)_
+- [x] Confirm screen luôn hiển thị, có nút Sửa và Lưu trận
+- [x] Kickoff được lưu theo UTC trong database
+- [x] Hiển thị local time được convert đúng (kể cả DST)
+- [x] Countdown hiển thị ngay sau khi lưu trận
+- [ ] Cảnh báo hiển thị khi trận rơi vào đêm khuya (22:00–05:00 local) _(deferred → Phase 2)_
 
 ---
 

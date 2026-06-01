@@ -1,11 +1,11 @@
 ---
 id: ops-testing
 title: Testing Checklist
-status: planned
+status: in-progress
 phase: mvp
 depends-on: [arch-time-handling, feat-reminders, feat-replay-planner]
 related: [arch-tech-stack, ops-accessibility]
-last-updated: 2026-05-25
+last-updated: 2026-05-29
 ---
 
 ## Mục đích

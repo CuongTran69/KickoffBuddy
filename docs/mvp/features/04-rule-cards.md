@@ -1,16 +1,18 @@
 ---
 id: feat-rule-cards
 title: Rule Cards
-status: planned
+status: done
 phase: mvp
 depends-on: [mvp-scope, content-rule-cards-spec, content-strategy]
 related: [feat-vocabulary, future-quiz-simulator]
-last-updated: 2026-05-25
+last-updated: 2026-05-29
 ---
 
 ## Mục đích
 
 Giúp người mới hiểu nhanh các luật bóng đá phổ biến qua thẻ ngắn gọn, có 3 level (newbie/casual/advanced). Bao gồm cả "5-Minute Brief" trước trận và "Why Did That Happen" trong lúc xem.
+
+**Trạng thái (2026-05-29):** 21 cards (7 chủ đề × 3 level) đã build xong. "Why Did That Happen" (10 tình huống tra cứu) được deferred sang Phase 2 — xem [mvp-status](../01-status.md).
 
 ## Phạm vi
 
@@ -42,12 +44,12 @@ Giúp người mới hiểu nhanh các luật bóng đá phổ biến qua thẻ 
 
 ## Acceptance criteria
 
-- [ ] 7 chủ đề MVP có đủ nội dung level newbie
-- [ ] Mỗi card có: tên luật, giải thích 1 câu, ví dụ đời thường, khi nào thường xuất hiện
-- [ ] User có thể chọn level (newbie/casual/advanced) trong Settings
-- [ ] "Why Did That Happen" có đủ 10 tình huống phổ biến
-- [ ] Nội dung phản ánh luật IFAB 2025/26 (xem bên dưới)
-- [ ] Không có thông tin sai lệch về luật bóng đá
+- [x] 7 chủ đề MVP có đủ nội dung level newbie
+- [x] Mỗi card có: tên luật, giải thích 1 câu, ví dụ đời thường, khi nào thường xuất hiện
+- [x] User có thể chọn level (newbie/casual/advanced) trong Settings
+- [ ] "Why Did That Happen" có đủ 10 tình huống phổ biến _(deferred → Phase 2)_
+- [x] Nội dung phản ánh luật IFAB 2025/26 (xem bên dưới)
+- [x] Không có thông tin sai lệch về luật bóng đá
 
 ---
 

@@ -1,11 +1,11 @@
 ---
 id: product-roadmap
 title: Product Roadmap
-status: planned
+status: in-progress
 phase: foundational
 depends-on: [product-vision, product-problems, mvp-scope]
 related: [arch-tech-stack, ops-monetization]
-last-updated: 2026-05-25
+last-updated: 2026-05-29
 ---
 
 ## Mục đích
@@ -70,6 +70,15 @@ Phác thảo 4 phase phát triển và sprint plan cho Phase 1 (MVP). Là tài l
 - Badge / gamification cơ bản
 - Widget: Android (`home_widget`), iOS WidgetKit (spike 2-4 tuần)
 - Fan Etiquette Guide
+- **Deferred từ MVP:**
+  - "Why Did That Happen" — 10 tình huống tra cứu (Rule Cards)
+  - Onboarding: bước football level + goals
+  - Replay Planner: nút "Đã xem" + spoiler-avoidance checklist
+  - Magic Add: confidence scoring trên confirm screen
+  - Magic Add: parse Vietnamese-time format ("2h sáng giờ VN")
+  - Cảnh báo đêm khuya (22:00–05:00) trong Match Scheduler
+  - Custom reminder messages UI
+  - Manual Add: dropdown "Timezone gốc"
 
 ### Deliverable
 
@@ -112,6 +121,8 @@ Phác thảo 4 phase phát triển và sprint plan cho Phase 1 (MVP). Là tài l
 ---
 
 ## Sprint Plan — Phase 1
+
+> **Sprint 1–5: phần lớn đã hoàn thành tính đến 2026-05-29 — xem [mvp-status](../mvp/01-status.md) để biết chi tiết trạng thái từng feature và danh sách launch blockers còn lại.**
 
 ### Sprint 1 — Foundation (tuần 1)
 
@@ -193,6 +204,13 @@ Phác thảo 4 phase phát triển và sprint plan cho Phase 1 (MVP). Là tài l
 - Search vocabulary
 - Magic Add LLM
 - Widget
+- "Why Did That Happen" (10 tình huống — Rule Cards) _(deferred từ MVP)_
+- Onboarding: football level + goals _(deferred từ MVP)_
+- Replay Planner: nút "Đã xem" + spoiler-avoidance checklist _(deferred từ MVP)_
+- Magic Add: confidence scoring + Vietnamese-time parsing _(deferred từ MVP)_
+- Cảnh báo đêm khuya trong Match Scheduler _(deferred từ MVP)_
+- Custom reminder messages _(deferred từ MVP)_
+- Manual Add: dropdown "Timezone gốc" _(deferred từ MVP)_
 
 ### Could-have (Phase 3)
 

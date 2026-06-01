@@ -1,11 +1,11 @@
 ---
 id: product-ux-flows
 title: UX Flows
-status: planned
+status: in-progress
 phase: mvp
 depends-on: [product-vision]
 related: [feat-match-scheduler, feat-reminders, feat-replay-planner, feat-rule-cards, mvp-scope]
-last-updated: 2026-05-25
+last-updated: 2026-05-29
 ---
 
 ## Mục đích

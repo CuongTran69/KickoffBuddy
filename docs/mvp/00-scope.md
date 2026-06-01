@@ -1,11 +1,11 @@
 ---
 id: mvp-scope
 title: MVP Scope
-status: planned
+status: in-progress
 phase: mvp
 depends-on: [product-vision, product-problems, product-roadmap]
 related: [feat-match-scheduler, feat-reminders, feat-replay-planner, feat-rule-cards, feat-vocabulary, data-seed-strategy]
-last-updated: 2026-05-25
+last-updated: 2026-05-29
 ---
 
 ## Mục đích
@@ -57,19 +57,19 @@ last-updated: 2026-05-25
 
 ## Acceptance criteria
 
-- [ ] App hiển thị 104 trận WC 2026 được seed sẵn với giờ local chính xác
-- [ ] Manual Add form hoạt động offline, lưu trận với UTC kickoff time
-- [ ] Magic Add Lite nhận diện được ít nhất 7 regex pattern (xem [feat-match-scheduler](features/01-match-scheduler.md))
-- [ ] Confirm screen luôn hiển thị sau Magic Add, không bỏ qua được
-- [ ] Reminder fires đúng giờ trên Android và iOS
-- [ ] Android exact-alarm permission được xử lý đúng (Android 12+)
-- [ ] Replay Planner ẩn tỉ số/kết quả khi đang bật
-- [ ] Notification của Replay Planner không leak kết quả
-- [ ] Rule Cards có đủ 7 chủ đề MVP với ít nhất level newbie
-- [ ] Vocabulary có ít nhất 17 term từ bảng gốc
-- [ ] Onboarding hoàn chỉnh: timezone detect + football level + mục tiêu
-- [ ] Disclaimer "unofficial" hiển thị trong About/Settings
-- [ ] Không có trademark FIFA/World Cup trong app name, icon, screenshot
+- [x] App hiển thị 104 trận WC 2026 được seed sẵn với giờ local chính xác
+- [x] Manual Add form hoạt động offline, lưu trận với UTC kickoff time
+- [ ] Magic Add Lite nhận diện được ít nhất 7 regex pattern (xem [feat-match-scheduler](features/01-match-scheduler.md)) _(6/7 pattern done — "Xh sáng/tối giờ VN" deferred → Phase 2)_
+- [x] Confirm screen luôn hiển thị sau Magic Add, không bỏ qua được
+- [x] Reminder fires đúng giờ trên Android và iOS
+- [ ] Android exact-alarm permission được xử lý đúng (Android 12+) _(blocker — chưa làm)_
+- [x] Replay Planner ẩn tỉ số/kết quả khi đang bật
+- [x] Notification của Replay Planner không leak kết quả
+- [x] Rule Cards có đủ 7 chủ đề MVP với ít nhất level newbie
+- [x] Vocabulary có ít nhất 17 term từ bảng gốc
+- [ ] Onboarding hoàn chỉnh: timezone detect + football level + mục tiêu _(timezone done; football level + mục tiêu deferred → Phase 2)_
+- [ ] Disclaimer "unofficial" hiển thị trong About/Settings _(blocker — chưa làm)_
+- [x] Không có trademark FIFA/World Cup trong app name, icon, screenshot
 
 ---
 

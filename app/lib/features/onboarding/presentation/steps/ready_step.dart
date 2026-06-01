@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/routing/routes.dart';
 import '../../../../core/storage/prefs_provider.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../application/onboarding_controller.dart';
 
 /// Step 4 — "All set" confirmation. Marks onboarding complete and navigates home.
@@ -14,6 +15,7 @@ class ReadyStep extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -27,13 +29,13 @@ class ReadyStep extends ConsumerWidget {
           ),
           const SizedBox(height: 32),
           Text(
-            "You're all set!",
+            l10n.onboarding_ready_title,
             style: textTheme.headlineMedium,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
           Text(
-            'Kickoff Buddy is ready.\nMatch times in your timezone, no spoilers.',
+            l10n.onboarding_ready_body,
             style: textTheme.bodyLarge?.copyWith(
               color: colorScheme.onSurface.withValues(alpha: 0.7),
             ),
@@ -44,23 +46,17 @@ class ReadyStep extends ConsumerWidget {
             width: double.infinity,
             child: FilledButton(
               onPressed: () async {
-                final prefsAsync = ref.read(sharedPreferencesProvider);
-                await prefsAsync.when(
-                  data: (prefs) async {
-                    await ref
-                        .read(onboardingControllerProvider.notifier)
-                        .complete(prefs);
-                    if (context.mounted) {
-                      context.go(Routes.home);
-                    }
-                  },
-                  loading: () async {},
-                  error: (_, __) async {},
-                );
+                final prefs = ref.read(sharedPreferencesProvider);
+                await ref
+                    .read(onboardingControllerProvider.notifier)
+                    .complete(prefs);
+                if (context.mounted) {
+                  context.go(Routes.home);
+                }
               },
-              child: const Padding(
-                padding: EdgeInsets.symmetric(vertical: 4),
-                child: Text("Let's go"),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Text(l10n.onboarding_ready_letsGo),
               ),
             ),
           ),
@@ -69,3 +65,4 @@ class ReadyStep extends ConsumerWidget {
     );
   }
 }
+

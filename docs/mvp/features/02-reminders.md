@@ -1,11 +1,11 @@
 ---
 id: feat-reminders
 title: Reminders
-status: planned
+status: in-progress
 phase: mvp
 depends-on: [mvp-scope, arch-time-handling, arch-tech-stack]
 related: [feat-match-scheduler, feat-replay-planner, ops-testing]
-last-updated: 2026-05-25
+last-updated: 2026-05-29
 ---
 
 ## Mục đích
@@ -41,15 +41,15 @@ Cho phép người dùng đặt nhắc lịch trước trận đấu bằng loca
 
 ## Acceptance criteria
 
-- [ ] Default reminders (1d/3h/30m/5m) được tạo tự động khi lưu trận
-- [ ] User có thể bật/tắt từng reminder riêng lẻ
-- [ ] User có thể chọn custom message cho reminder
-- [ ] Notification fires đúng giờ trên Android (kể cả khi app bị kill)
-- [ ] Notification fires đúng giờ trên iOS
-- [ ] Android 12+: app hướng dẫn user cấp exact-alarm permission nếu chưa có
-- [ ] Khi Replay Planner bật: notification copy không chứa tỉ số hoặc từ khóa lộ kết quả
-- [ ] User có thể cancel reminder bất kỳ lúc nào
-- [ ] Reminder tự cancel khi trận đã qua
+- [x] Default reminders (1d/3h/30m/5m) được tạo tự động khi lưu trận
+- [x] User có thể bật/tắt từng reminder riêng lẻ
+- [ ] User có thể chọn custom message cho reminder _(deferred → Phase 2)_
+- [x] Notification fires đúng giờ trên Android (kể cả khi app bị kill)
+- [x] Notification fires đúng giờ trên iOS
+- [ ] Android 12+: app hướng dẫn user cấp exact-alarm permission nếu chưa có _(blocker — chưa làm)_
+- [x] Khi Replay Planner bật: notification copy không chứa tỉ số hoặc từ khóa lộ kết quả
+- [x] User có thể cancel reminder bất kỳ lúc nào
+- [x] Reminder tự cancel khi trận đã qua
 
 ---
 
@@ -107,8 +107,9 @@ Người dùng có thể chọn từ danh sách gợi ý hoặc nhập tự do:
 
 - Package: `flutter_local_notifications` v21+
 - Timezone: `TZDateTime` từ package `timezone` — KHÔNG dùng raw `DateTime`
-- Android notification channel: `kickoff_reminders` (importance: HIGH)
+- Android notification channel: `kickoff_reminders` (importance: HIGH) — **Lưu ý:** code hiện tại dùng `match_reminders`, cần thống nhất trước launch
 - iOS: request `alert`, `sound`, `badge` permissions
+- **AndroidManifest cần thêm:** `SCHEDULE_EXACT_ALARM` + `RECEIVE_BOOT_COMPLETED` _(blocker — chưa làm)_
 
 ```
 // Đúng

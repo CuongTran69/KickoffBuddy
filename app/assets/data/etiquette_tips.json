@@ -1,0 +1,46 @@
+{
+  "tips": [
+    {
+      "id": "no_spoil",
+      "titleVi": "Không spoil kết quả",
+      "bodyVi": "Nếu bạn đã xem trận, đừng spoil cho người chưa xem. Hỏi trước: \"Bạn đã xem chưa?\" trước khi nói về kết quả. Tôn trọng trải nghiệm của người khác — cảm giác hồi hộp khi chưa biết kết quả là một phần thú vị của bóng đá.",
+      "icon": "block"
+    },
+    {
+      "id": "watch_together",
+      "titleVi": "Xem chung không tranh cãi quá căng",
+      "bodyVi": "Bóng đá là cảm xúc, nhưng tranh cãi quá căng làm hỏng không khí. Nếu ý kiến khác nhau, hãy giữ ở mức vui vẻ. Nhớ rằng mục đích là cùng nhau tận hưởng trận đấu, không phải thắng cuộc tranh luận.",
+      "icon": "groups"
+    },
+    {
+      "id": "explain_rules",
+      "titleVi": "Giải thích luật cho người mới",
+      "bodyVi": "Giải thích ngắn gọn, dùng ví dụ đời thường. Không tỏ ra khó chịu khi người mới hỏi câu \"ngây thơ\" — ai cũng có lần đầu tiên. Ví dụ: \"Offside giống như bạn đứng chờ sẵn ở vạch đích trước khi bạn bè chuyền bóng.\" Kiên nhẫn và thân thiện sẽ giúp người mới yêu bóng đá hơn.",
+      "icon": "school"
+    },
+    {
+      "id": "sports_bar",
+      "titleVi": "Xem ở quán/cafe/sports bar",
+      "bodyVi": "Đặt chỗ trước nếu trận lớn — quán có thể đông hơn bạn nghĩ. Không chiếm màn hình nếu quán đang chiếu trận khác. Tôn trọng fan của đội đối phương — họ cũng có quyền cổ vũ đội mình. Giữ tiếng ồn ở mức hợp lý để không làm phiền người xung quanh.",
+      "icon": "local_bar"
+    },
+    {
+      "id": "when_to_cheer",
+      "titleVi": "Khi nào nên reo hò",
+      "bodyVi": "Bàn thắng: reo hò thoải mái — đó là khoảnh khắc để ăn mừng! Tình huống căng thẳng: giữ im lặng để nghe bình luận và không bỏ lỡ chi tiết quan trọng. Khi người khác đang ngủ: dùng tai nghe hoặc giảm âm lượng. Biết lúc nào nên im lặng cũng là một phần của văn hóa xem bóng đá.",
+      "icon": "celebration"
+    },
+    {
+      "id": "referee_reactions",
+      "titleVi": "Vì sao fan phản ứng với trọng tài",
+      "bodyVi": "Trọng tài đưa ra quyết định trong tích tắc, không phải lúc nào cũng đúng — đó là bản chất của môn thể thao này. Fan phản ứng vì cảm xúc và tình yêu với đội bóng, không phải vì trọng tài xấu. VAR giúp giảm sai sót nhưng không loại bỏ hoàn toàn. Hiểu điều này giúp bạn xem bóng đá thoải mái hơn.",
+      "icon": "sports"
+    },
+    {
+      "id": "time_wasting",
+      "titleVi": "Vì sao cầu thủ câu giờ",
+      "bodyVi": "Câu giờ là chiến thuật hợp lệ khi đội đang dẫn — mục tiêu là bảo vệ kết quả. Trọng tài sẽ cộng thêm bù giờ để bù lại thời gian bị mất. Luật 2025/26 áp dụng nghiêm hơn với hành vi câu giờ, bao gồm thẻ vàng cho những trường hợp cố tình. Biết điều này giúp bạn không bực bội khi xem.",
+      "icon": "timer"
+    }
+  ]
+}

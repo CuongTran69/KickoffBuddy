@@ -1,11 +1,11 @@
 ---
 id: ops-analytics
 title: Analytics
-status: planned
+status: done
 phase: ops
 depends-on: [mvp-scope, product-roadmap]
 related: [arch-backend-strategy, ops-monetization]
-last-updated: 2026-05-25
+last-updated: 2026-05-29
 ---
 
 ## Mục đích

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../l10n/app_localizations.dart';
 import '../application/onboarding_controller.dart';
 import 'steps/language_step.dart';
 import 'steps/ready_step.dart';
@@ -79,9 +80,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       width: double.infinity,
                       child: FilledButton(
                         onPressed: () => _onNext(currentStep),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 4),
-                          child: Text('Next'),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4),
+                          child: Text(AppLocalizations.of(context).onboarding_btn_next),
                         ),
                       ),
                     ),
