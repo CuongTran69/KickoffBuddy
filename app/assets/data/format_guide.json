@@ -1,0 +1,59 @@
+{
+  "sections": [
+    {
+      "id": "overview",
+      "titleVi": "Tổng quan giải đấu",
+      "bodyVi": "FIFA World Cup 2026 là kỳ World Cup đầu tiên mở rộng lên 48 đội tham dự, tổ chức tại Mỹ, Canada và Mexico. Giải đấu gồm 104 trận đấu, chia thành vòng bảng và vòng loại trực tiếp. Đây là lần đầu tiên trong lịch sử World Cup có 12 bảng đấu, mỗi bảng gồm 4 đội.",
+      "icon": "public",
+      "bullets": []
+    },
+    {
+      "id": "groups",
+      "titleVi": "Vòng bảng",
+      "bodyVi": "48 đội được chia thành 12 bảng (A đến L), mỗi bảng có 4 đội. Trong vòng bảng, mỗi đội thi đấu 3 trận vòng tròn một lượt với các đội còn lại trong bảng. Hệ thống tính điểm: thắng được 3 điểm, hòa được 1 điểm, thua được 0 điểm.",
+      "icon": "groups",
+      "bullets": []
+    },
+    {
+      "id": "advancement",
+      "titleVi": "Đội đi tiếp",
+      "bodyVi": "Từ 12 bảng đấu, tổng cộng 32 đội sẽ tiến vào vòng loại trực tiếp. Cụ thể: 2 đội đứng đầu mỗi bảng (24 đội) cộng với 8 đội xếp hạng 3 có thành tích tốt nhất trong số 12 bảng sẽ đi tiếp. 4 đội xếp hạng 3 có thành tích kém nhất và tất cả các đội xếp hạng 4 sẽ bị loại.",
+      "icon": "trending_up",
+      "bullets": []
+    },
+    {
+      "id": "tiebreakers",
+      "titleVi": "Tiêu chí phân hạng",
+      "bodyVi": "Khi hai hay nhiều đội bằng điểm nhau trong bảng, thứ hạng được xác định theo thứ tự ưu tiên sau. Lưu ý: FIFA có thể cập nhật tiêu chí chính xác trước hoặc trong giải đấu.",
+      "icon": "compare_arrows",
+      "bullets": [
+        "Hiệu số bàn thắng bại toàn bảng",
+        "Số bàn thắng ghi được",
+        "Đối đầu trực tiếp giữa các đội bằng điểm (điểm → hiệu số → bàn thắng)",
+        "Điểm fair play (ít thẻ phạt hơn)",
+        "Thứ hạng trên bảng xếp hạng FIFA hoặc bốc thăm"
+      ]
+    },
+    {
+      "id": "best_thirds",
+      "titleVi": "8 đội hạng 3 tốt nhất",
+      "bodyVi": "Trong số 12 đội xếp hạng 3 (một đội từ mỗi bảng), 8 đội có thành tích tốt nhất sẽ được chọn vào vòng loại trực tiếp. Thành tích được so sánh theo cùng thứ tự tiêu chí phân hạng như trong bảng đấu: điểm số, hiệu số bàn thắng bại, số bàn thắng ghi được, và các tiêu chí tiếp theo nếu vẫn bằng nhau.",
+      "icon": "format_list_numbered",
+      "bullets": []
+    },
+    {
+      "id": "knockout",
+      "titleVi": "Vòng loại trực tiếp",
+      "bodyVi": "32 đội vào vòng loại trực tiếp thi đấu theo thể thức loại trực tiếp một lượt. Nếu hòa sau 90 phút, trận đấu sẽ bước vào hiệp phụ (2 hiệp × 15 phút). Nếu vẫn hòa sau hiệp phụ, hai đội sẽ đá luân lưu để phân định thắng thua.",
+      "icon": "emoji_events",
+      "bullets": [
+        "Vòng 1/16 — 32 đội",
+        "Vòng 1/8 — 16 đội",
+        "Tứ kết — 8 đội",
+        "Bán kết — 4 đội",
+        "Tranh hạng 3",
+        "Chung kết"
+      ]
+    }
+  ]
+}

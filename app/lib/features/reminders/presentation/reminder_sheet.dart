@@ -1,5 +1,6 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/notifications/notification_service.dart';
@@ -28,8 +29,14 @@ Future<void> showReminderSheet(BuildContext context, Match match) async {
   final decision = prefs.getString(_kPermissionKey);
 
   if (decision == _kPermissionGranted) {
-    // Already granted — open sheet directly.
+    // Already granted — check exact alarm permission on Android 12+ (D1).
     if (context.mounted) {
+      final canSchedule = await notifService.canScheduleExactAlarms();
+      if (!context.mounted) return;
+      if (!canSchedule) {
+        await _showExactAlarmDialog(context);
+        return;
+      }
       await _openSheet(context, match);
     }
     return;
@@ -53,7 +60,14 @@ Future<void> showReminderSheet(BuildContext context, Match match) async {
   if (!context.mounted) return;
 
   if (granted) {
-    await _openSheet(context, match);
+    // Check exact alarm permission on Android 12+ before opening sheet (D1).
+    final canSchedule = await notifService.canScheduleExactAlarms();
+    if (!context.mounted) return;
+    if (!canSchedule) {
+      await _showExactAlarmDialog(context);
+    } else {
+      await _openSheet(context, match);
+    }
   } else {
     await _showPermissionDeniedDialog(context);
   }
@@ -85,6 +99,37 @@ Future<void> _showPermissionDeniedDialog(BuildContext context) async {
             AppSettings.openAppSettings(type: AppSettingsType.notification);
           },
           child: Text(l10n.reminder_permission_openSettings),
+        ),
+      ],
+    ),
+  );
+}
+
+/// Shows a rationale dialog when exact alarm permission is not granted
+/// on Android 12+. Deep-links to the system exact alarm settings page.
+Future<void> _showExactAlarmDialog(BuildContext context) async {
+  final l10n = AppLocalizations.of(context);
+  await showDialog<void>(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: Text(l10n.reminder_exactAlarm_title),
+      content: Text(l10n.reminder_exactAlarm_body),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(ctx),
+          child: Text(l10n.common_btn_cancel),
+        ),
+        FilledButton(
+          onPressed: () {
+            Navigator.pop(ctx);
+            // Deep-link to ACTION_REQUEST_SCHEDULE_EXACT_ALARM on Android 12+.
+            // AppSettingsType.alarm maps to ACTION_REQUEST_SCHEDULE_EXACT_ALARM
+            // on Android, which opens the dedicated exact-alarm settings page.
+            if (defaultTargetPlatform == TargetPlatform.android) {
+              AppSettings.openAppSettings(type: AppSettingsType.alarm);
+            }
+          },
+          child: Text(l10n.reminder_exactAlarm_openSettings),
         ),
       ],
     ),

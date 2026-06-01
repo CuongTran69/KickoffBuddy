@@ -387,6 +387,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reminder_permission_openSettings => 'Open Settings';
 
   @override
+  String get reminder_exactAlarm_title => 'Exact alarm permission required';
+
+  @override
+  String get reminder_exactAlarm_body =>
+      'To deliver reminders at the exact kickoff time, Kickoff Buddy needs permission to schedule exact alarms. Tap \"Open Settings\" to grant it.';
+
+  @override
+  String get reminder_exactAlarm_openSettings => 'Open Settings';
+
+  @override
   String get reminder_offset_1day => '1 day';
 
   @override
@@ -582,6 +592,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings_language_en => 'English';
 
   @override
+  String get settings_about_title => 'About';
+
+  @override
+  String get settings_about_disclaimer =>
+      'Kickoff Buddy is an unofficial fan app and is not affiliated with FIFA or any football federation.';
+
+  @override
   String get home_section_nextMatch => 'Next Match';
 
   @override
@@ -686,4 +703,65 @@ class AppLocalizationsEn extends AppLocalizations {
   String matchDetail_score_penalties(int scoreA, int scoreB) {
     return 'Pen $scoreA–$scoreB';
   }
+
+  @override
+  String get sleepPlan_cardTitle => 'Sleep Plan';
+
+  @override
+  String get sleepPlan_disclaimer =>
+      'This is a personal schedule suggestion, not medical advice.';
+
+  @override
+  String get sleepPlan_mode_lateWatcher_title => 'Late Watcher';
+
+  @override
+  String get sleepPlan_mode_lateWatcher_body =>
+      'Nap before the match, then watch live.';
+
+  @override
+  String get sleepPlan_mode_balanced_title => 'Balanced';
+
+  @override
+  String get sleepPlan_mode_balanced_body =>
+      'Watch the second half or highlights tomorrow.';
+
+  @override
+  String get sleepPlan_mode_healthyReplay_title => 'Healthy Replay';
+
+  @override
+  String get sleepPlan_mode_healthyReplay_body =>
+      'Sleep now, watch the replay in the morning.';
+
+  @override
+  String get sleepPlan_mode_healthyReplay_cta => 'Set up Replay Planner';
+
+  @override
+  String get etiquette_appBar_title => 'Fan Etiquette';
+
+  @override
+  String get etiquette_error_load => 'Could not load etiquette tips';
+
+  @override
+  String get etiquette_btn_retry => 'Retry';
+
+  @override
+  String get etiquette_notFound => 'Tip not found';
+
+  @override
+  String get etiquette_btn_back => 'Back';
+
+  @override
+  String get formatGuide_appBar_title => 'Tournament Format';
+
+  @override
+  String get formatGuide_error_load => 'Could not load format guide';
+
+  @override
+  String get formatGuide_btn_retry => 'Retry';
+
+  @override
+  String get formatGuide_notFound => 'Section not found';
+
+  @override
+  String get formatGuide_btn_back => 'Back';
 }

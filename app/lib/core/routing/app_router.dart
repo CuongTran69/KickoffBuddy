@@ -11,6 +11,10 @@ import '../../features/onboarding/presentation/onboarding_screen.dart';
 import '../../features/rule_cards/presentation/rule_card_detail_screen.dart';
 import '../../features/rule_cards/presentation/rule_cards_screen.dart';
 import '../../features/vocabulary/presentation/vocabulary_screen.dart';
+import '../../features/etiquette/presentation/etiquette_list_screen.dart';
+import '../../features/etiquette/presentation/etiquette_detail_screen.dart';
+import '../../features/format_guide/presentation/format_guide_list_screen.dart';
+import '../../features/format_guide/presentation/format_guide_detail_screen.dart';
 import '../../features/settings/presentation/settings_screen.dart';
 import '../../features/standings/presentation/standings_screen.dart';
 import '../storage/prefs_provider.dart';
@@ -75,6 +79,30 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: Routes.vocabulary,
         builder: (BuildContext context, GoRouterState state) =>
             const VocabularyScreen(),
+      ),
+      GoRoute(
+        path: Routes.etiquette,
+        builder: (BuildContext context, GoRouterState state) =>
+            const EtiquetteListScreen(),
+      ),
+      GoRoute(
+        path: '/etiquette/:id',
+        builder: (BuildContext context, GoRouterState state) {
+          final tipId = state.pathParameters['id']!;
+          return EtiquetteDetailScreen(tipId: tipId);
+        },
+      ),
+      GoRoute(
+        path: Routes.formatGuide,
+        builder: (BuildContext context, GoRouterState state) =>
+            const FormatGuideListScreen(),
+      ),
+      GoRoute(
+        path: '/format-guide/:id',
+        builder: (BuildContext context, GoRouterState state) {
+          final sectionId = state.pathParameters['id']!;
+          return FormatGuideDetailScreen(sectionId: sectionId);
+        },
       ),
 
       // Shell — wraps the four primary tab destinations.

@@ -68,8 +68,12 @@ class MatchSyncService {
 }
 
 /// Riverpod provider for [MatchSyncService].
-final matchSyncServiceProvider = Provider<MatchSyncService>((ref) {
+///
+/// Returns null when [isarInstanceProvider] is not yet ready (Isar not open).
+/// Callers should null-check before using the service.
+final matchSyncServiceProvider = Provider<MatchSyncService?>((ref) {
   final isar = ref.watch(isarInstanceProvider);
+  if (isar == null) return null;
   final apiClient = ref.watch(apiClientProvider);
   return MatchSyncService(isar, apiClient);
 });

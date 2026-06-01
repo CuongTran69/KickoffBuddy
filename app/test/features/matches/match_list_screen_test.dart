@@ -291,4 +291,9 @@ class _FakeMatchRepository implements MatchRepository {
 
   @override
   Stream<List<Match>> watchAll() => Stream.value(List.unmodifiable(_matches));
+
+  @override
+  Stream<Match?> watchById(String matchId) => Stream.value(
+        _matches.where((m) => m.matchId == matchId).firstOrNull,
+      );
 }

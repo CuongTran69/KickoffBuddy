@@ -818,6 +818,24 @@ abstract class AppLocalizations {
   /// **'Open Settings'**
   String get reminder_permission_openSettings;
 
+  /// Dialog title when exact alarm permission is not granted on Android 12+
+  ///
+  /// In en, this message translates to:
+  /// **'Exact alarm permission required'**
+  String get reminder_exactAlarm_title;
+
+  /// Dialog body explaining why exact alarm permission is needed
+  ///
+  /// In en, this message translates to:
+  /// **'To deliver reminders at the exact kickoff time, Kickoff Buddy needs permission to schedule exact alarms. Tap \"Open Settings\" to grant it.'**
+  String get reminder_exactAlarm_body;
+
+  /// Button label to open the exact alarm settings page on Android 12+
+  ///
+  /// In en, this message translates to:
+  /// **'Open Settings'**
+  String get reminder_exactAlarm_openSettings;
+
   /// Reminder offset chip label for 1 day before kickoff
   ///
   /// In en, this message translates to:
@@ -1190,6 +1208,18 @@ abstract class AppLocalizations {
   /// **'English'**
   String get settings_language_en;
 
+  /// Settings About card title
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get settings_about_title;
+
+  /// Disclaimer text shown in the About card on the Settings screen
+  ///
+  /// In en, this message translates to:
+  /// **'Kickoff Buddy is an unofficial fan app and is not affiliated with FIFA or any football federation.'**
+  String get settings_about_disclaimer;
+
   /// Home dashboard section heading for the next match hero
   ///
   /// In en, this message translates to:
@@ -1381,6 +1411,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pen {scoreA}–{scoreB}'**
   String matchDetail_score_penalties(int scoreA, int scoreB);
+
+  /// Sleep Plan card title shown on Match Detail for late-night fixtures
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep Plan'**
+  String get sleepPlan_cardTitle;
+
+  /// Mandatory disclaimer at the bottom of the Sleep Plan card
+  ///
+  /// In en, this message translates to:
+  /// **'This is a personal schedule suggestion, not medical advice.'**
+  String get sleepPlan_disclaimer;
+
+  /// Sleep Plan mode title: watch the match live
+  ///
+  /// In en, this message translates to:
+  /// **'Late Watcher'**
+  String get sleepPlan_mode_lateWatcher_title;
+
+  /// Sleep Plan Late Watcher mode suggestion text
+  ///
+  /// In en, this message translates to:
+  /// **'Nap before the match, then watch live.'**
+  String get sleepPlan_mode_lateWatcher_body;
+
+  /// Sleep Plan mode title: watch part of the match
+  ///
+  /// In en, this message translates to:
+  /// **'Balanced'**
+  String get sleepPlan_mode_balanced_title;
+
+  /// Sleep Plan Balanced mode suggestion text
+  ///
+  /// In en, this message translates to:
+  /// **'Watch the second half or highlights tomorrow.'**
+  String get sleepPlan_mode_balanced_body;
+
+  /// Sleep Plan mode title: skip live, watch replay
+  ///
+  /// In en, this message translates to:
+  /// **'Healthy Replay'**
+  String get sleepPlan_mode_healthyReplay_title;
+
+  /// Sleep Plan Healthy Replay mode suggestion text
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep now, watch the replay in the morning.'**
+  String get sleepPlan_mode_healthyReplay_body;
+
+  /// CTA button label in the Healthy Replay mode row to open the Replay Planner dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Set up Replay Planner'**
+  String get sleepPlan_mode_healthyReplay_cta;
+
+  /// Etiquette list and detail screen app bar title
+  ///
+  /// In en, this message translates to:
+  /// **'Fan Etiquette'**
+  String get etiquette_appBar_title;
+
+  /// Error message when etiquette tips fail to load
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load etiquette tips'**
+  String get etiquette_error_load;
+
+  /// Retry button on etiquette error state
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get etiquette_btn_retry;
+
+  /// Message when an etiquette tip ID cannot be found
+  ///
+  /// In en, this message translates to:
+  /// **'Tip not found'**
+  String get etiquette_notFound;
+
+  /// Back button label on etiquette detail error/not-found states
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get etiquette_btn_back;
+
+  /// Format guide list and detail screen app bar title
+  ///
+  /// In en, this message translates to:
+  /// **'Tournament Format'**
+  String get formatGuide_appBar_title;
+
+  /// Error message when format guide sections fail to load
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load format guide'**
+  String get formatGuide_error_load;
+
+  /// Retry button on format guide error state
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get formatGuide_btn_retry;
+
+  /// Message when a format guide section ID cannot be found
+  ///
+  /// In en, this message translates to:
+  /// **'Section not found'**
+  String get formatGuide_notFound;
+
+  /// Back button label on format guide detail error/not-found states
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get formatGuide_btn_back;
 }
 
 class _AppLocalizationsDelegate

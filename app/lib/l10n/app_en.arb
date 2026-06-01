@@ -514,6 +514,18 @@
   "@reminder_permission_openSettings": {
     "description": "Button label to open app settings for notification permission"
   },
+  "reminder_exactAlarm_title": "Exact alarm permission required",
+  "@reminder_exactAlarm_title": {
+    "description": "Dialog title when exact alarm permission is not granted on Android 12+"
+  },
+  "reminder_exactAlarm_body": "To deliver reminders at the exact kickoff time, Kickoff Buddy needs permission to schedule exact alarms. Tap \"Open Settings\" to grant it.",
+  "@reminder_exactAlarm_body": {
+    "description": "Dialog body explaining why exact alarm permission is needed"
+  },
+  "reminder_exactAlarm_openSettings": "Open Settings",
+  "@reminder_exactAlarm_openSettings": {
+    "description": "Button label to open the exact alarm settings page on Android 12+"
+  },
   "reminder_offset_1day": "1 day",
   "@reminder_offset_1day": {
     "description": "Reminder offset chip label for 1 day before kickoff"
@@ -787,6 +799,14 @@
   "@settings_language_en": {
     "description": "Label for English language option"
   },
+  "settings_about_title": "About",
+  "@settings_about_title": {
+    "description": "Settings About card title"
+  },
+  "settings_about_disclaimer": "Kickoff Buddy is an unofficial fan app and is not affiliated with FIFA or any football federation.",
+  "@settings_about_disclaimer": {
+    "description": "Disclaimer text shown in the About card on the Settings screen"
+  },
 
   "home_section_nextMatch": "Next Match",
   "@home_section_nextMatch": {
@@ -962,5 +982,84 @@
         "description": "Away team penalty score"
       }
     }
+  },
+
+  "sleepPlan_cardTitle": "Sleep Plan",
+  "@sleepPlan_cardTitle": {
+    "description": "Sleep Plan card title shown on Match Detail for late-night fixtures"
+  },
+  "sleepPlan_disclaimer": "This is a personal schedule suggestion, not medical advice.",
+  "@sleepPlan_disclaimer": {
+    "description": "Mandatory disclaimer at the bottom of the Sleep Plan card"
+  },
+  "sleepPlan_mode_lateWatcher_title": "Late Watcher",
+  "@sleepPlan_mode_lateWatcher_title": {
+    "description": "Sleep Plan mode title: watch the match live"
+  },
+  "sleepPlan_mode_lateWatcher_body": "Nap before the match, then watch live.",
+  "@sleepPlan_mode_lateWatcher_body": {
+    "description": "Sleep Plan Late Watcher mode suggestion text"
+  },
+  "sleepPlan_mode_balanced_title": "Balanced",
+  "@sleepPlan_mode_balanced_title": {
+    "description": "Sleep Plan mode title: watch part of the match"
+  },
+  "sleepPlan_mode_balanced_body": "Watch the second half or highlights tomorrow.",
+  "@sleepPlan_mode_balanced_body": {
+    "description": "Sleep Plan Balanced mode suggestion text"
+  },
+  "sleepPlan_mode_healthyReplay_title": "Healthy Replay",
+  "@sleepPlan_mode_healthyReplay_title": {
+    "description": "Sleep Plan mode title: skip live, watch replay"
+  },
+  "sleepPlan_mode_healthyReplay_body": "Sleep now, watch the replay in the morning.",
+  "@sleepPlan_mode_healthyReplay_body": {
+    "description": "Sleep Plan Healthy Replay mode suggestion text"
+  },
+  "sleepPlan_mode_healthyReplay_cta": "Set up Replay Planner",
+  "@sleepPlan_mode_healthyReplay_cta": {
+    "description": "CTA button label in the Healthy Replay mode row to open the Replay Planner dialog"
+  },
+
+  "etiquette_appBar_title": "Fan Etiquette",
+  "@etiquette_appBar_title": {
+    "description": "Etiquette list and detail screen app bar title"
+  },
+  "etiquette_error_load": "Could not load etiquette tips",
+  "@etiquette_error_load": {
+    "description": "Error message when etiquette tips fail to load"
+  },
+  "etiquette_btn_retry": "Retry",
+  "@etiquette_btn_retry": {
+    "description": "Retry button on etiquette error state"
+  },
+  "etiquette_notFound": "Tip not found",
+  "@etiquette_notFound": {
+    "description": "Message when an etiquette tip ID cannot be found"
+  },
+  "etiquette_btn_back": "Back",
+  "@etiquette_btn_back": {
+    "description": "Back button label on etiquette detail error/not-found states"
+  },
+
+  "formatGuide_appBar_title": "Tournament Format",
+  "@formatGuide_appBar_title": {
+    "description": "Format guide list and detail screen app bar title"
+  },
+  "formatGuide_error_load": "Could not load format guide",
+  "@formatGuide_error_load": {
+    "description": "Error message when format guide sections fail to load"
+  },
+  "formatGuide_btn_retry": "Retry",
+  "@formatGuide_btn_retry": {
+    "description": "Retry button on format guide error state"
+  },
+  "formatGuide_notFound": "Section not found",
+  "@formatGuide_notFound": {
+    "description": "Message when a format guide section ID cannot be found"
+  },
+  "formatGuide_btn_back": "Back",
+  "@formatGuide_btn_back": {
+    "description": "Back button label on format guide detail error/not-found states"
   }
 }

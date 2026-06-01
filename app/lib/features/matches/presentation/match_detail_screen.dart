@@ -18,12 +18,16 @@ import '../../replay_planner/application/shield_status_provider.dart';
 import '../../replay_planner/presentation/replay_planner_dialog.dart';
 import '../../replay_planner/presentation/widgets/spoiler_banner.dart';
 import 'widgets/flag_avatar.dart';
+import 'widgets/sleep_plan_card.dart';
 
-/// Provider that fetches a single match by its application-level ID.
+/// Provider that streams a single match by its application-level ID.
+///
+/// Backed by [MatchRepository.watchById] so score/status updates written by
+/// background polling surface immediately on the detail screen.
 final matchByIdProvider =
-    FutureProvider.family<Match?, String>((ref, matchId) async {
+    StreamProvider.family<Match?, String>((ref, matchId) async* {
   final repo = await ref.watch(matchRepositoryProvider.future);
-  return repo.getById(matchId);
+  yield* repo.watchById(matchId);
 });
 
 /// Displays full match details with timezone-aware kickoff time.
@@ -132,6 +136,8 @@ class _MatchDetailBodyState extends ConsumerState<_MatchDetailBody> {
     final theme = Theme.of(context);
     final isKickedOff =
         match.kickoffAtUtc.toUtc().isBefore(DateTime.now().toUtc());
+    final isLateNight =
+        localKickoff.hour >= 22 || localKickoff.hour < 5;
 
     return Column(
       children: [
@@ -279,6 +285,12 @@ class _MatchDetailBodyState extends ConsumerState<_MatchDetailBody> {
                   ),
                 ),
                 const SizedBox(height: 16),
+
+                // Sleep Plan card — shown for late-night fixtures not yet started
+                if (isLateNight && !isKickedOff) ...[
+                  SleepPlanCard(match: match),
+                  const SizedBox(height: 16),
+                ],
 
                 // Primary action: My matches toggle
                 FilledButton.icon(

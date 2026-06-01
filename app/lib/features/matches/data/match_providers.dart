@@ -20,7 +20,8 @@ final seedLoaderProvider = FutureProvider<void>((ref) async {
 });
 
 /// Convenience provider that exposes the [Isar] instance synchronously
-/// once it has been opened. Throws if Isar is not yet ready.
-final isarInstanceProvider = Provider<Isar>((ref) {
-  return ref.watch(isarProvider).requireValue;
+/// once it has been opened. Returns null when Isar is not yet ready,
+/// preventing a [StateError] on hot-restart or first-launch races (D2).
+final isarInstanceProvider = Provider<Isar?>((ref) {
+  return ref.watch(isarProvider).asData?.value;
 });

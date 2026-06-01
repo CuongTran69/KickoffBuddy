@@ -104,12 +104,46 @@ class SettingsScreen extends ConsumerWidget {
             _PremiumSettingsCard(
               title: locale?.languageCode == 'vi' ? 'Tài nguyên & Tra cứu' : 'Resources & Reference',
               icon: Icons.menu_book_outlined,
-              child: _SettingsNavigationTile(
-                label: l10n.vocabulary_appBar_title,
-                icon: Icons.translate,
-                onTap: () {
-                  context.push(Routes.vocabulary);
-                },
+              child: Column(
+                children: [
+                  _SettingsNavigationTile(
+                    label: l10n.vocabulary_appBar_title,
+                    icon: Icons.translate,
+                    onTap: () {
+                      context.push(Routes.vocabulary);
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  _SettingsNavigationTile(
+                    label: l10n.etiquette_appBar_title,
+                    icon: Icons.sports_soccer,
+                    onTap: () {
+                      context.push(Routes.etiquette);
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  _SettingsNavigationTile(
+                    label: l10n.formatGuide_appBar_title,
+                    icon: Icons.emoji_events_outlined,
+                    onTap: () {
+                      context.push(Routes.formatGuide);
+                    },
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 8),
+
+            // About / Disclaimer Card (D4)
+            _PremiumSettingsCard(
+              title: l10n.settings_about_title,
+              icon: Icons.info_outline,
+              child: Text(
+                l10n.settings_about_disclaimer,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+                ),
               ),
             ),
           ],

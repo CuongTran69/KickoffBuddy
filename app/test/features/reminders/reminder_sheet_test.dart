@@ -241,6 +241,10 @@ class _FakeMatchRepository implements MatchRepository {
 
   @override
   Stream<List<Match>> watchAll() => Stream.value([_match]);
+
+  @override
+  Stream<Match?> watchById(String matchId) =>
+      Stream.value(matchId == _match.matchId ? _match : null);
 }
 
 /// Fake NotificationService that does nothing (no plugin calls in tests).

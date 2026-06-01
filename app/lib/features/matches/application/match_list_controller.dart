@@ -44,28 +44,32 @@ final matchFilterProvider =
 
 /// Provider that returns the filtered + date-grouped match list.
 ///
+/// Backed by [MatchRepository.watchAll] so Isar write-transactions (e.g. from
+/// background score polling) automatically surface on the UI without requiring
+/// a manual pull-to-refresh.
+///
 /// Depends on [matchRepositoryProvider] and [matchFilterProvider].
 /// Returns [AsyncValue<List<MatchDateGroup>>].
 final groupedMatchesProvider =
-    FutureProvider<List<MatchDateGroup>>((ref) async {
+    StreamProvider<List<MatchDateGroup>>((ref) async* {
   final repo = await ref.watch(matchRepositoryProvider.future);
   final filter = ref.watch(matchFilterProvider);
 
-  final allMatches = await repo.getAll();
+  yield* repo.watchAll().map((allMatches) {
+    // Apply filter
+    final filtered = allMatches.where((m) {
+      switch (filter) {
+        case MatchFilter.all:
+          return true;
+        case MatchFilter.groupStage:
+          return m.worldCupRound == 'group_stage';
+        case MatchFilter.knockouts:
+          return _knockoutRounds.contains(m.worldCupRound);
+      }
+    }).toList();
 
-  // Apply filter
-  final filtered = allMatches.where((m) {
-    switch (filter) {
-      case MatchFilter.all:
-        return true;
-      case MatchFilter.groupStage:
-        return m.worldCupRound == 'group_stage';
-      case MatchFilter.knockouts:
-        return _knockoutRounds.contains(m.worldCupRound);
-    }
-  }).toList();
-
-  return _groupByDate(filtered);
+    return _groupByDate(filtered);
+  });
 });
 
 /// Groups matches into date sections using the device's local timezone.

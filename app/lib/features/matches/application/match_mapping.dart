@@ -53,9 +53,9 @@ Match? findLocalMatchFor(ApiMatch apiMatch, List<Match> locals) {
 
 /// Provider that returns all local [Match] objects from Isar.
 ///
-/// Used by the home screen to resolve API match cards to local match IDs
-/// for safe navigation.
-final allLocalMatchesProvider = FutureProvider<List<Match>>((ref) async {
+/// Backed by [MatchRepository.watchAll] so the home screen live/today card
+/// tap handlers always resolve against the latest local match data.
+final allLocalMatchesProvider = StreamProvider<List<Match>>((ref) async* {
   final repo = await ref.watch(matchRepositoryProvider.future);
-  return repo.getAll();
+  yield* repo.watchAll();
 });

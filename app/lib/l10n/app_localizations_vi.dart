@@ -387,6 +387,16 @@ class AppLocalizationsVi extends AppLocalizations {
   String get reminder_permission_openSettings => 'Mở Cài đặt';
 
   @override
+  String get reminder_exactAlarm_title => 'Cần quyền báo thức chính xác';
+
+  @override
+  String get reminder_exactAlarm_body =>
+      'Để gửi nhắc nhở đúng giờ đá, Kickoff Buddy cần quyền đặt báo thức chính xác. Nhấn \"Mở Cài đặt\" để cấp quyền.';
+
+  @override
+  String get reminder_exactAlarm_openSettings => 'Mở Cài đặt';
+
+  @override
   String get reminder_offset_1day => '1 ngày';
 
   @override
@@ -583,6 +593,13 @@ class AppLocalizationsVi extends AppLocalizations {
   String get settings_language_en => 'English';
 
   @override
+  String get settings_about_title => 'Giới thiệu';
+
+  @override
+  String get settings_about_disclaimer =>
+      'Kickoff Buddy là ứng dụng fan không chính thức và không liên kết với FIFA hay bất kỳ liên đoàn bóng đá nào.';
+
+  @override
   String get home_section_nextMatch => 'Trận tiếp theo';
 
   @override
@@ -687,4 +704,65 @@ class AppLocalizationsVi extends AppLocalizations {
   String matchDetail_score_penalties(int scoreA, int scoreB) {
     return 'Luân lưu $scoreA–$scoreB';
   }
+
+  @override
+  String get sleepPlan_cardTitle => 'Kế hoạch ngủ';
+
+  @override
+  String get sleepPlan_disclaimer =>
+      'Đây là gợi ý lịch cá nhân, không phải lời khuyên y tế.';
+
+  @override
+  String get sleepPlan_mode_lateWatcher_title => 'Xem khuya';
+
+  @override
+  String get sleepPlan_mode_lateWatcher_body =>
+      'Chợp mắt trước trận, rồi xem trực tiếp.';
+
+  @override
+  String get sleepPlan_mode_balanced_title => 'Cân bằng';
+
+  @override
+  String get sleepPlan_mode_balanced_body =>
+      'Xem hiệp hai hoặc xem highlight vào ngày mai.';
+
+  @override
+  String get sleepPlan_mode_healthyReplay_title => 'Xem lại lành mạnh';
+
+  @override
+  String get sleepPlan_mode_healthyReplay_body =>
+      'Ngủ ngay bây giờ, xem lại vào buổi sáng.';
+
+  @override
+  String get sleepPlan_mode_healthyReplay_cta => 'Lên kế hoạch xem lại';
+
+  @override
+  String get etiquette_appBar_title => 'Văn hóa xem bóng đá';
+
+  @override
+  String get etiquette_error_load => 'Không thể tải mẹo văn hóa';
+
+  @override
+  String get etiquette_btn_retry => 'Thử lại';
+
+  @override
+  String get etiquette_notFound => 'Không tìm thấy mẹo';
+
+  @override
+  String get etiquette_btn_back => 'Quay lại';
+
+  @override
+  String get formatGuide_appBar_title => 'Thể thức giải đấu';
+
+  @override
+  String get formatGuide_error_load => 'Không thể tải thể thức giải đấu';
+
+  @override
+  String get formatGuide_btn_retry => 'Thử lại';
+
+  @override
+  String get formatGuide_notFound => 'Không tìm thấy mục';
+
+  @override
+  String get formatGuide_btn_back => 'Quay lại';
 }

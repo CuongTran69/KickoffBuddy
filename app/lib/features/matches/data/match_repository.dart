@@ -72,6 +72,16 @@ class MatchRepository {
         .sortByKickoffAtUtc()
         .watch(fireImmediately: true);
   }
+
+  /// Returns a stream that emits the match with the given [matchId] whenever
+  /// it is created, updated, or deleted. Emits null when no match is found.
+  Stream<Match?> watchById(String matchId) {
+    return _isar.matchs
+        .where()
+        .matchIdEqualTo(matchId)
+        .watch(fireImmediately: true)
+        .map((list) => list.isEmpty ? null : list.first);
+  }
 }
 
 /// Riverpod provider for [MatchRepository].

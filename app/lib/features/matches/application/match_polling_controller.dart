@@ -74,7 +74,7 @@ class MatchPollingController {
 
   Future<void> _runPoll() async {
     try {
-      await _ref.read(matchSyncServiceProvider).syncScores();
+      await _ref.read(matchSyncServiceProvider)?.syncScores();
     } catch (e) {
       debugPrint('[MatchPollingController] poll error (continuing): $e');
     }

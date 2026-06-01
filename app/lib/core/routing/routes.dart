@@ -19,4 +19,16 @@ abstract final class Routes {
 
   /// Returns the path for a rule card detail screen.
   static String ruleDetail(String id) => '/rules/$id';
+
+  // Fan Etiquette Guide routes
+  static const String etiquette = '/etiquette';
+
+  /// Returns the path for an etiquette tip detail screen.
+  static String etiquetteDetail(String id) => '/etiquette/$id';
+
+  // Tournament Format Guide routes
+  static const String formatGuide = '/format-guide';
+
+  /// Returns the path for a format guide section detail screen.
+  static String formatGuideDetail(String id) => '/format-guide/$id';
 }

@@ -15,6 +15,9 @@ import '../../../core/network/api_models.dart';
 /// screen shows its empty state.
 final standingsProvider =
     FutureProvider.autoDispose<ApiTeamsResponse>((ref) async {
+  // Keep standings data alive for the session so tab navigation does not
+  // trigger a new API call (D3). Data is invalidated on process restart.
+  ref.keepAlive();
   final client = ref.watch(apiClientProvider);
   try {
     return await client.getTeams();

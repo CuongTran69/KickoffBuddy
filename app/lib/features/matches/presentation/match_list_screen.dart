@@ -75,7 +75,7 @@ class MatchListScreen extends ConsumerWidget {
                     data: (groups) {
                       Future<void> onRefresh() async {
                         try {
-                          await ref.read(matchSyncServiceProvider).syncScores();
+                          await ref.read(matchSyncServiceProvider)?.syncScores();
                         } catch (e) {
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(

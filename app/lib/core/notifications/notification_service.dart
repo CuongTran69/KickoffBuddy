@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -155,6 +156,27 @@ class NotificationService {
   /// Cancel all scheduled notifications.
   Future<void> cancelAll() async {
     await _plugin.cancelAll();
+  }
+
+  /// Returns true if the app can schedule exact alarms.
+  ///
+  /// Always returns true on iOS and Android < 12.
+  /// On Android 12+ (API 31+), queries the OS via
+  /// [AndroidFlutterLocalNotificationsPlugin.canScheduleExactNotifications].
+  /// Returns true if the result is null (older Android, auto-granted).
+  Future<bool> canScheduleExactAlarms() async {
+    // iOS never requires this permission.
+    if (defaultTargetPlatform == TargetPlatform.iOS) return true;
+
+    final androidPlugin = _plugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>();
+
+    if (androidPlugin == null) return true;
+
+    final result = await androidPlugin.canScheduleExactNotifications();
+    // null means Android < 12 — exact alarms are auto-granted.
+    return result ?? true;
   }
 }
 

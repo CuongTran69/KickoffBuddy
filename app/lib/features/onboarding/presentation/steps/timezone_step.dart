@@ -90,12 +90,7 @@ class _TimezoneStepState extends ConsumerState<TimezoneStep> {
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 16),
-          // "Change" is a no-op for Sprint 1 — Sprint 2 adds manual override
-          TextButton(
-            onPressed: null, // TODO(Sprint 2): manual timezone override
-            child: Text(l10n.onboarding_timezone_changeBtn),
-          ),
+          // Sprint 2: manual timezone override button will go here.
         ],
       ),
     );
