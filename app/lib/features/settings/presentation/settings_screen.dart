@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/routing/routes.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/premium_screen_background.dart';
 import '../application/settings_providers.dart';
@@ -25,11 +26,21 @@ class SettingsScreen extends ConsumerWidget {
           backgroundColor: Colors.transparent,
           elevation: 0,
           scrolledUnderElevation: 0,
-          title: Text(l10n.settings_appBar_title),
         ),
         body: ListView(
-          padding: const EdgeInsets.fromLTRB(16, 12, 16, 100), // extra bottom padding for floating tabbar
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 20),
           children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 8, 0, 16),
+              child: Text(
+                l10n.settings_appBar_title,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w800,
+                  color: Theme.of(context).colorScheme.onSurface,
+                  letterSpacing: -0.5,
+                ),
+              ),
+            ),
             // Theme Section Card
             _PremiumSettingsCard(
               title: l10n.settings_themeMode,
@@ -173,7 +184,7 @@ class _PremiumSettingsCard extends StatelessWidget {
         ? const Color(0x991E293B) // Slate-800 with 60% opacity
         : const Color(0xD9FFFFFF); // White with 85% opacity
     final borderColor = isDark
-        ? const Color(0x3310B981) // Translucent Emerald
+        ? AppColors.darkPrimary.withValues(alpha: 0.2)
         : Colors.white.withValues(alpha: 0.9);
     final double borderWidth = isDark ? 1.0 : 1.5;
 
@@ -187,7 +198,7 @@ class _PremiumSettingsCard extends StatelessWidget {
           BoxShadow(
             color: isDark
                 ? Colors.black.withValues(alpha: 0.2)
-                : const Color(0x0A059669).withValues(alpha: 0.04),
+                : AppColors.lightPrimary.withValues(alpha: 0.04),
             blurRadius: 14,
             offset: const Offset(0, 6),
           ),
@@ -202,7 +213,7 @@ class _PremiumSettingsCard extends StatelessWidget {
               children: [
                 Icon(
                   icon,
-                  color: isDark ? const Color(0xFF10B981) : const Color(0xFF059669),
+                  color: isDark ? AppColors.darkPrimary : AppColors.lightPrimary,
                   size: 22,
                 ),
                 const SizedBox(width: 10),
@@ -244,15 +255,15 @@ class _ThemeSelectorItem extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    final activeColor = isDark ? const Color(0xFF10B981) : const Color(0xFF059669);
-    final inactiveColor = isDark ? const Color(0xFF94A3B8) : const Color(0xFF64748B);
+    final activeColor = isDark ? AppColors.darkPrimary : AppColors.lightPrimary;
+    final inactiveColor = isDark ? AppColors.darkOnSurfaceMuted : const Color(0xFF64748B);
 
     final itemBgColor = isSelected
-        ? (isDark ? const Color(0x2610B981) : const Color(0x1F059669))
+        ? (isDark ? AppColors.darkPrimary.withValues(alpha: 0.1) : AppColors.lightPrimary.withValues(alpha: 0.06))
         : (isDark ? const Color(0x0AFFFFFF) : Colors.white.withValues(alpha: 0.45));
 
     final itemBorderColor = isSelected
-        ? activeColor
+        ? activeColor.withValues(alpha: 0.5)
         : (isDark ? const Color(0x2694A3B8) : Colors.white.withValues(alpha: 0.6));
 
     return Expanded(
@@ -265,7 +276,7 @@ class _ThemeSelectorItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: itemBorderColor,
-              width: isSelected ? 1.8 : 1.0,
+              width: 1.0,
             ),
             boxShadow: isSelected
                 ? [
@@ -323,12 +334,12 @@ class _LanguageSelectorTile extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    final activeColor = isDark ? const Color(0xFF10B981) : const Color(0xFF059669);
+    final activeColor = isDark ? AppColors.darkPrimary : AppColors.lightPrimary;
     final tileBgColor = isSelected
-        ? (isDark ? const Color(0x2610B981) : const Color(0x1F059669))
+        ? (isDark ? AppColors.darkPrimary.withValues(alpha: 0.1) : AppColors.lightPrimary.withValues(alpha: 0.06))
         : (isDark ? const Color(0x0AFFFFFF) : Colors.white.withValues(alpha: 0.45));
     final tileBorderColor = isSelected
-        ? activeColor
+        ? activeColor.withValues(alpha: 0.5)
         : (isDark ? const Color(0x2694A3B8) : Colors.white.withValues(alpha: 0.6));
 
     return InkWell(
@@ -340,7 +351,7 @@ class _LanguageSelectorTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: tileBorderColor,
-            width: isSelected ? 1.8 : 1.0,
+            width: 1.0,
           ),
           boxShadow: isSelected
               ? [
@@ -402,7 +413,7 @@ class _SettingsNavigationTile extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    final activeColor = isDark ? const Color(0xFF10B981) : const Color(0xFF059669);
+    final activeColor = isDark ? AppColors.darkPrimary : AppColors.lightPrimary;
     final tileBgColor = isDark ? const Color(0x0AFFFFFF) : Colors.white.withValues(alpha: 0.45);
     final tileBorderColor = isDark ? const Color(0x2694A3B8) : Colors.white.withValues(alpha: 0.6);
 

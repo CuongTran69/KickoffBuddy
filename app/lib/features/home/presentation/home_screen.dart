@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -28,7 +29,6 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
     final nextMatchAsync = ref.watch(nextMatchProvider);
 
     return PremiumScreenBackground(
@@ -38,7 +38,12 @@ class HomeScreen extends ConsumerWidget {
           backgroundColor: Colors.transparent,
           elevation: 0,
           scrolledUnderElevation: 0,
-          title: Text(l10n.home_title),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.settings_outlined),
+              onPressed: () => context.push(Routes.settings),
+            ),
+          ],
         ),
         body: nextMatchAsync.when(
           loading: () => const Center(child: CircularProgressIndicator()),
@@ -70,7 +75,7 @@ class _SectionHeader extends StatelessWidget {
             width: 4,
             height: 18,
             decoration: BoxDecoration(
-              color: isDark ? const Color(0xFF10B981) : const Color(0xFF059669),
+              color: isDark ? AppColors.darkPrimary : AppColors.lightPrimary,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -104,10 +109,12 @@ class _HomeBody extends ConsumerWidget {
     final todayMatches = todayMatchesAsync.valueOrNull ?? [];
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(0, 0, 0, 100), // extra bottom padding for floating bar
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, 20), // regular padding
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const _DashboardHeader(),
+          const _QuickActionsGrid(),
           _SectionHeader(title: l10n.home_section_nextMatch),
           if (currentMatches.isNotEmpty)
             _LiveMatchHeroCard(match: currentMatches.first)
@@ -124,6 +131,191 @@ class _HomeBody extends ConsumerWidget {
           _SectionHeader(title: l10n.home_section_quickLearn),
           _QuickLearnSection(),
         ],
+      ),
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Dashboard Header & Quick Actions Grid
+// ---------------------------------------------------------------------------
+
+class _DashboardHeader extends StatelessWidget {
+  const _DashboardHeader();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Kickoff Buddy',
+            style: theme.textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.w800,
+              color: theme.colorScheme.onSurface,
+              letterSpacing: -0.5,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Cẩm nang & lịch thi đấu bóng đá tiện ích',
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _QuickActionsGrid extends StatelessWidget {
+  const _QuickActionsGrid();
+
+  @override
+  Widget build(BuildContext context) {
+    itemsBuilder(BuildContext context) => [
+      _QuickActionItem(
+        icon: Icons.calendar_month_outlined,
+        label: 'Lịch thi đấu',
+        onTap: () {
+          final shell = StatefulNavigationShell.of(context);
+          shell.goBranch(1);
+        },
+      ),
+      _QuickActionItem(
+        icon: Icons.emoji_events_outlined,
+        label: 'BXH bảng',
+        onTap: () {
+          final shell = StatefulNavigationShell.of(context);
+          shell.goBranch(2);
+        },
+      ),
+      _QuickActionItem(
+        icon: Icons.menu_book_outlined,
+        label: 'Cẩm nang luật',
+        onTap: () {
+          final shell = StatefulNavigationShell.of(context);
+          shell.goBranch(3);
+        },
+      ),
+      _QuickActionItem(
+        icon: Icons.translate,
+        label: 'Từ vựng',
+        onTap: () => context.push(Routes.vocabulary),
+      ),
+      _QuickActionItem(
+        icon: Icons.auto_fix_high,
+        label: 'Thêm nhanh',
+        onTap: () => context.push(Routes.matchesMagicAdd),
+      ),
+      _QuickActionItem(
+        icon: Icons.add_circle_outline,
+        label: 'Thêm thủ công',
+        onTap: () => context.push(Routes.matchesAdd),
+      ),
+    ];
+
+    final items = itemsBuilder(context);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      child: GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          childAspectRatio: 1.25,
+        ),
+        itemCount: items.length,
+        itemBuilder: (context, index) => items[index],
+      ),
+    );
+  }
+}
+
+class _QuickActionItem extends StatelessWidget {
+  const _QuickActionItem({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    final itemBgColor = isDark 
+        ? AppColors.darkSurfaceVariant
+        : AppColors.lightPrimary.withValues(alpha: 0.03);
+    
+    final borderColor = isDark 
+        ? AppColors.darkPrimary.withValues(alpha: 0.1) 
+        : Colors.black.withValues(alpha: 0.03);
+
+    final iconColor = isDark ? AppColors.darkPrimary : AppColors.lightPrimary;
+
+    return Container(
+      decoration: BoxDecoration(
+        color: itemBgColor,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: borderColor, width: 1),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: isDark ? 0.1 : 0.02),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () {
+              HapticFeedback.lightImpact();
+              onTap();
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    icon,
+                    color: iconColor,
+                    size: 24,
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    label,
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10,
+                      height: 1.2,
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -155,13 +347,9 @@ class _NextMatchHeroCard extends ConsumerWidget {
 
     final isDark = theme.brightness == Brightness.dark;
     
-    // Premium Midnight Stadium Gradient for dark mode, Emerald Tint for light mode
-    final gradientStart = isDark 
-        ? const Color(0xFF042F1A) // Deep forest green
-        : const Color(0xFFE8F5E9); // Light green tint
-    final gradientEnd = isDark 
-        ? const Color(0xFF0F172A) // Midnight slate
-        : const Color(0xFFFFFFFF); // White
+    final cardBgColor = isDark 
+        ? AppColors.darkSurfaceVariant
+        : Colors.white;
     
     final borderColor = isDark
         ? AppColors.darkPrimary.withValues(alpha: 0.25)
@@ -173,11 +361,7 @@ class _NextMatchHeroCard extends ConsumerWidget {
         borderRadius: BorderRadius.circular(18),
         child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [gradientStart, gradientEnd],
-            ),
+            color: cardBgColor,
             borderRadius: BorderRadius.circular(18),
             border: Border.all(color: borderColor, width: 1.2),
             boxShadow: [
@@ -200,11 +384,9 @@ class _NextMatchHeroCard extends ConsumerWidget {
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   children: [
-                    // Teams row
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Flexible(
+                        Expanded(
                           child: _HeroTeamColumn(
                             isoAlpha2: teamAIso,
                             name: teamAVi,
@@ -212,7 +394,7 @@ class _NextMatchHeroCard extends ConsumerWidget {
                           ),
                         ),
                         _CountdownPill(kickoffAtUtc: match.kickoffAtUtc),
-                        Flexible(
+                        Expanded(
                           child: _HeroTeamColumn(
                             isoAlpha2: teamBIso,
                             name: teamBVi,
@@ -251,19 +433,15 @@ class _NextMatchHeroCard extends ConsumerWidget {
                     Row(
                       children: [
                         Expanded(
-                          child: OutlinedButton.icon(
+                          child: FilledButton.icon(
                             icon: const Icon(Icons.notifications_outlined, size: 16),
                             label: Text(l10n.home_btn_setReminder),
-                            style: OutlinedButton.styleFrom(
+                            style: FilledButton.styleFrom(
                               foregroundColor: isDark ? Colors.white : AppColors.lightPrimary,
                               backgroundColor: isDark 
-                                  ? Colors.white.withValues(alpha: 0.05) 
-                                  : Colors.white.withValues(alpha: 0.5),
-                              side: BorderSide(
-                                color: isDark 
-                                    ? Colors.white.withValues(alpha: 0.2) 
-                                    : AppColors.lightPrimary.withValues(alpha: 0.25),
-                              ),
+                                  ? Colors.white.withValues(alpha: 0.08) 
+                                  : AppColors.lightPrimary.withValues(alpha: 0.08),
+                              elevation: 0,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
@@ -320,12 +498,12 @@ class _HeroTeamColumn extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: isDark ? const Color(0x4D10B981) : const Color(0x4D059669),
+              color: isDark ? AppColors.darkPrimary.withValues(alpha: 0.3) : AppColors.lightPrimary.withValues(alpha: 0.3),
               width: 2.0,
             ),
             boxShadow: [
               BoxShadow(
-                color: (isDark ? const Color(0xFF10B981) : const Color(0xFF059669))
+                color: (isDark ? AppColors.darkPrimary : AppColors.lightPrimary)
                     .withValues(alpha: 0.25),
                 blurRadius: 12,
                 spreadRadius: 1,
@@ -402,7 +580,7 @@ class _CountdownPill extends ConsumerWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _PulsingDot(color: isLiveSoon ? AppColors.darkError : AppColors.darkPrimary),
+          _PulsingDot(color: isLiveSoon ? (isDark ? AppColors.darkError : AppColors.lightError) : accentColor),
           const SizedBox(width: 6),
           Text(
             countdownText,
@@ -546,32 +724,31 @@ class _QuickLearnCard extends StatelessWidget {
     final icon = _icons[ruleId] ?? Icons.menu_book_outlined;
     final isDark = theme.brightness == Brightness.dark;
 
-    final startColor = isDark 
-        ? const Color(0x2610B981) // Translucent Emerald
-        : const Color(0x1F059669);
-    final endColor = isDark 
-        ? const Color(0xBF1E293B) // Translucent Slate-800
-        : const Color(0xD9FFFFFF); // Translucent White
+    final cardBgColor = isDark 
+        ? AppColors.darkSurfaceVariant
+        : Colors.white.withValues(alpha: 0.95);
+
     final borderColor = isDark 
-        ? const Color(0x2694A3B8) 
-        : const Color(0x2664748B);
+        ? AppColors.darkPrimary.withValues(alpha: 0.3)
+        : AppColors.lightPrimary.withValues(alpha: 0.3);
 
     return Container(
       width: 220,
       margin: const EdgeInsets.only(right: 12),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: borderColor, width: 1),
+        color: cardBgColor,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: borderColor, width: 1.0),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: isDark ? 0.15 : 0.04),
+            color: Colors.black.withValues(alpha: isDark ? 0.12 : 0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
         ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(18),
         child: Material(
           color: Colors.transparent,
           child: InkWell(
@@ -583,13 +760,6 @@ class _QuickLearnCard extends StatelessWidget {
               }
             },
             child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [startColor, endColor],
-                ),
-              ),
               padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -785,13 +955,9 @@ class _LiveMatchHeroCard extends ConsumerWidget {
 
     final isDark = theme.brightness == Brightness.dark;
 
-    // Red-orange premium gradient for live matches
-    final gradientStart = isDark 
-        ? const Color(0xFF450A0A) // Deep red
-        : const Color(0xFFFEF2F2); // Very light red
-    final gradientEnd = isDark 
-        ? const Color(0xFF0F172A) // Midnight slate
-        : const Color(0xFFFFFFFF); // White
+    final cardBgColor = isDark 
+        ? AppColors.darkSurfaceVariant
+        : const Color(0xFFFEF2F2); // Red-50 tint for light mode live match
     
     final borderColor = isDark
         ? AppColors.darkError.withValues(alpha: 0.3)
@@ -803,11 +969,7 @@ class _LiveMatchHeroCard extends ConsumerWidget {
         borderRadius: BorderRadius.circular(18),
         child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [gradientStart, gradientEnd],
-            ),
+            color: cardBgColor,
             borderRadius: BorderRadius.circular(18),
             border: Border.all(color: borderColor, width: 1.5),
             boxShadow: [
@@ -988,8 +1150,8 @@ class _TodayMatchCard extends ConsumerWidget {
         ? const Color(0x991E293B) // Slate-800 with 60% opacity
         : const Color(0xD9FFFFFF); // White with 85% opacity
     final borderColor = isDark 
-        ? const Color(0x2694A3B8) 
-        : const Color(0x2664748B);
+        ? AppColors.darkPrimary.withValues(alpha: 0.3) 
+        : AppColors.lightPrimary.withValues(alpha: 0.3);
 
     final textMuted = isDark ? AppColors.darkOnSurfaceMuted : AppColors.lightOnSurfaceMuted;
 
@@ -998,11 +1160,11 @@ class _TodayMatchCard extends ConsumerWidget {
       margin: const EdgeInsets.only(right: 12),
       decoration: BoxDecoration(
         color: cardBgColor,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(18),
         border: Border.all(color: borderColor, width: 1.0),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: isDark ? 0.15 : 0.04),
+            color: Colors.black.withValues(alpha: isDark ? 0.12 : 0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -1011,7 +1173,7 @@ class _TodayMatchCard extends ConsumerWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(18),
           onTap: () {
             final locals = allLocalsAsync.valueOrNull ?? [];
             final local = findLocalMatchFor(match, locals);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/theme/app_colors.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../application/match_list_controller.dart';
 
@@ -37,14 +38,14 @@ class MatchFilterChips extends StatelessWidget {
 
   Widget _customChip(BuildContext context, MatchFilter filter, String label, bool isDark) {
     final isSelected = selected == filter;
-    final activeColor = isDark ? const Color(0xFF10B981) : const Color(0xFF059669);
+    final activeColor = isDark ? AppColors.darkPrimary : AppColors.lightPrimary;
 
     final chipBgColor = isSelected
         ? activeColor
         : (isDark ? const Color(0x661E293B) : Colors.white.withValues(alpha: 0.65));
     final chipTextColor = isSelected
         ? Colors.white
-        : (isDark ? const Color(0xFF94A3B8) : const Color(0xFF15803D));
+        : (isDark ? AppColors.darkOnSurfaceMuted : AppColors.lightOnSurfaceMuted);
     final chipBorderColor = isSelected
         ? activeColor
         : (isDark ? const Color(0x2694A3B8) : Colors.white.withValues(alpha: 0.8));

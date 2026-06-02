@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/routing/routes.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../../shared/widgets/premium_screen_background.dart';
 import '../application/match_list_controller.dart';
 import '../application/match_sync_service.dart';
@@ -31,7 +32,6 @@ class MatchListScreen extends ConsumerWidget {
           backgroundColor: Colors.transparent,
           elevation: 0,
           scrolledUnderElevation: 0,
-          title: Text(l10n.matches_appBar_title),
           actions: [
             IconButton(
               icon: const Icon(Icons.auto_fix_high),
@@ -46,7 +46,19 @@ class MatchListScreen extends ConsumerWidget {
           ],
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+              child: Text(
+                l10n.matches_appBar_title,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w800,
+                  color: Theme.of(context).colorScheme.onSurface,
+                  letterSpacing: -0.5,
+                ),
+              ),
+            ),
             MatchFilterChips(
               selected: filter,
               onSelected: (f) =>
@@ -62,8 +74,8 @@ class MatchListScreen extends ConsumerWidget {
                     child: Container(
                       width: 1.5,
                       color: Theme.of(context).brightness == Brightness.dark
-                          ? const Color(0x3310B981)
-                          : const Color(0x4D059669),
+                          ? AppColors.darkPrimary.withValues(alpha: 0.2)
+                          : AppColors.lightPrimary.withValues(alpha: 0.3),
                     ),
                   ),
                   groupedAsync.when(
@@ -91,8 +103,8 @@ class MatchListScreen extends ConsumerWidget {
                       if (groups.isEmpty) {
                         return RefreshIndicator(
                           color: Theme.of(context).brightness == Brightness.dark
-                              ? const Color(0xFF10B981)
-                              : const Color(0xFF059669),
+                              ? AppColors.darkPrimary
+                              : AppColors.lightPrimary,
                           onRefresh: onRefresh,
                           child: ListView(
                             physics: const AlwaysScrollableScrollPhysics(),
@@ -106,12 +118,12 @@ class MatchListScreen extends ConsumerWidget {
 
                       return RefreshIndicator(
                         color: Theme.of(context).brightness == Brightness.dark
-                            ? const Color(0xFF10B981)
-                            : const Color(0xFF059669),
+                            ? AppColors.darkPrimary
+                            : AppColors.lightPrimary,
                         onRefresh: onRefresh,
                         child: ListView.builder(
                           physics: const AlwaysScrollableScrollPhysics(),
-                          padding: const EdgeInsets.only(bottom: 100),
+                          padding: const EdgeInsets.only(bottom: 20),
                           itemCount: _itemCount(groups),
                           itemBuilder: (context, index) =>
                               _buildItem(context, groups, index),

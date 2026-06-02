@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../data/rule_card.dart';
+import '../../../../core/theme/app_colors.dart';
 
 /// A card tile showing the VN title and summary for a rule card.
 ///
 /// Used in the list screen inside each topic section.
 /// Features a colored left border based on the card's level:
-/// - newbie: emerald (#10B981)
+/// - newbie: neon cyan (#00E5FF)
 /// - casual: amber (#FBBF24)
 /// - advanced: red (#F87171)
 class RuleCardTile extends StatelessWidget {
@@ -20,7 +21,7 @@ class RuleCardTile extends StatelessWidget {
   final VoidCallback onTap;
 
   static const _levelColors = {
-    'newbie': Color(0xFF10B981),   // Emerald
+    'newbie': Color(0xFF00E5FF),   // Electric Neon Cyan
     'casual': Color(0xFFFBBF24),   // Amber
     'advanced': Color(0xFFF87171), // Red-400
   };
@@ -29,13 +30,16 @@ class RuleCardTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final levelColor = _levelColors[card.level] ?? theme.colorScheme.primary;
+    Color levelColor = _levelColors[card.level] ?? theme.colorScheme.primary;
+    if (card.level == 'newbie' && !isDark) {
+      levelColor = const Color(0xFF0891B2); // Cyan-600 for light mode
+    }
 
     final cardBgColor = isDark
         ? const Color(0x991E293B) // Slate-800 with 60% opacity
         : const Color(0xD9FFFFFF); // White with 85% opacity
     final cardBorderColor = isDark
-        ? const Color(0x3310B981)
+        ? AppColors.darkPrimary.withValues(alpha: 0.2)
         : Colors.white.withValues(alpha: 0.9);
     final double borderWidth = isDark ? 1.0 : 1.5;
 
@@ -49,7 +53,7 @@ class RuleCardTile extends StatelessWidget {
           BoxShadow(
             color: isDark
                 ? Colors.black.withValues(alpha: 0.2)
-                : const Color(0x0A059669).withValues(alpha: 0.04),
+                : AppColors.lightPrimary.withValues(alpha: 0.04),
             blurRadius: 14,
             offset: const Offset(0, 6),
           ),

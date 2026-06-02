@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_typography.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../matches/application/team_lookup_service.dart';
 import '../../../matches/presentation/widgets/flag_avatar.dart';
@@ -23,11 +24,11 @@ class GroupStandingsCard extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
 
     final cardBgColor = isDark
-        ? const Color(0xBF1E293B) // Translucent Slate-800
-        : const Color(0xD9FFFFFF); // Translucent White
+        ? AppColors.darkSurfaceVariant.withValues(alpha: 0.8)
+        : AppColors.lightSurface;
     final cardBorderColor = isDark
-        ? const Color(0x2694A3B8)
-        : const Color(0x2664748B);
+        ? AppColors.darkSurfaceContainerHigh.withValues(alpha: 0.4)
+        : AppColors.lightSurfaceContainerHigh;
 
     final textMutedColor =
         isDark ? AppColors.darkOnSurfaceMuted : AppColors.lightOnSurfaceMuted;
@@ -42,35 +43,42 @@ class GroupStandingsCard extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         color: cardBgColor,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(18),
         border: Border.all(
           color: cardBorderColor,
-          width: isDark ? 1.0 : 1.5,
+          width: 1.0,
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: isDark ? 0.15 : 0.03),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header: Group letter badge
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
             child: Row(
               children: [
                 Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   decoration: BoxDecoration(
-                    color: primaryColor.withValues(alpha: 0.15),
+                    color: primaryColor.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: primaryColor.withValues(alpha: 0.3),
+                      color: primaryColor.withValues(alpha: 0.25),
                       width: 1.0,
                     ),
                   ),
                   child: Text(
                     l10n.standings_group_label(group.letter),
                     style: theme.textTheme.titleMedium?.copyWith(
-                      color: primaryColor,
+                      color: isDark ? AppColors.darkPrimary : AppColors.lightPrimary,
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
                     ),
@@ -79,25 +87,26 @@ class GroupStandingsCard extends ConsumerWidget {
               ],
             ),
           ),
-          const Divider(height: 1, color: Color(0x1F94A3B8)),
+          Divider(height: 1, color: cardBorderColor.withValues(alpha: 0.5)),
           // Table Headers
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             child: Row(
               children: [
                 // Rank
-                SizedBox(
-                  width: 20,
+                const SizedBox(
+                  width: 24,
                   child: Text(
                     '#',
                     textAlign: TextAlign.center,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: textMutedColor,
+                    style: TextStyle(
+                      color: Colors.grey,
                       fontWeight: FontWeight.bold,
+                      fontSize: 10,
                     ),
                   ),
                 ),
-                const SizedBox(width: 6),
+                const SizedBox(width: 8),
                 // Team name
                 Expanded(
                   child: Text(
@@ -105,6 +114,8 @@ class GroupStandingsCard extends ConsumerWidget {
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: textMutedColor,
                       fontWeight: FontWeight.bold,
+                      fontSize: 10,
+                      letterSpacing: 0.2,
                     ),
                   ),
                 ),
@@ -121,24 +132,20 @@ class GroupStandingsCard extends ConsumerWidget {
               ],
             ),
           ),
-          const Divider(height: 1, color: Color(0x1F94A3B8)),
+          Divider(height: 1, color: cardBorderColor.withValues(alpha: 0.5)),
           // Team Rows
-          // A-L, 12 groups (WC2026 format)
           ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: group.teams.length,
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            separatorBuilder: (context, index) => const Divider(
+            padding: EdgeInsets.zero,
+            separatorBuilder: (context, index) => Divider(
               height: 1,
-              indent: 12,
-              endIndent: 12,
-              color: Color(0x0F94A3B8),
+              color: cardBorderColor.withValues(alpha: 0.25),
             ),
             itemBuilder: (context, index) {
               final team = group.teams[index];
               final rank = index + 1;
-              // Ranks 1-2: strong qualify; rank 3: possible best-third advance.
               final isQualifying = rank <= 2;
               final isBestThird = rank == 3;
 
@@ -150,48 +157,67 @@ class GroupStandingsCard extends ConsumerWidget {
                   : '${team.goalDifferential}';
 
               final rankColor = isQualifying
-                  ? primaryColor
+                  ? (isDark ? AppColors.darkPrimary : AppColors.lightPrimary)
                   : isBestThird
                       ? bestThirdColor
-                      : (isDark ? Colors.white70 : Colors.black87);
+                      : (isDark ? AppColors.darkOnSurface : AppColors.lightOnSurface);
 
               return Container(
                 decoration: isQualifying
                     ? BoxDecoration(
-                        color: primaryColor.withValues(alpha: 0.05),
+                        color: primaryColor.withValues(alpha: 0.03),
                       )
                     : isBestThird
                         ? BoxDecoration(
-                            color: bestThirdColor.withValues(alpha: 0.04),
+                            color: bestThirdColor.withValues(alpha: 0.02),
                           )
                         : null,
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                   child: Row(
                     children: [
-                      // Rank
+                      // Rank Badge
                       SizedBox(
-                        width: 20,
-                        child: Center(
+                        width: 24,
+                        height: 24,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: isQualifying
+                                ? primaryColor.withValues(alpha: 0.12)
+                                : isBestThird
+                                    ? bestThirdColor.withValues(alpha: 0.1)
+                                    : Colors.transparent,
+                            shape: BoxShape.circle,
+                            border: isQualifying || isBestThird
+                                ? Border.all(
+                                    color: isQualifying
+                                        ? primaryColor.withValues(alpha: 0.2)
+                                        : bestThirdColor.withValues(alpha: 0.2),
+                                    width: 1.0,
+                                  )
+                                : null,
+                          ),
+                          alignment: Alignment.center,
                           child: Text(
                             '$rank',
-                            style: theme.textTheme.bodyMedium?.copyWith(
+                            style: AppTypography.tabularNumbers(
+                              fontSize: 11,
                               color: rankColor,
-                              fontWeight: isQualifying
+                              fontWeight: isQualifying || isBestThird
                                   ? FontWeight.bold
                                   : FontWeight.normal,
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(width: 6),
+                      const SizedBox(width: 8),
                       // Team Info (Flag + Name)
                       Expanded(
                         child: Row(
                           children: [
                             FlagAvatar(isoAlpha2: teamIso, size: 20),
-                            const SizedBox(width: 6),
+                            const SizedBox(width: 8),
                             Expanded(
                               child: Text(
                                 teamVi,
@@ -199,7 +225,7 @@ class GroupStandingsCard extends ConsumerWidget {
                                   fontWeight: isQualifying
                                       ? FontWeight.w600
                                       : FontWeight.normal,
-                                  color: isDark ? Colors.white : Colors.black87,
+                                  color: isDark ? AppColors.darkOnSurface : AppColors.lightOnSurface,
                                 ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -212,15 +238,14 @@ class GroupStandingsCard extends ConsumerWidget {
                       _DataCell(
                         label: '${team.gamesPlayed}',
                         width: 24,
-                        color: isDark ? Colors.white70 : Colors.black87,
+                        color: isDark ? AppColors.darkOnSurface.withValues(alpha: 0.8) : AppColors.lightOnSurface,
                         theme: theme,
                       ),
                       // W-D-L
                       _DataCell(
-                        label:
-                            '${team.wins}-${team.draws}-${team.losses}',
+                        label: '${team.wins}-${team.draws}-${team.losses}',
                         width: 48,
-                        color: isDark ? Colors.white70 : Colors.black87,
+                        color: isDark ? AppColors.darkOnSurface.withValues(alpha: 0.8) : AppColors.lightOnSurface,
                         theme: theme,
                         fontSize: 11,
                       ),
@@ -228,7 +253,7 @@ class GroupStandingsCard extends ConsumerWidget {
                       _DataCell(
                         label: '${team.goalsFor}:${team.goalsAgainst}',
                         width: 44,
-                        color: isDark ? Colors.white70 : Colors.black87,
+                        color: isDark ? AppColors.darkOnSurface.withValues(alpha: 0.8) : AppColors.lightOnSurface,
                         theme: theme,
                         fontSize: 11,
                       ),
@@ -237,13 +262,13 @@ class GroupStandingsCard extends ConsumerWidget {
                         label: gdString,
                         width: 28,
                         color: team.goalDifferential > 0
-                            ? Colors.green
+                            ? (isDark ? AppColors.darkPrimary : AppColors.lightPrimary)
                             : (team.goalDifferential < 0
-                                ? Colors.redAccent
+                                ? (isDark ? AppColors.darkError : AppColors.lightError)
                                 : textMutedColor),
                         theme: theme,
                         fontWeight: team.goalDifferential != 0
-                            ? FontWeight.w500
+                            ? FontWeight.w600
                             : FontWeight.normal,
                       ),
                       // Points
@@ -251,8 +276,8 @@ class GroupStandingsCard extends ConsumerWidget {
                         label: '${team.groupPoints}',
                         width: 32,
                         color: isQualifying
-                            ? primaryColor
-                            : (isDark ? Colors.white : Colors.black87),
+                            ? (isDark ? AppColors.darkPrimary : AppColors.lightPrimary)
+                            : (isDark ? AppColors.darkOnSurface : AppColors.lightOnSurface),
                         theme: theme,
                         fontWeight: FontWeight.bold,
                       ),
@@ -264,20 +289,20 @@ class GroupStandingsCard extends ConsumerWidget {
           ),
           // Best-third legend hint
           if (group.teams.length >= 3) ...[
-            const Divider(height: 1, color: Color(0x1F94A3B8)),
+            Divider(height: 1, color: cardBorderColor.withValues(alpha: 0.5)),
             Padding(
-              padding: const EdgeInsets.fromLTRB(12, 6, 12, 10),
+              padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
               child: Row(
                 children: [
                   Container(
-                    width: 10,
-                    height: 10,
+                    width: 8,
+                    height: 8,
                     decoration: BoxDecoration(
                       color: bestThirdColor,
                       shape: BoxShape.circle,
                     ),
                   ),
-                  const SizedBox(width: 6),
+                  const SizedBox(width: 8),
                   Text(
                     l10n.standings_hint_bestThird,
                     style: theme.textTheme.bodySmall?.copyWith(
@@ -295,7 +320,6 @@ class GroupStandingsCard extends ConsumerWidget {
   }
 }
 
-/// Compact header cell for the standings table.
 class _HeaderCell extends StatelessWidget {
   const _HeaderCell({
     required this.label,
@@ -320,13 +344,13 @@ class _HeaderCell extends StatelessWidget {
           color: textMutedColor,
           fontWeight: FontWeight.bold,
           fontSize: 10,
+          letterSpacing: 0.2,
         ),
       ),
     );
   }
 }
 
-/// Compact data cell for the standings table.
 class _DataCell extends StatelessWidget {
   const _DataCell({
     required this.label,
@@ -351,10 +375,10 @@ class _DataCell extends StatelessWidget {
       child: Text(
         label,
         textAlign: TextAlign.center,
-        style: theme.textTheme.bodyMedium?.copyWith(
+        style: AppTypography.tabularNumbers(
+          fontSize: fontSize ?? 12,
           color: color,
           fontWeight: fontWeight,
-          fontSize: fontSize,
         ),
       ),
     );

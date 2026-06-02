@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/theme/app_colors.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../application/vocabulary_search_controller.dart';
 
@@ -51,12 +52,12 @@ class _VocabularySearchBarState extends ConsumerState<VocabularySearchBar> {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    final activeColor = isDark ? const Color(0xFF10B981) : const Color(0xFF059669);
+    final activeColor = isDark ? AppColors.darkPrimary : AppColors.lightPrimary;
     final searchBgColor = isDark
         ? const Color(0x991E293B)
         : Colors.white.withValues(alpha: 0.75);
     final borderColor = isDark
-        ? const Color(0x3310B981)
+        ? AppColors.darkPrimary.withValues(alpha: 0.2)
         : Colors.white.withValues(alpha: 0.9);
 
     return Container(
@@ -68,7 +69,7 @@ class _VocabularySearchBarState extends ConsumerState<VocabularySearchBar> {
           BoxShadow(
             color: isDark
                 ? Colors.black.withValues(alpha: 0.15)
-                : const Color(0x0A059669).withValues(alpha: 0.04),
+                : AppColors.lightPrimary.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),

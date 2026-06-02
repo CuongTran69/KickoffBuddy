@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../data/match.dart';
 import '../../../replay_planner/presentation/replay_planner_dialog.dart';
+import '../../../../core/theme/app_colors.dart';
 import '../../../../l10n/app_localizations.dart';
 
 /// A card shown on Match Detail for late-night fixtures (22:00–04:59 local).
@@ -12,7 +13,7 @@ import '../../../../l10n/app_localizations.dart';
 /// the bottom.
 ///
 /// Styling matches `_PremiumSettingsCard` in settings_screen.dart:
-/// translucent background, rounded corners (20), emerald border.
+/// translucent background, rounded corners (20), neon cyan border.
 class SleepPlanCard extends StatelessWidget {
   const SleepPlanCard({super.key, required this.match});
 
@@ -28,11 +29,11 @@ class SleepPlanCard extends StatelessWidget {
         ? const Color(0x991E293B) // Slate-800 60% opacity
         : const Color(0xD9FFFFFF); // White 85% opacity
     final borderColor = isDark
-        ? const Color(0x3310B981) // Translucent Emerald
+        ? AppColors.darkPrimary.withValues(alpha: 0.2)
         : Colors.white.withValues(alpha: 0.9);
     final double borderWidth = isDark ? 1.0 : 1.5;
-    final emeraldColor =
-        isDark ? const Color(0xFF10B981) : const Color(0xFF059669);
+    final primaryColor =
+        isDark ? AppColors.darkPrimary : AppColors.lightPrimary;
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 0),
@@ -44,7 +45,7 @@ class SleepPlanCard extends StatelessWidget {
           BoxShadow(
             color: isDark
                 ? Colors.black.withValues(alpha: 0.2)
-                : const Color(0x0A059669).withValues(alpha: 0.04),
+                : AppColors.lightPrimary.withValues(alpha: 0.04),
             blurRadius: 14,
             offset: const Offset(0, 6),
           ),
@@ -60,7 +61,7 @@ class SleepPlanCard extends StatelessWidget {
               children: [
                 Icon(
                   Icons.bedtime_outlined,
-                  color: emeraldColor,
+                  color: primaryColor,
                   size: 22,
                 ),
                 const SizedBox(width: 10),
@@ -81,7 +82,7 @@ class SleepPlanCard extends StatelessWidget {
               title: l10n.sleepPlan_mode_lateWatcher_title,
               body: l10n.sleepPlan_mode_lateWatcher_body,
               isDark: isDark,
-              emeraldColor: emeraldColor,
+              primaryColor: primaryColor,
             ),
             const SizedBox(height: 10),
             _ModeRow(
@@ -89,7 +90,7 @@ class SleepPlanCard extends StatelessWidget {
               title: l10n.sleepPlan_mode_balanced_title,
               body: l10n.sleepPlan_mode_balanced_body,
               isDark: isDark,
-              emeraldColor: emeraldColor,
+              primaryColor: primaryColor,
             ),
             const SizedBox(height: 10),
             _ModeRow(
@@ -97,12 +98,12 @@ class SleepPlanCard extends StatelessWidget {
               title: l10n.sleepPlan_mode_healthyReplay_title,
               body: l10n.sleepPlan_mode_healthyReplay_body,
               isDark: isDark,
-              emeraldColor: emeraldColor,
+              primaryColor: primaryColor,
               cta: OutlinedButton(
                 onPressed: () => showReplayPlannerDialog(context, match),
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: emeraldColor,
-                  side: BorderSide(color: emeraldColor),
+                  foregroundColor: primaryColor,
+                  side: BorderSide(color: primaryColor),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   minimumSize: Size.zero,
@@ -136,7 +137,7 @@ class _ModeRow extends StatelessWidget {
     required this.title,
     required this.body,
     required this.isDark,
-    required this.emeraldColor,
+    required this.primaryColor,
     this.cta,
   });
 
@@ -144,7 +145,7 @@ class _ModeRow extends StatelessWidget {
   final String title;
   final String body;
   final bool isDark;
-  final Color emeraldColor;
+  final Color primaryColor;
   final Widget? cta;
 
   @override
@@ -170,7 +171,7 @@ class _ModeRow extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(icon, color: emeraldColor, size: 18),
+                Icon(icon, color: primaryColor, size: 18),
                 const SizedBox(width: 8),
                 Text(
                   title,

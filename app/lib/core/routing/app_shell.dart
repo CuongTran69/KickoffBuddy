@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../shared/widgets/premium_screen_background.dart';
+import '../theme/app_colors.dart';
 
 /// Shell scaffold that wraps the four primary tab destinations.
 ///
@@ -20,6 +22,7 @@ class AppShell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final isVi = Localizations.localeOf(context).languageCode == 'vi';
 
     final destinations = [
       _NavBarDestination(
@@ -35,24 +38,20 @@ class AppShell extends StatelessWidget {
       _NavBarDestination(
         icon: Icons.emoji_events_outlined,
         selectedIcon: Icons.emoji_events,
-        label: l10n.nav_standings,
+        label: isVi ? 'BXH' : l10n.nav_standings,
       ),
       _NavBarDestination(
         icon: Icons.menu_book_outlined,
         selectedIcon: Icons.menu_book,
         label: l10n.nav_rules,
       ),
-
-      _NavBarDestination(
-        icon: Icons.settings_outlined,
-        selectedIcon: Icons.settings,
-        label: l10n.nav_settings,
-      ),
     ];
 
-    return Scaffold(
-      extendBody: true,
-      body: navigationShell,
+    return PremiumScreenBackground(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        extendBody: false,
+        body: navigationShell,
       bottomNavigationBar: _PremiumFloatingNavBar(
         selectedIndex: navigationShell.currentIndex,
         onDestinationSelected: (index) {
@@ -64,6 +63,7 @@ class AppShell extends StatelessWidget {
         },
         destinations: destinations,
       ),
+    ),
     );
   }
 }
@@ -119,66 +119,29 @@ class _PremiumFloatingNavBar extends StatelessWidget {
               filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    final totalWidth = constraints.maxWidth;
-                    final itemWidth = totalWidth / destinations.length;
+                child: Row(
+                  children: List.generate(destinations.length, (index) {
+                    final dest = destinations[index];
+                    final isSelected = selectedIndex == index;
 
-                    return Stack(
-                      children: [
-                        // Sliding indicator capsule behind the active tab
-                        AnimatedAlign(
-                          duration: const Duration(milliseconds: 250),
-                          curve: Curves.easeInOutCubic,
-                          alignment: Alignment(
-                            -1.0 + (selectedIndex * (2.0 / (destinations.length - 1))),
-                            0.0,
-                          ),
-                          child: Container(
-                            width: itemWidth - 12,
-                            height: 48,
-                            decoration: BoxDecoration(
-                              color: isDark
-                                  ? const Color(0x1F10B981) // Emerald glow with opacity
-                                  : const Color(0x26059669), // Emerald-600 with opacity
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(
-                                color: isDark
-                                    ? const Color(0x4D10B981)
-                                    : const Color(0x4D059669),
-                                width: 1.0,
-                              ),
-                            ),
-                          ),
+                    return Expanded(
+                      child: GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {
+                          if (!isSelected) {
+                            HapticFeedback.lightImpact();
+                          }
+                          onDestinationSelected(index);
+                        },
+                        child: _NavBarItem(
+                          destination: dest,
+                          isSelected: isSelected,
+                          theme: theme,
+                          isDark: isDark,
                         ),
-                        // Navigation buttons
-                        Row(
-                          children: List.generate(destinations.length, (index) {
-                            final dest = destinations[index];
-                            final isSelected = selectedIndex == index;
-
-                            return Expanded(
-                              child: GestureDetector(
-                                behavior: HitTestBehavior.opaque,
-                                onTap: () {
-                                  if (!isSelected) {
-                                    HapticFeedback.lightImpact();
-                                  }
-                                  onDestinationSelected(index);
-                                },
-                                child: _NavBarItem(
-                                  destination: dest,
-                                  isSelected: isSelected,
-                                  theme: theme,
-                                  isDark: isDark,
-                                ),
-                              ),
-                            );
-                          }),
-                        ),
-                      ],
+                      ),
                     );
-                  },
+                  }),
                 ),
               ),
             ),
@@ -204,7 +167,7 @@ class _NavBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final activeColor = isDark ? const Color(0xFF10B981) : const Color(0xFF059669);
+    final activeColor = isDark ? AppColors.darkPrimary : AppColors.lightPrimary;
     final inactiveColor = isDark ? const Color(0xFF94A3B8) : const Color(0xFF64748B);
 
     return Column(

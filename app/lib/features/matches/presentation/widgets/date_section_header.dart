@@ -6,7 +6,7 @@ import '../../application/match_list_controller.dart';
 
 /// Section header for a date group in the match list.
 ///
-/// Features an emerald left accent bar, surfaceVariant background,
+/// Features an primary colored left accent bar, surfaceVariant background,
 /// and rounded corners for visual anchoring.
 class DateSectionHeader extends StatelessWidget {
   const DateSectionHeader({super.key, required this.section});
@@ -22,16 +22,21 @@ class DateSectionHeader extends StatelessWidget {
     final accentColor =
         isDark ? AppColors.darkPrimary : AppColors.lightPrimary;
 
-    final bgColor = isDark
-        ? const Color(0x1F10B981) // Translucent Emerald
-        : const Color(0x1F059669);
+    final bgColor = accentColor.withValues(alpha: 0.1);
+
+    final screenBgColor = isDark
+        ? AppColors.darkSurface
+        : AppColors.lightSurfaceVariant;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
       child: Align(
         alignment: Alignment.centerLeft,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        child: Material(
+          color: screenBgColor,
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
             color: bgColor,
             borderRadius: BorderRadius.circular(20),
@@ -62,6 +67,7 @@ class DateSectionHeader extends StatelessWidget {
           ),
         ),
       ),
+    ),
     );
   }
 }

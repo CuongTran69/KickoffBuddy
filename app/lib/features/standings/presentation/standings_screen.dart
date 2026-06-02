@@ -25,13 +25,6 @@ class StandingsScreen extends ConsumerWidget {
           backgroundColor: Colors.transparent,
           elevation: 0,
           scrolledUnderElevation: 0,
-          title: Text(
-            l10n.nav_standings,
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0.1,
-            ),
-          ),
         ),
         body: RefreshIndicator(
           color: isDark ? AppColors.darkPrimary : AppColors.lightPrimary,
@@ -85,9 +78,22 @@ class StandingsScreen extends ConsumerWidget {
 
               return ListView.builder(
                 padding: const EdgeInsets.fromLTRB(16, 12, 16, 100), // padding for floating tabbar
-                itemCount: response.groups.length,
+                itemCount: response.groups.length + 1,
                 itemBuilder: (context, index) {
-                  final group = response.groups[index];
+                  if (index == 0) {
+                    return Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 8, 0, 16),
+                      child: Text(
+                        l10n.nav_standings,
+                        style: theme.textTheme.headlineMedium?.copyWith(
+                          fontWeight: FontWeight.w800,
+                          color: isDark ? AppColors.darkPrimary : AppColors.lightPrimary,
+                          letterSpacing: -0.5,
+                        ),
+                      ),
+                    );
+                  }
+                  final group = response.groups[index - 1];
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 16),
                     child: GroupStandingsCard(group: group),

@@ -59,11 +59,11 @@ class LevelFilterChips extends StatelessWidget {
                     width: itemWidth - 8,
                     height: 38,
                     decoration: BoxDecoration(
-                      color: _levelColor(currentLevel),
+                      color: _levelColor(context, currentLevel),
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
-                          color: _levelColor(currentLevel).withValues(alpha: 0.3),
+                          color: _levelColor(context, currentLevel).withValues(alpha: 0.3),
                           blurRadius: 8,
                           offset: const Offset(0, 2),
                         ),
@@ -75,7 +75,7 @@ class LevelFilterChips extends StatelessWidget {
                 Row(
                   children: RuleLevel.values.map((level) {
                     final isSelected = currentLevel == level;
-                    final color = _levelColor(level);
+                    final color = _levelColor(context, level);
 
                     return Expanded(
                       child: LevelFilterChip(
@@ -95,10 +95,11 @@ class LevelFilterChips extends StatelessWidget {
     );
   }
 
-  Color _levelColor(RuleLevel level) {
+  Color _levelColor(BuildContext context, RuleLevel level) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     switch (level) {
       case RuleLevel.newbie:
-        return const Color(0xFF10B981); // Emerald
+        return isDark ? const Color(0xFF00E5FF) : const Color(0xFF0891B2); // Cyan-600 in light mode
       case RuleLevel.casual:
         return const Color(0xFFFBBF24); // Amber
       case RuleLevel.advanced:
@@ -138,7 +139,7 @@ class LevelFilterChip extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
 
     final chipTextColor = selected
-        ? Colors.white
+        ? (color.computeLuminance() > 0.5 ? Colors.black87 : Colors.white)
         : (isDark ? const Color(0xFF94A3B8) : const Color(0xFF475569));
 
     return GestureDetector(

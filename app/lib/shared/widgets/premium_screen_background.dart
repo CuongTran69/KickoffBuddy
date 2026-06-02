@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../core/theme/app_colors.dart';
 
-/// A shared wrapper widget that applies a premium background gradient.
-///
-/// Dark Mode: Midnight Pitch to Slate-900.
-/// Light Mode: Soft Emerald to White.
+/// A shared wrapper widget that applies a flat background color.
 class PremiumScreenBackground extends StatelessWidget {
   const PremiumScreenBackground({
     super.key,
@@ -17,23 +15,14 @@ class PremiumScreenBackground extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    final gradientStart = isDark
-        ? const Color(0xFF051811) // Deep stadium green
-        : const Color(0xFFDCF2E8); // Rich soft mint green
-    final gradientEnd = isDark
-        ? const Color(0xFF080F16) // Midnight slate-blue
-        : const Color(0xFFF3FAF6); // Minty white
+    final backgroundColor = isDark
+        ? AppColors.darkSurface
+        : AppColors.lightSurfaceVariant;
 
     return Container(
       width: double.infinity,
       height: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [gradientStart, gradientEnd],
-        ),
-      ),
+      color: backgroundColor,
       child: child,
     );
   }

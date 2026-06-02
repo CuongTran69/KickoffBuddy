@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/vocabulary_item.dart';
+import '../../../../core/theme/app_colors.dart';
 
 /// A vocabulary term tile with collapsed and expanded states.
 ///
@@ -32,10 +33,10 @@ class VocabularyTile extends StatelessWidget {
         ? const Color(0x991E293B) // Slate-800 with 60% opacity
         : const Color(0xD9FFFFFF); // White with 85% opacity
     final cardBorderColor = isDark
-        ? const Color(0x3310B981)
+        ? AppColors.darkPrimary.withValues(alpha: 0.2)
         : Colors.white.withValues(alpha: 0.9);
     final double borderWidth = isDark ? 1.0 : 1.5;
-    final activeColor = isDark ? const Color(0xFF10B981) : const Color(0xFF059669);
+    final activeColor = isDark ? AppColors.darkPrimary : AppColors.lightPrimary;
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 6),
@@ -47,7 +48,7 @@ class VocabularyTile extends StatelessWidget {
           BoxShadow(
             color: isDark
                 ? Colors.black.withValues(alpha: 0.2)
-                : const Color(0x0A059669).withValues(alpha: 0.04),
+                : AppColors.lightPrimary.withValues(alpha: 0.04),
             blurRadius: 14,
             offset: const Offset(0, 6),
           ),
@@ -133,14 +134,9 @@ class VocabularyTile extends StatelessWidget {
                             width: double.infinity,
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  isDark ? const Color(0x1F10B981) : const Color(0x15059669),
-                                  Colors.transparent,
-                                ],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              ),
+                              color: isDark
+                                  ? AppColors.darkPrimary.withValues(alpha: 0.05)
+                                  : AppColors.lightPrimary.withValues(alpha: 0.03),
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(
                                 color: activeColor.withValues(alpha: 0.25),
@@ -208,8 +204,8 @@ class VocabularyTile extends StatelessWidget {
                             child: Container(
                               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                               decoration: BoxDecoration(
-                                color: isDark ? const Color(0x1F10B981) : const Color(0x15059669),
-                                borderRadius: BorderRadius.circular(12),
+                                  color: isDark ? AppColors.darkPrimary.withValues(alpha: 0.12) : AppColors.lightPrimary.withValues(alpha: 0.08),
+                                  borderRadius: BorderRadius.circular(12),
                                 border: Border.all(
                                   color: activeColor.withValues(alpha: 0.2),
                                   width: 0.8,

@@ -87,7 +87,6 @@ class _VocabularyScreenState extends ConsumerState<VocabularyScreen> {
     final searchState = ref.watch(vocabularySearchControllerProvider);
     final results = searchState.results;
     final currentResultIds = results.map((i) => i.id).toList();
-
     // Ensure keys exist for all current results.
     for (final item in results) {
       _itemKeys.putIfAbsent(item.id, () => GlobalKey());
@@ -100,10 +99,21 @@ class _VocabularyScreenState extends ConsumerState<VocabularyScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           scrolledUnderElevation: 0,
-          title: Text(AppLocalizations.of(context).vocabulary_appBar_title),
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+              child: Text(
+                AppLocalizations.of(context).vocabulary_appBar_title,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w800,
+                  color: Theme.of(context).colorScheme.onSurface,
+                  letterSpacing: -0.5,
+                ),
+              ),
+            ),
             // Search bar
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
@@ -116,7 +126,7 @@ class _VocabularyScreenState extends ConsumerState<VocabularyScreen> {
                   : ListView.builder(
                       controller: _scrollController,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 4).copyWith(bottom: 100),
+                          horizontal: 16, vertical: 4).copyWith(bottom: 20),
                       itemCount: results.length,
                       itemBuilder: (context, index) {
                         final item = results[index];

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Typography for Kickoff Buddy using Inter (Google Fonts).
+/// Typography for Kickoff Buddy using Outfit (Google Fonts).
 /// - Display / Title: SemiBold (w600)
 /// - Body: Regular (w400)
 /// - Numerals / Time: SemiBold (w600) + tabular figures
 abstract final class AppTypography {
-  /// Base Inter TextTheme for Material 3.
+  /// Base Outfit TextTheme for Material 3.
   static TextTheme textTheme(Brightness brightness) {
-    final base = GoogleFonts.interTextTheme(
+    final base = GoogleFonts.outfitTextTheme(
       brightness == Brightness.dark
           ? ThemeData.dark().textTheme
           : ThemeData.light().textTheme,
@@ -40,7 +40,7 @@ abstract final class AppTypography {
     Color? color,
     FontWeight? fontWeight,
   }) {
-    return GoogleFonts.inter(
+    return GoogleFonts.outfit(
       fontSize: fontSize,
       fontWeight: fontWeight ?? FontWeight.w600,
       color: color,

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/routing/routes.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/premium_screen_background.dart';
 import '../data/format_guide_repository.dart';
@@ -90,10 +91,10 @@ class _FormatGuideSectionTile extends StatelessWidget {
         ? const Color(0x991E293B)
         : const Color(0xD9FFFFFF);
     final borderColor = isDark
-        ? const Color(0x3310B981)
+        ? AppColors.darkPrimary.withValues(alpha: 0.2)
         : Colors.white.withValues(alpha: 0.9);
     final activeColor =
-        isDark ? const Color(0xFF10B981) : const Color(0xFF059669);
+        isDark ? AppColors.darkPrimary : AppColors.lightPrimary;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),

@@ -104,6 +104,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           return FormatGuideDetailScreen(sectionId: sectionId);
         },
       ),
+      GoRoute(
+        path: Routes.settings,
+        builder: (BuildContext context, GoRouterState state) =>
+            const SettingsScreen(),
+      ),
 
       // Shell — wraps the four primary tab destinations.
       StatefulShellRoute.indexedStack(
@@ -148,19 +153,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               ),
             ],
           ),
-
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                path: Routes.settings,
-                builder: (BuildContext context, GoRouterState state) =>
-                    const SettingsScreen(),
-              ),
-            ],
-          ),
         ],
       ),
     ],
   );
 });
-

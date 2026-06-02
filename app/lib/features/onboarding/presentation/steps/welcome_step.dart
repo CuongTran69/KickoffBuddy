@@ -23,7 +23,7 @@ class WelcomeStep extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Gradient circle container with emerald border
+          // Gradient circle container with neon cyan border
           Container(
             width: 120,
             height: 120,

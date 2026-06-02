@@ -40,7 +40,6 @@ class RuleCardsScreen extends ConsumerWidget {
           backgroundColor: Colors.transparent,
           elevation: 0,
           scrolledUnderElevation: 0,
-          title: Text(l10n.rules_appBar_title),
         ),
         body: filteredAsync.when(
           loading: () => const Center(child: CircularProgressIndicator()),
@@ -73,8 +72,19 @@ class RuleCardsScreen extends ConsumerWidget {
             final cardByTopic = {for (final c in cards) c.topic: c};
 
             return ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8).copyWith(bottom: 100),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8).copyWith(bottom: 20),
               children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 8, 0, 16),
+                  child: Text(
+                    l10n.rules_appBar_title,
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.w800,
+                      color: Theme.of(context).colorScheme.onSurface,
+                      letterSpacing: -0.5,
+                    ),
+                  ),
+                ),
                 // Level filter chips
                 LevelFilterChips(
                   currentLevel: currentLevel,

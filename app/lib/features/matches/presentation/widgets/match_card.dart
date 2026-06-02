@@ -81,7 +81,7 @@ class MatchCard extends ConsumerWidget {
               shape: BoxShape.circle,
               color: isToday ? amberColor : (isDark ? AppColors.darkPrimary : AppColors.lightPrimary),
               border: Border.all(
-                color: isDark ? const Color(0xFF080F16) : const Color(0xFFDCF2E8),
+                color: isDark ? const Color(0xFF080F16) : const Color(0xFFE0F2FE), // Soft blue instead of green
                 width: 2.0,
               ),
               boxShadow: [
@@ -108,7 +108,7 @@ class MatchCard extends ConsumerWidget {
               BoxShadow(
                 color: isDark
                     ? Colors.black.withValues(alpha: 0.25)
-                    : const Color(0x0A059669).withValues(alpha: 0.06),
+                    : AppColors.lightPrimary.withValues(alpha: 0.06),
                 blurRadius: 14,
                 offset: const Offset(0, 6),
               ),
@@ -124,16 +124,7 @@ class MatchCard extends ConsumerWidget {
                   if (isToday)
                     Positioned.fill(
                       child: Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              amberColor.withValues(alpha: 0.05),
-                              Colors.transparent,
-                            ],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
-                          ),
-                        ),
+                        color: amberColor.withValues(alpha: 0.04),
                       ),
                     ),
                   if (isToday)
@@ -147,7 +138,7 @@ class MatchCard extends ConsumerWidget {
                       ),
                     ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(isToday ? 16.5 : 12, 12, 12, 12),
+                    padding: EdgeInsets.fromLTRB(isToday ? 20.5 : 16, 16, 16, 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -157,7 +148,7 @@ class MatchCard extends ConsumerWidget {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: isDark ? const Color(0x3310B981) : const Color(0x33059669),
+                                  color: isDark ? AppColors.darkPrimary.withValues(alpha: 0.2) : AppColors.lightPrimary.withValues(alpha: 0.15),
                                   width: 1.5,
                                 ),
                               ),
@@ -239,7 +230,7 @@ class MatchCard extends ConsumerWidget {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: isDark ? const Color(0x3310B981) : const Color(0x33059669),
+                                  color: isDark ? AppColors.darkPrimary.withValues(alpha: 0.2) : AppColors.lightPrimary.withValues(alpha: 0.15),
                                   width: 1.5,
                                 ),
                               ),
