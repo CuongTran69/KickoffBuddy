@@ -87,7 +87,7 @@ class _VocabularySearchBarState extends ConsumerState<VocabularySearchBar> {
           suffixIcon: _hasText
               ? IconButton(
                   icon: Icon(Icons.clear, color: theme.colorScheme.onSurfaceVariant, size: 18),
-                  tooltip: 'Clear search',
+                  tooltip: l10n.vocabulary_search_clear_tooltip,
                   onPressed: () {
                     _ctrl.clear();
                     ref

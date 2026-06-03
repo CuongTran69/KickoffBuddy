@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/storage/prefs_provider.dart';
 
+/// SharedPreferences key for the persisted theme mode.
+const _kThemeModeKey = 'theme_mode';
+
+/// SharedPreferences key for the persisted locale code.
+const _kLocaleCodeKey = 'locale_code';
+
 /// Provider for managing the app's [ThemeMode].
 class ThemeModeNotifier extends StateNotifier<ThemeMode> {
   ThemeModeNotifier(this._ref) : super(ThemeMode.system) {
@@ -12,7 +18,7 @@ class ThemeModeNotifier extends StateNotifier<ThemeMode> {
 
   void _init() {
     final prefs = _ref.read(sharedPreferencesProvider);
-    final value = prefs.getString('theme_mode');
+    final value = prefs.getString(_kThemeModeKey);
     if (value == 'light') {
       state = ThemeMode.light;
     } else if (value == 'dark') {
@@ -25,7 +31,7 @@ class ThemeModeNotifier extends StateNotifier<ThemeMode> {
   Future<void> setThemeMode(ThemeMode mode) async {
     state = mode;
     final prefs = _ref.read(sharedPreferencesProvider);
-    await prefs.setString('theme_mode', mode.name);
+    await prefs.setString(_kThemeModeKey, mode.name);
   }
 }
 
@@ -43,7 +49,7 @@ class LocaleNotifier extends StateNotifier<Locale?> {
 
   void _init() {
     final prefs = _ref.read(sharedPreferencesProvider);
-    final value = prefs.getString('locale_code');
+    final value = prefs.getString(_kLocaleCodeKey);
     if (value != null) {
       state = Locale(value);
     }
@@ -53,9 +59,9 @@ class LocaleNotifier extends StateNotifier<Locale?> {
     state = locale;
     final prefs = _ref.read(sharedPreferencesProvider);
     if (locale == null) {
-      await prefs.remove('locale_code');
+      await prefs.remove(_kLocaleCodeKey);
     } else {
-      await prefs.setString('locale_code', locale.languageCode);
+      await prefs.setString(_kLocaleCodeKey, locale.languageCode);
     }
   }
 }

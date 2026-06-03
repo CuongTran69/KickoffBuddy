@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../data/vocabulary_item.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_decorations.dart';
 
 /// A vocabulary term tile with collapsed and expanded states.
 ///
@@ -17,6 +18,7 @@ class VocabularyTile extends StatelessWidget {
     required this.expanded,
     required this.onToggle,
     this.onRelatedTap,
+    this.relatedNameResolver,
   });
 
   final VocabularyItem item;
@@ -24,36 +26,21 @@ class VocabularyTile extends StatelessWidget {
   final VoidCallback onToggle;
   final void Function(String relatedId)? onRelatedTap;
 
+  /// Resolves a related-term ID to a human-readable display name.
+  ///
+  /// Falls back to the raw ID when null or unresolved (design D14).
+  final String Function(String relatedId)? relatedNameResolver;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    final cardBgColor = isDark
-        ? const Color(0x991E293B) // Slate-800 with 60% opacity
-        : const Color(0xD9FFFFFF); // White with 85% opacity
-    final cardBorderColor = isDark
-        ? AppColors.darkPrimary.withValues(alpha: 0.2)
-        : Colors.white.withValues(alpha: 0.9);
-    final double borderWidth = isDark ? 1.0 : 1.5;
     final activeColor = isDark ? AppColors.darkPrimary : AppColors.lightPrimary;
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 6),
-      decoration: BoxDecoration(
-        color: cardBgColor,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: cardBorderColor, width: borderWidth),
-        boxShadow: [
-          BoxShadow(
-            color: isDark
-                ? Colors.black.withValues(alpha: 0.2)
-                : AppColors.lightPrimary.withValues(alpha: 0.04),
-            blurRadius: 14,
-            offset: const Offset(0, 6),
-          ),
-        ],
-      ),
+      decoration: AppDecorations.glassCard(context),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: InkWell(
@@ -197,26 +184,32 @@ class VocabularyTile extends StatelessWidget {
                         spacing: 6,
                         runSpacing: 4,
                         children: item.related.map((relatedId) {
-                          return GestureDetector(
-                            onTap: onRelatedTap != null
-                                ? () => onRelatedTap!(relatedId)
-                                : null,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                              decoration: BoxDecoration(
-                                  color: isDark ? AppColors.darkPrimary.withValues(alpha: 0.12) : AppColors.lightPrimary.withValues(alpha: 0.08),
-                                  borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                  color: activeColor.withValues(alpha: 0.2),
-                                  width: 0.8,
+                          final label = relatedNameResolver?.call(relatedId) ??
+                              relatedId;
+                          return Semantics(
+                            button: onRelatedTap != null,
+                            label: label,
+                            child: GestureDetector(
+                              onTap: onRelatedTap != null
+                                  ? () => onRelatedTap!(relatedId)
+                                  : null,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                decoration: BoxDecoration(
+                                    color: isDark ? AppColors.darkPrimary.withValues(alpha: 0.12) : AppColors.lightPrimary.withValues(alpha: 0.08),
+                                    borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(
+                                    color: activeColor.withValues(alpha: 0.2),
+                                    width: 0.8,
+                                  ),
                                 ),
-                              ),
-                              child: Text(
-                                relatedId,
-                                style: TextStyle(
-                                  color: activeColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 10,
+                                child: Text(
+                                  label,
+                                  style: TextStyle(
+                                    color: activeColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10,
+                                  ),
                                 ),
                               ),
                             ),

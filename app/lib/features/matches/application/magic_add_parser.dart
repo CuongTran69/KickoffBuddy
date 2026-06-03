@@ -140,7 +140,7 @@ class MagicAddParser {
     if (mdMatch != null) {
       final month = _monthNames[mdMatch.group(1)!.toLowerCase()];
       final day = int.tryParse(mdMatch.group(2)!);
-      if (month != null && day != null) {
+      if (month != null && day != null && day >= 1 && day <= 31) {
         return _inferYear(now, month, day);
       }
     }
@@ -151,7 +151,12 @@ class MagicAddParser {
     if (slashMatch != null) {
       final month = int.tryParse(slashMatch.group(1)!);
       final day = int.tryParse(slashMatch.group(2)!);
-      if (month != null && day != null && month >= 1 && month <= 12) {
+      if (month != null &&
+          day != null &&
+          month >= 1 &&
+          month <= 12 &&
+          day >= 1 &&
+          day <= 31) {
         return _inferYear(now, month, day);
       }
     }
@@ -162,7 +167,12 @@ class MagicAddParser {
     if (dashMatch != null) {
       final month = int.tryParse(dashMatch.group(1)!);
       final day = int.tryParse(dashMatch.group(2)!);
-      if (month != null && day != null && month >= 1 && month <= 12) {
+      if (month != null &&
+          day != null &&
+          month >= 1 &&
+          month <= 12 &&
+          day >= 1 &&
+          day <= 31) {
         return _inferYear(now, month, day);
       }
     }

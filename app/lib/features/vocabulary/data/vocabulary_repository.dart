@@ -1,8 +1,6 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/data/bundled_json_repository.dart';
 import 'vocabulary_item.dart';
 
 /// Repository for vocabulary terms loaded from the bundled JSON asset.
@@ -11,42 +9,20 @@ import 'vocabulary_item.dart';
 /// - D1: No Isar — content is read-only and small (17 terms).
 /// - D3: Diacritic-insensitive search via [_stripVietnameseDiacritics].
 /// - Lazy load on first [getAll] call; subsequent calls use in-memory cache.
-class VocabularyRepository {
-  List<VocabularyItem>? _cache;
+class VocabularyRepository extends BundledJsonRepository<VocabularyItem> {
+  VocabularyRepository()
+      : super(
+          assetPath: 'assets/data/vocabulary.json',
+          rootKey: 'terms',
+          fromJson: VocabularyItem.fromJson,
+          idOf: (item) => item.id,
+        );
 
-  /// Load all 17 vocabulary terms from the bundled JSON asset.
-  ///
-  /// First call reads `assets/data/vocabulary.json` via [rootBundle].
-  /// Subsequent calls return the cached list (sorted alphabetically by termVi).
-  Future<List<VocabularyItem>> getAll() async {
-    if (_cache != null) return _cache!;
-
-    try {
-      final jsonString =
-          await rootBundle.loadString('assets/data/vocabulary.json');
-      final jsonMap = json.decode(jsonString) as Map<String, dynamic>;
-      final termsJson = jsonMap['terms'] as List<dynamic>;
-      final items = termsJson
-          .map((e) => VocabularyItem.fromJson(e as Map<String, dynamic>))
-          .toList();
-
-      // Sort alphabetically by Vietnamese term.
-      items.sort((a, b) => a.termVi.compareTo(b.termVi));
-      _cache = items;
-      return _cache!;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  /// Returns the item with the given [id], or null if not found.
-  Future<VocabularyItem?> getById(String id) async {
-    final items = await getAll();
-    try {
-      return items.firstWhere((i) => i.id == id);
-    } catch (_) {
-      return null;
-    }
+  /// Sort alphabetically by Vietnamese term before caching.
+  @override
+  List<VocabularyItem> postProcess(List<VocabularyItem> items) {
+    items.sort((a, b) => a.termVi.compareTo(b.termVi));
+    return items;
   }
 
   /// Search vocabulary terms.

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/rule_card.dart';
-import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_decorations.dart';
 
 /// A card tile showing the VN title and summary for a rule card.
 ///
@@ -35,30 +35,9 @@ class RuleCardTile extends StatelessWidget {
       levelColor = const Color(0xFF0891B2); // Cyan-600 for light mode
     }
 
-    final cardBgColor = isDark
-        ? const Color(0x991E293B) // Slate-800 with 60% opacity
-        : const Color(0xD9FFFFFF); // White with 85% opacity
-    final cardBorderColor = isDark
-        ? AppColors.darkPrimary.withValues(alpha: 0.2)
-        : Colors.white.withValues(alpha: 0.9);
-    final double borderWidth = isDark ? 1.0 : 1.5;
-
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 6),
-      decoration: BoxDecoration(
-        color: cardBgColor,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: cardBorderColor, width: borderWidth),
-        boxShadow: [
-          BoxShadow(
-            color: isDark
-                ? Colors.black.withValues(alpha: 0.2)
-                : AppColors.lightPrimary.withValues(alpha: 0.04),
-            blurRadius: 14,
-            offset: const Offset(0, 6),
-          ),
-        ],
-      ),
+      decoration: AppDecorations.glassCard(context),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: InkWell(

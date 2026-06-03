@@ -31,4 +31,29 @@ abstract final class AppColors {
   static const Color darkOnSurfaceMuted = Color(0xFF94A3B8); // Cool Grey
   static const Color darkPrimaryDim = Color(0xFF00B8D4); // Dimmed Neon Cyan
   static const Color darkError = Color(0xFFFF4D4D); // Vibrant Red
+
+  // ---------------------------------------------------------------------------
+  // Named constants for magic hex literals (live/status indicators)
+  // ---------------------------------------------------------------------------
+
+  /// Dark-mode LIVE badge background (red with 20% opacity).
+  static const Color liveIndicatorBgDark = Color(0x33DC2626);
+
+  /// Light-mode LIVE badge background (red with 12% opacity).
+  static const Color liveIndicatorBgLight = Color(0x1FDC2626);
+
+  /// Dark-mode muted surface border (slate-400 with 15% opacity).
+  static const Color mutedBorderDark = Color(0x2694A3B8);
+
+  /// Light-mode muted surface border (slate-500 with 12% opacity).
+  static const Color mutedBorderLight = Color(0x1F64748B);
+
+  /// Error red — same as lightError, used for explicit raw-color references.
+  static const Color errorRed = Color(0xFFDC2626);
+
+  /// Error red medium — slightly lighter shade (red-500).
+  static const Color errorRedMedium = Color(0xFFEF4444);
+
+  /// Error red light — light tint (red-400).
+  static const Color errorRedLight = Color(0xFFF87171);
 }

@@ -73,14 +73,26 @@ ReminderOffsetFilterResult filterValidOffsets(
 }
 
 /// Human-readable label for a reminder offset in minutes.
-String offsetLabel(int offsetMinutes) {
+///
+/// Unit words are injected so the function stays pure and testable (design D8);
+/// they default to Vietnamese. Callers with a [BuildContext] pass localized
+/// unit words from the ARB (`reminder_unit_*`).
+String offsetLabel(
+  int offsetMinutes, {
+  String dayUnit = 'ngày',
+  String daysUnit = 'ngày',
+  String hourUnit = 'giờ',
+  String hoursUnit = 'giờ',
+  String minuteUnit = 'phút',
+  String minutesUnit = 'phút',
+}) {
   if (offsetMinutes >= 1440) {
     final days = offsetMinutes ~/ 1440;
-    return days == 1 ? '1 ngày' : '$days ngày';
+    return days == 1 ? '1 $dayUnit' : '$days $daysUnit';
   } else if (offsetMinutes >= 60) {
     final hours = offsetMinutes ~/ 60;
-    return hours == 1 ? '1 giờ' : '$hours giờ';
+    return hours == 1 ? '1 $hourUnit' : '$hours $hoursUnit';
   } else {
-    return '$offsetMinutes phút';
+    return offsetMinutes == 1 ? '1 $minuteUnit' : '$offsetMinutes $minutesUnit';
   }
 }

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/routing/routes.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/icon_mapper.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/premium_screen_background.dart';
 import '../data/etiquette_repository.dart';
@@ -122,7 +123,7 @@ class _EtiquetteTipTile extends StatelessWidget {
             child: Row(
               children: [
                 Icon(
-                  _iconData(tip.icon),
+                  iconFromName(tip.icon),
                   color: activeColor,
                   size: 26,
                 ),
@@ -151,26 +152,5 @@ class _EtiquetteTipTile extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  IconData _iconData(String name) {
-    switch (name) {
-      case 'block':
-        return Icons.block;
-      case 'groups':
-        return Icons.groups;
-      case 'school':
-        return Icons.school;
-      case 'local_bar':
-        return Icons.local_bar;
-      case 'celebration':
-        return Icons.celebration;
-      case 'sports':
-        return Icons.sports;
-      case 'timer':
-        return Icons.timer;
-      default:
-        return Icons.info_outline;
-    }
   }
 }

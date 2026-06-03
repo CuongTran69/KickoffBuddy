@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/routing/routes.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/icon_mapper.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/premium_screen_background.dart';
 import '../data/format_guide_repository.dart';
@@ -122,7 +123,7 @@ class _FormatGuideSectionTile extends StatelessWidget {
             child: Row(
               children: [
                 Icon(
-                  _iconData(section.icon),
+                  iconFromName(section.icon),
                   color: activeColor,
                   size: 26,
                 ),
@@ -151,24 +152,5 @@ class _FormatGuideSectionTile extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  IconData _iconData(String name) {
-    switch (name) {
-      case 'public':
-        return Icons.public;
-      case 'groups':
-        return Icons.groups;
-      case 'trending_up':
-        return Icons.trending_up;
-      case 'compare_arrows':
-        return Icons.compare_arrows;
-      case 'format_list_numbered':
-        return Icons.format_list_numbered;
-      case 'emoji_events':
-        return Icons.emoji_events;
-      default:
-        return Icons.info_outline;
-    }
   }
 }

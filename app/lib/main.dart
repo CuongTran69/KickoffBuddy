@@ -8,7 +8,6 @@ import 'app.dart';
 import 'core/notifications/notification_service.dart';
 import 'core/storage/prefs_provider.dart';
 import 'core/time/timezone_service.dart';
-import 'features/matches/application/team_lookup_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +23,7 @@ void main() async {
   }
 
   await TimezoneService.initialize();
-  await TeamLookupService.instance.load();
+  // TeamLookupService is loaded lazily via teamLookupServiceProvider (D6).
   await NotificationService.instance.initialize();
   final prefs = await SharedPreferences.getInstance();
   runApp(ProviderScope(

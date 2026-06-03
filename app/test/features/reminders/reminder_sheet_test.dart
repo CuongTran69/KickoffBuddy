@@ -256,6 +256,9 @@ class _FakeNotificationService implements NotificationService {
   Future<bool> requestPermissions() async => true;
 
   @override
+  Future<bool> canScheduleExactAlarms() async => true;
+
+  @override
   Future<void> scheduleAt(
     int id,
     String title,

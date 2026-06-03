@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/analytics/analytics_events.dart';
@@ -44,13 +45,20 @@ class VocabularySearchNotifier extends Notifier<VocabularySearchState> {
   VocabularySearchState build() {
     // Load all items on init.
     _loadAll();
-    return const VocabularySearchState(query: '', results: []);
+    return const VocabularySearchState(query: '', results: [], loading: true);
   }
 
   Future<void> _loadAll() async {
-    final repo = ref.read(vocabularyRepositoryProvider);
-    final items = await repo.getAll();
-    state = state.copyWith(results: items, loading: false);
+    try {
+      final repo = ref.read(vocabularyRepositoryProvider);
+      final items = await repo.getAll();
+      state = state.copyWith(results: items, loading: false);
+    } catch (e) {
+      // Clear the loading flag so the UI isn't stuck on a spinner; log for
+      // diagnostics (design D7).
+      debugPrint('[VocabularySearchNotifier] _loadAll error: $e');
+      state = state.copyWith(loading: false);
+    }
   }
 
   /// Update the search query.
@@ -96,3 +104,14 @@ final vocabularySearchControllerProvider =
     NotifierProvider<VocabularySearchNotifier, VocabularySearchState>(
   VocabularySearchNotifier.new,
 );
+
+/// Maps each vocabulary term ID to its Vietnamese display name.
+///
+/// Used to render related-term chips with readable names instead of raw IDs
+/// (design D14). Loaded once from the repository.
+final vocabularyTermNamesProvider =
+    FutureProvider<Map<String, String>>((ref) async {
+  final repo = ref.read(vocabularyRepositoryProvider);
+  final items = await repo.getAll();
+  return {for (final item in items) item.id: item.termVi};
+});

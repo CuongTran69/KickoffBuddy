@@ -69,13 +69,21 @@ void main() {
   });
 
   group('SpoilerBadge', () {
+    Widget buildWithL10n(Widget child) => MaterialApp(
+          locale: const Locale('vi'),
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [Locale('vi'), Locale('en')],
+          home: Scaffold(body: child),
+        );
+
     testWidgets('renders shield icon and Protected label', (tester) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(
-            body: SpoilerBadge(),
-          ),
-        ),
+        buildWithL10n(const SpoilerBadge()),
       );
 
       expect(find.byIcon(Icons.shield_outlined), findsOneWidget);

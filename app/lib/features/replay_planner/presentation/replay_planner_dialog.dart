@@ -35,6 +35,8 @@ class _ReplayPlannerDialogState
   DateTime? _pickedDate;
   TimeOfDay? _pickedTime;
   String? _validationError;
+  bool _isSaving = false;
+  bool _isCancelling = false;
 
   Match get match => widget.match;
 
@@ -52,6 +54,7 @@ class _ReplayPlannerDialogState
 
   bool get _canSave {
     if (_pickedDateTime == null) return false;
+    if (_isSaving || _isCancelling) return false;
     return _validationError == null;
   }
 
@@ -119,17 +122,37 @@ class _ReplayPlannerDialogState
 
   Future<void> _save(AppLocalizations l10n) async {
     final dt = _pickedDateTime;
-    if (dt == null) return;
+    if (dt == null || _isSaving) return;
+
+    setState(() => _isSaving = true);
 
     final controller = ref.read(
       replayPlannerControllerProvider(match.matchId).notifier,
     );
 
     try {
-      await controller.savePlan(match, dt);
-    } catch (e) {
+      await controller.savePlan(
+        match,
+        dt,
+        notificationTitle: l10n.replay_notification_title,
+        notificationBody: l10n.replay_notification_body(match.teamA, match.teamB),
+      );
+    } on ArgumentError catch (e) {
+      debugPrint('[ReplayPlannerDialog] save validation error: $e');
       if (mounted) {
-        setState(() => _validationError = e.toString());
+        setState(() {
+          _isSaving = false;
+          _validationError = l10n.replayPlanner_validation_mustBeInFuture;
+        });
+      }
+      return;
+    } catch (e) {
+      debugPrint('[ReplayPlannerDialog] save error: $e');
+      if (mounted) {
+        setState(() {
+          _isSaving = false;
+          _validationError = l10n.common_error_generic;
+        });
       }
       return;
     }
@@ -145,6 +168,8 @@ class _ReplayPlannerDialogState
   }
 
   Future<void> _cancelPlan(AppLocalizations l10n) async {
+    if (_isCancelling) return;
+
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -165,10 +190,23 @@ class _ReplayPlannerDialogState
 
     if (confirmed != true || !mounted) return;
 
+    setState(() => _isCancelling = true);
+
     final controller = ref.read(
       replayPlannerControllerProvider(match.matchId).notifier,
     );
-    await controller.cancelPlan(match);
+    try {
+      await controller.cancelPlan(match);
+    } catch (e) {
+      debugPrint('[ReplayPlannerDialog] cancel error: $e');
+      if (mounted) {
+        setState(() {
+          _isCancelling = false;
+          _validationError = l10n.common_error_generic;
+        });
+      }
+      return;
+    }
 
     if (!mounted) return;
     Navigator.pop(context);
@@ -224,19 +262,28 @@ class _ReplayPlannerDialogState
         // Cancel existing plan button (only if plan exists)
         if (planState.enabled)
           TextButton(
-            onPressed: () => _cancelPlan(l10n),
+            onPressed:
+                (_isSaving || _isCancelling) ? null : () => _cancelPlan(l10n),
             style: TextButton.styleFrom(
               foregroundColor: Theme.of(context).colorScheme.error,
             ),
             child: Text(l10n.replayPlanner_btn_cancelPlan),
           ),
         TextButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: (_isSaving || _isCancelling)
+              ? null
+              : () => Navigator.pop(context),
           child: Text(l10n.replayPlanner_btn_close),
         ),
         FilledButton(
           onPressed: _canSave ? () => _save(l10n) : null,
-          child: Text(l10n.replayPlanner_btn_save),
+          child: (_isSaving || _isCancelling)
+              ? const SizedBox(
+                  width: 16,
+                  height: 16,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : Text(l10n.replayPlanner_btn_save),
         ),
       ],
     );

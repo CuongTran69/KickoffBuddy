@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../application/reminder_scheduler.dart';
+import '../../../../l10n/app_localizations.dart';
+import '../reminder_l10n.dart';
 
 /// A single chip for a reminder offset option.
 ///
@@ -20,8 +21,9 @@ class ReminderOffsetChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return FilterChip(
-      label: Text(offsetLabel(offsetMinutes)),
+      label: Text(l10n.offsetLabelLocalized(offsetMinutes)),
       selected: selected,
       onSelected: (_) => onTap(),
     );

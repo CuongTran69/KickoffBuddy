@@ -87,7 +87,12 @@ class _VocabularyScreenState extends ConsumerState<VocabularyScreen> {
     final searchState = ref.watch(vocabularySearchControllerProvider);
     final results = searchState.results;
     final currentResultIds = results.map((i) => i.id).toList();
-    // Ensure keys exist for all current results.
+    final termNames =
+        ref.watch(vocabularyTermNamesProvider).valueOrNull ?? const {};
+    // Keep keys only for currently-displayed items so the map cannot grow
+    // without bound as the user searches (design D11).
+    final resultIdSet = currentResultIds.toSet();
+    _itemKeys.removeWhere((id, _) => !resultIdSet.contains(id));
     for (final item in results) {
       _itemKeys.putIfAbsent(item.id, () => GlobalKey());
     }
@@ -121,27 +126,30 @@ class _VocabularyScreenState extends ConsumerState<VocabularyScreen> {
             ),
             // Results list
             Expanded(
-              child: results.isEmpty && searchState.query.isNotEmpty
-                  ? _buildEmptyState(context)
-                  : ListView.builder(
-                      controller: _scrollController,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 4).copyWith(bottom: 20),
-                      itemCount: results.length,
-                      itemBuilder: (context, index) {
-                        final item = results[index];
-                        return KeyedSubtree(
-                          key: _itemKeys[item.id],
-                          child: VocabularyTile(
-                            item: item,
-                            expanded: _expandedState[item.id] ?? false,
-                            onToggle: () => _toggleExpanded(item.id),
-                            onRelatedTap: (relatedId) =>
-                                _onRelatedTap(relatedId, currentResultIds),
-                          ),
-                        );
-                      },
-                    ),
+              child: searchState.loading && results.isEmpty
+                  ? const Center(child: CircularProgressIndicator())
+                  : results.isEmpty && searchState.query.isNotEmpty
+                      ? _buildEmptyState(context)
+                      : ListView.builder(
+                          controller: _scrollController,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 4).copyWith(bottom: 20),
+                          itemCount: results.length,
+                          itemBuilder: (context, index) {
+                            final item = results[index];
+                            return KeyedSubtree(
+                              key: _itemKeys[item.id],
+                              child: VocabularyTile(
+                                item: item,
+                                expanded: _expandedState[item.id] ?? false,
+                                onToggle: () => _toggleExpanded(item.id),
+                                onRelatedTap: (relatedId) =>
+                                    _onRelatedTap(relatedId, currentResultIds),
+                                relatedNameResolver: (id) => termNames[id] ?? id,
+                              ),
+                            );
+                          },
+                        ),
             ),
           ],
         ),

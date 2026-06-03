@@ -354,7 +354,8 @@ class AppLocalizationsVi extends AppLocalizations {
   String get magicAdd_snackbar_saved => 'Đã thêm trận đấu';
 
   @override
-  String get magicAdd_snackbar_error => 'Lỗi khi lưu: ';
+  String get magicAdd_snackbar_error =>
+      'Không thể lưu trận đấu. Vui lòng thử lại.';
 
   @override
   String get reminder_sheet_title => 'Nhắc nhở trước giờ đá';
@@ -765,4 +766,112 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get formatGuide_btn_back => 'Quay lại';
+
+  @override
+  String get home_dashboard_title => 'Kickoff Buddy';
+
+  @override
+  String get home_dashboard_subtitle =>
+      'Cẩm nang & lịch thi đấu bóng đá tiện ích';
+
+  @override
+  String get home_action_matches => 'Lịch thi đấu';
+
+  @override
+  String get home_action_standings => 'BXH bảng';
+
+  @override
+  String get home_action_rules => 'Cẩm nang luật';
+
+  @override
+  String get home_action_vocabulary => 'Từ vựng';
+
+  @override
+  String get home_action_magicAdd => 'Thêm nhanh';
+
+  @override
+  String get home_action_manualAdd => 'Thêm thủ công';
+
+  @override
+  String get home_quickLearn_offside_label => 'Việt vị';
+
+  @override
+  String get home_quickLearn_offside_desc =>
+      'Luật việt vị cơ bản cho người mới bắt đầu.';
+
+  @override
+  String get home_quickLearn_penalty_label => 'Phạt đền';
+
+  @override
+  String get home_quickLearn_penalty_desc =>
+      'Tìm hiểu khi nào phạt đền xảy ra.';
+
+  @override
+  String get home_quickLearn_var_label => 'VAR';
+
+  @override
+  String get home_quickLearn_var_desc =>
+      'VAR hoạt động như thế nào trong trận?';
+
+  @override
+  String get home_quickLearn_vocabulary_label => 'Từ vựng';
+
+  @override
+  String get home_quickLearn_vocabulary_desc =>
+      'Tra cứu các thuật ngữ bóng đá thông dụng.';
+
+  @override
+  String get settings_resources_title => 'Tài nguyên & Tra cứu';
+
+  @override
+  String reminder_notification_title(String label) {
+    return 'Nhắc trận đấu: còn $label';
+  }
+
+  @override
+  String reminder_notification_body(String teamA, String teamB) {
+    return '$teamA vs $teamB';
+  }
+
+  @override
+  String get replay_notification_title => 'Sắp đến giờ xem lại';
+
+  @override
+  String replay_notification_body(String teamA, String teamB) {
+    return '$teamA vs $teamB';
+  }
+
+  @override
+  String get reminder_unit_day => 'ngày';
+
+  @override
+  String get reminder_unit_days => 'ngày';
+
+  @override
+  String get reminder_unit_hour => 'giờ';
+
+  @override
+  String get reminder_unit_hours => 'giờ';
+
+  @override
+  String get reminder_unit_minute => 'phút';
+
+  @override
+  String get reminder_unit_minutes => 'phút';
+
+  @override
+  String get spoiler_badge_label => 'Bảo vệ';
+
+  @override
+  String get rules_empty_state => 'Không có thẻ cho cấp độ này';
+
+  @override
+  String get vocabulary_search_clear_tooltip => 'Xóa tìm kiếm';
+
+  @override
+  String get common_error_network =>
+      'Lỗi mạng. Vui lòng kiểm tra kết nối và thử lại.';
+
+  @override
+  String get common_error_generic => 'Đã có lỗi xảy ra. Vui lòng thử lại.';
 }

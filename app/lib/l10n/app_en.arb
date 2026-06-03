@@ -467,9 +467,9 @@
   "@magicAdd_snackbar_saved": {
     "description": "Magic Add snackbar message after saving"
   },
-  "magicAdd_snackbar_error": "Error saving: ",
+  "magicAdd_snackbar_error": "Could not save the match. Please try again.",
   "@magicAdd_snackbar_error": {
-    "description": "Magic Add snackbar error prefix"
+    "description": "Magic Add snackbar error message shown when saving a match fails"
   },
 
   "reminder_sheet_title": "Remind before kickoff",
@@ -1061,5 +1061,168 @@
   "formatGuide_btn_back": "Back",
   "@formatGuide_btn_back": {
     "description": "Back button label on format guide detail error/not-found states"
+  },
+
+  "home_dashboard_title": "Kickoff Buddy",
+  "@home_dashboard_title": {
+    "description": "home_dashboard_purpose: Dashboard header title shown on the home screen"
+  },
+  "home_dashboard_subtitle": "Your football schedule & guide",
+  "@home_dashboard_subtitle": {
+    "description": "home_dashboard_purpose: Dashboard header subtitle tagline on the home screen"
+  },
+  "home_action_matches": "Schedule",
+  "@home_action_matches": {
+    "description": "home_quickAction_purpose: Quick action label for match schedule"
+  },
+  "home_action_standings": "Standings",
+  "@home_action_standings": {
+    "description": "home_quickAction_purpose: Quick action label for standings"
+  },
+  "home_action_rules": "Rules",
+  "@home_action_rules": {
+    "description": "home_quickAction_purpose: Quick action label for football rules"
+  },
+  "home_action_vocabulary": "Vocabulary",
+  "@home_action_vocabulary": {
+    "description": "home_quickAction_purpose: Quick action label for vocabulary"
+  },
+  "home_action_magicAdd": "Quick Add",
+  "@home_action_magicAdd": {
+    "description": "home_quickAction_purpose: Quick action label for magic add"
+  },
+  "home_action_manualAdd": "Manual Add",
+  "@home_action_manualAdd": {
+    "description": "home_quickAction_purpose: Quick action label for manual add"
+  },
+  "home_quickLearn_offside_label": "Offside",
+  "@home_quickLearn_offside_label": {
+    "description": "home_quickLearn_purpose: Quick learn card label for offside rule"
+  },
+  "home_quickLearn_offside_desc": "Basic offside rule for beginners.",
+  "@home_quickLearn_offside_desc": {
+    "description": "home_quickLearn_purpose: Quick learn card description for offside"
+  },
+  "home_quickLearn_penalty_label": "Penalty",
+  "@home_quickLearn_penalty_label": {
+    "description": "home_quickLearn_purpose: Quick learn card label for penalty rule"
+  },
+  "home_quickLearn_penalty_desc": "Learn when a penalty kick occurs.",
+  "@home_quickLearn_penalty_desc": {
+    "description": "home_quickLearn_purpose: Quick learn card description for penalty"
+  },
+  "home_quickLearn_var_label": "VAR",
+  "@home_quickLearn_var_label": {
+    "description": "home_quickLearn_purpose: Quick learn card label for VAR"
+  },
+  "home_quickLearn_var_desc": "How does VAR work in a match?",
+  "@home_quickLearn_var_desc": {
+    "description": "home_quickLearn_purpose: Quick learn card description for VAR"
+  },
+  "home_quickLearn_vocabulary_label": "Vocabulary",
+  "@home_quickLearn_vocabulary_label": {
+    "description": "home_quickLearn_purpose: Quick learn card label for vocabulary"
+  },
+  "home_quickLearn_vocabulary_desc": "Look up common football terms.",
+  "@home_quickLearn_vocabulary_desc": {
+    "description": "home_quickLearn_purpose: Quick learn card description for vocabulary"
+  },
+
+  "settings_resources_title": "Resources & Reference",
+  "@settings_resources_title": {
+    "description": "settings_resources_purpose: Settings screen section title for resources and reference links"
+  },
+
+  "reminder_notification_title": "Match reminder: {label} to go",
+  "@reminder_notification_title": {
+    "description": "reminder_notification_purpose: Notification title for a match reminder, with time label",
+    "placeholders": {
+      "label": {
+        "type": "String",
+        "description": "Human-readable time label, e.g. '1 day' or '30 minutes'"
+      }
+    }
+  },
+  "reminder_notification_body": "{teamA} vs {teamB}",
+  "@reminder_notification_body": {
+    "description": "reminder_notification_purpose: Notification body for a match reminder showing the teams",
+    "placeholders": {
+      "teamA": {
+        "type": "String",
+        "description": "Home team name"
+      },
+      "teamB": {
+        "type": "String",
+        "description": "Away team name"
+      }
+    }
+  },
+
+  "replay_notification_title": "Replay time coming up",
+  "@replay_notification_title": {
+    "description": "replay_notification_purpose: Notification title for an upcoming replay reminder"
+  },
+  "replay_notification_body": "{teamA} vs {teamB}",
+  "@replay_notification_body": {
+    "description": "replay_notification_purpose: Notification body for an upcoming replay showing the teams",
+    "placeholders": {
+      "teamA": {
+        "type": "String",
+        "description": "Home team name"
+      },
+      "teamB": {
+        "type": "String",
+        "description": "Away team name"
+      }
+    }
+  },
+
+  "reminder_unit_day": "day",
+  "@reminder_unit_day": {
+    "description": "reminder_offset_purpose: Unit word for a single day in offset labels"
+  },
+  "reminder_unit_days": "days",
+  "@reminder_unit_days": {
+    "description": "reminder_offset_purpose: Unit word for multiple days in offset labels"
+  },
+  "reminder_unit_hour": "hour",
+  "@reminder_unit_hour": {
+    "description": "reminder_offset_purpose: Unit word for a single hour in offset labels"
+  },
+  "reminder_unit_hours": "hours",
+  "@reminder_unit_hours": {
+    "description": "reminder_offset_purpose: Unit word for multiple hours in offset labels"
+  },
+  "reminder_unit_minute": "minute",
+  "@reminder_unit_minute": {
+    "description": "reminder_offset_purpose: Unit word for a single minute in offset labels"
+  },
+  "reminder_unit_minutes": "minutes",
+  "@reminder_unit_minutes": {
+    "description": "reminder_offset_purpose: Unit word for multiple minutes in offset labels"
+  },
+
+  "spoiler_badge_label": "Protected",
+  "@spoiler_badge_label": {
+    "description": "spoiler_badge_purpose: Label shown on the spoiler protection badge"
+  },
+
+  "rules_empty_state": "No rule cards available for this level.",
+  "@rules_empty_state": {
+    "description": "rules_emptyState_purpose: Empty state message when no rule cards exist for the selected level"
+  },
+
+  "vocabulary_search_clear_tooltip": "Clear search",
+  "@vocabulary_search_clear_tooltip": {
+    "description": "vocabulary_search_purpose: Accessibility tooltip for the clear button in the vocabulary search bar"
+  },
+
+  "common_error_network": "Network error. Please check your connection and try again.",
+  "@common_error_network": {
+    "description": "common_error_purpose: User-facing message for network connectivity failures"
+  },
+  "common_error_generic": "Something went wrong. Please try again.",
+  "@common_error_generic": {
+    "description": "common_error_purpose: User-facing message for generic unexpected errors"
   }
 }

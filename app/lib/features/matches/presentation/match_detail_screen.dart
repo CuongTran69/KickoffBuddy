@@ -7,11 +7,13 @@ import 'package:timezone/timezone.dart' as tz;
 import '../../../core/analytics/analytics_events.dart';
 import '../../../core/analytics/analytics_provider.dart';
 import '../../../core/routing/routes.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../../l10n/app_localizations.dart';
 import '../application/team_lookup_service.dart';
 import '../application/user_matches_provider.dart';
 import '../data/match.dart';
 import '../data/match_repository.dart';
+import '../data/match_status.dart';
 import '../../reminders/presentation/reminder_sheet.dart';
 import '../../replay_planner/application/replay_planner_controller.dart';
 import '../../replay_planner/application/shield_status_provider.dart';
@@ -364,7 +366,7 @@ class _MatchDetailBodyState extends ConsumerState<_MatchDetailBody> {
                           icon: const Icon(Icons.edit),
                           label: Text(l10n.matchDetail_btn_edit),
                           onPressed: () => context.push(
-                            '${Routes.matchesAdd}?edit=${match.matchId}',
+                            Routes.matchesAddWith(editMatchId: match.matchId),
                           ),
                         ),
                       ),
@@ -590,16 +592,19 @@ class _StatusBadge extends StatelessWidget {
     Color textColor;
     String label;
 
-    switch (status) {
-      case 'in_progress':
-        bgColor = isDark ? const Color(0x33DC2626) : const Color(0x1FDC2626);
+    switch (MatchStatus.fromApi(status)) {
+      case MatchStatus.inProgress:
+        bgColor = isDark
+            ? AppColors.liveIndicatorBgDark
+            : AppColors.liveIndicatorBgLight;
         textColor = Colors.redAccent;
         label = l10n.matchDetail_status_live;
-      case 'completed':
-        bgColor = isDark ? const Color(0x2694A3B8) : const Color(0x1F64748B);
+      case MatchStatus.completed:
+        bgColor =
+            isDark ? AppColors.mutedBorderDark : AppColors.mutedBorderLight;
         textColor = isDark ? Colors.white70 : Colors.black54;
         label = l10n.matchDetail_status_ft;
-      default:
+      case MatchStatus.futureScheduled:
         bgColor = theme.colorScheme.primaryContainer;
         textColor = theme.colorScheme.onPrimaryContainer;
         label = l10n.matchDetail_status_scheduled;
@@ -610,7 +615,7 @@ class _StatusBadge extends StatelessWidget {
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: BorderRadius.circular(12),
-        border: status == 'in_progress'
+        border: MatchStatus.fromApi(status).isLive
             ? Border.all(color: Colors.redAccent.withValues(alpha: 0.5))
             : null,
       ),

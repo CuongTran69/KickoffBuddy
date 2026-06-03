@@ -48,32 +48,41 @@ class MatchFilterChips extends StatelessWidget {
         : (isDark ? AppColors.darkOnSurfaceMuted : AppColors.lightOnSurfaceMuted);
     final chipBorderColor = isSelected
         ? activeColor
-        : (isDark ? const Color(0x2694A3B8) : Colors.white.withValues(alpha: 0.8));
+        : (isDark ? AppColors.mutedBorderDark : Colors.white.withValues(alpha: 0.8));
 
-    return GestureDetector(
-      onTap: () => onSelected(filter),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: chipBgColor,
+    return Semantics(
+      button: true,
+      selected: isSelected,
+      label: label,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () => onSelected(filter),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: chipBorderColor, width: 1.0),
-          boxShadow: isSelected
-              ? [
-                  BoxShadow(
-                    color: activeColor.withValues(alpha: 0.25),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ]
-              : null,
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            color: chipTextColor,
-            fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-            fontSize: 12,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: chipBgColor,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: chipBorderColor, width: 1.0),
+              boxShadow: isSelected
+                  ? [
+                      BoxShadow(
+                        color: activeColor.withValues(alpha: 0.25),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                      ),
+                    ]
+                  : null,
+            ),
+            child: Text(
+              label,
+              style: TextStyle(
+                color: chipTextColor,
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                fontSize: 12,
+              ),
+            ),
           ),
         ),
       ),

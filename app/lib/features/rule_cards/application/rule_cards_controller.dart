@@ -11,18 +11,6 @@ enum RuleLevel {
 
   /// Returns the JSON value string for this level.
   String get jsonValue => name; // "newbie", "casual", "advanced"
-
-  /// Returns the Vietnamese display label for this level.
-  String get labelVi {
-    switch (this) {
-      case RuleLevel.newbie:
-        return 'Người mới';
-      case RuleLevel.casual:
-        return 'Thỉnh thoảng';
-      case RuleLevel.advanced:
-        return 'Nâng cao';
-    }
-  }
 }
 
 /// Notifier that manages the active rule level filter.

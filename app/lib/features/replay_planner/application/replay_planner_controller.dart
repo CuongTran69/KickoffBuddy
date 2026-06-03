@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 import '../../../core/analytics/analytics_events.dart';
 import '../../../core/analytics/analytics_provider.dart';
+import '../../../core/constants/app_constants.dart';
 import '../../../core/notifications/notification_service.dart';
 import '../../../features/matches/data/match.dart';
 import '../../../features/matches/data/match_repository.dart';
@@ -46,13 +48,19 @@ class ReplayPlannerController
   }
 
   Future<void> _loadInitial(String matchId) async {
-    final repo = await ref.read(matchRepositoryProvider.future);
-    final match = await repo.getById(matchId);
-    if (match == null) return;
-    state = ReplayPlanState(
-      enabled: match.replayPlannerEnabled,
-      plannedAt: match.replayPlannedAt,
-    );
+    try {
+      final repo = await ref.read(matchRepositoryProvider.future);
+      final match = await repo.getById(matchId);
+      if (match == null) return;
+      state = ReplayPlanState(
+        enabled: match.replayPlannerEnabled,
+        plannedAt: match.replayPlannedAt,
+      );
+    } catch (e) {
+      // Surface for diagnostics but keep the safe default state so the UI is
+      // not stuck — the user can still create a fresh plan (design D7).
+      debugPrint('[ReplayPlannerController] _loadInitial error: $e');
+    }
   }
 
   /// Saves a replay plan for [match] at [plannedAt].
@@ -63,9 +71,21 @@ class ReplayPlannerController
   ///
   /// On success:
   /// - Cancels any existing replay reminder (D2).
-  /// - Schedules a new reminder at [plannedAt] - 5 min (D8).
-  /// - Persists the plan to the match record.
-  Future<void> savePlan(Match match, DateTime plannedAt) async {
+  /// - Schedules a new reminder at [plannedAt] - pre-fire offset (D8).
+  /// - Persists the plan to the match record atomically (design D5): the match
+  ///   record is written FIRST and the exposed Notifier state is only updated
+  ///   after that write succeeds. On failure the original record fields are
+  ///   restored and the error is rethrown so the caller can show it.
+  ///
+  /// [notificationTitle]/[notificationBody] let the caller pass localized
+  /// notification copy (design D8). They fall back to sensible defaults when
+  /// omitted (e.g. in tests).
+  Future<void> savePlan(
+    Match match,
+    DateTime plannedAt, {
+    String? notificationTitle,
+    String? notificationBody,
+  }) async {
     final now = DateTime.now().toUtc();
     final plannedAtUtc = plannedAt.toUtc();
 
@@ -79,26 +99,37 @@ class ReplayPlannerController
     final notifService = ref.read(notificationServiceProvider);
     final repo = await ref.read(matchRepositoryProvider.future);
 
+    // D5: persist FIRST so state never leads the write. Snapshot the original
+    // record fields so we can roll back the in-memory match if the write fails.
+    final prevEnabled = match.replayPlannerEnabled;
+    final prevPlannedAt = match.replayPlannedAt;
+
+    match.replayPlannerEnabled = true;
+    match.replayPlannedAt = plannedAtUtc;
+    try {
+      await repo.upsert(match);
+    } catch (e) {
+      // Roll back the shared match so memory matches disk, then rethrow.
+      match.replayPlannerEnabled = prevEnabled;
+      match.replayPlannedAt = prevPlannedAt;
+      rethrow;
+    }
+
     // D2: Cancel existing replay reminder before scheduling new one.
     await notifService.cancel(replayNotificationIdFor(match.matchId));
 
-    // D8: Schedule reminder 5 minutes before replay.
+    // D8: Schedule reminder before the planned replay time.
     final fireTime = tz.TZDateTime.from(plannedAtUtc, tz.local)
-        .subtract(const Duration(minutes: 5));
+        .subtract(AppConstants.replayPrefireOffset);
     final id = replayNotificationIdFor(match.matchId);
 
     await notifService.scheduleAt(
       id,
-      'Sắp đến giờ xem lại',
-      '${match.teamA} vs ${match.teamB}',
+      notificationTitle ?? 'Sắp đến giờ xem lại',
+      notificationBody ?? '${match.teamA} vs ${match.teamB}',
       fireTime,
       payload: match.matchId,
     );
-
-    // Persist to match record.
-    match.replayPlannerEnabled = true;
-    match.replayPlannedAt = plannedAtUtc;
-    await repo.upsert(match);
 
     // Fire analytics event after persistence.
     ref.read(analyticsServiceProvider).logEvent(
@@ -114,18 +145,28 @@ class ReplayPlannerController
 
   /// Cancels the replay plan for [match].
   ///
-  /// Cancels the scheduled notification and clears the plan from the record.
+  /// Persists the cleared plan FIRST (design D5); only updates state and
+  /// cancels the scheduled notification after the write succeeds. On write
+  /// failure the original record fields are restored and the error rethrown.
   Future<void> cancelPlan(Match match) async {
     final notifService = ref.read(notificationServiceProvider);
     final repo = await ref.read(matchRepositoryProvider.future);
 
-    // Cancel the scheduled replay reminder.
-    await notifService.cancel(replayNotificationIdFor(match.matchId));
+    final prevEnabled = match.replayPlannerEnabled;
+    final prevPlannedAt = match.replayPlannedAt;
 
-    // Clear plan from match record.
     match.replayPlannerEnabled = false;
     match.replayPlannedAt = null;
-    await repo.upsert(match);
+    try {
+      await repo.upsert(match);
+    } catch (e) {
+      match.replayPlannerEnabled = prevEnabled;
+      match.replayPlannedAt = prevPlannedAt;
+      rethrow;
+    }
+
+    // Cancel the scheduled replay reminder after the record is cleared.
+    await notifService.cancel(replayNotificationIdFor(match.matchId));
 
     state = const ReplayPlanState(enabled: false);
   }

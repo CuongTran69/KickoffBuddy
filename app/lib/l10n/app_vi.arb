@@ -118,7 +118,7 @@
   "magicAdd_btn_save": "Lưu trận đấu",
   "magicAdd_btn_edit": "Chỉnh sửa",
   "magicAdd_snackbar_saved": "Đã thêm trận đấu",
-  "magicAdd_snackbar_error": "Lỗi khi lưu: ",
+  "magicAdd_snackbar_error": "Không thể lưu trận đấu. Vui lòng thử lại.",
 
   "reminder_sheet_title": "Nhắc nhở trước giờ đá",
   "reminder_btn_cancel": "Hủy",
@@ -262,5 +262,46 @@
   "formatGuide_error_load": "Không thể tải thể thức giải đấu",
   "formatGuide_btn_retry": "Thử lại",
   "formatGuide_notFound": "Không tìm thấy mục",
-  "formatGuide_btn_back": "Quay lại"
+  "formatGuide_btn_back": "Quay lại",
+
+  "home_dashboard_title": "Kickoff Buddy",
+  "home_dashboard_subtitle": "Cẩm nang & lịch thi đấu bóng đá tiện ích",
+  "home_action_matches": "Lịch thi đấu",
+  "home_action_standings": "BXH bảng",
+  "home_action_rules": "Cẩm nang luật",
+  "home_action_vocabulary": "Từ vựng",
+  "home_action_magicAdd": "Thêm nhanh",
+  "home_action_manualAdd": "Thêm thủ công",
+  "home_quickLearn_offside_label": "Việt vị",
+  "home_quickLearn_offside_desc": "Luật việt vị cơ bản cho người mới bắt đầu.",
+  "home_quickLearn_penalty_label": "Phạt đền",
+  "home_quickLearn_penalty_desc": "Tìm hiểu khi nào phạt đền xảy ra.",
+  "home_quickLearn_var_label": "VAR",
+  "home_quickLearn_var_desc": "VAR hoạt động như thế nào trong trận?",
+  "home_quickLearn_vocabulary_label": "Từ vựng",
+  "home_quickLearn_vocabulary_desc": "Tra cứu các thuật ngữ bóng đá thông dụng.",
+
+  "settings_resources_title": "Tài nguyên & Tra cứu",
+
+  "reminder_notification_title": "Nhắc trận đấu: còn {label}",
+  "reminder_notification_body": "{teamA} vs {teamB}",
+
+  "replay_notification_title": "Sắp đến giờ xem lại",
+  "replay_notification_body": "{teamA} vs {teamB}",
+
+  "reminder_unit_day": "ngày",
+  "reminder_unit_days": "ngày",
+  "reminder_unit_hour": "giờ",
+  "reminder_unit_hours": "giờ",
+  "reminder_unit_minute": "phút",
+  "reminder_unit_minutes": "phút",
+
+  "spoiler_badge_label": "Bảo vệ",
+
+  "rules_empty_state": "Không có thẻ cho cấp độ này",
+
+  "vocabulary_search_clear_tooltip": "Xóa tìm kiếm",
+
+  "common_error_network": "Lỗi mạng. Vui lòng kiểm tra kết nối và thử lại.",
+  "common_error_generic": "Đã có lỗi xảy ra. Vui lòng thử lại."
 }

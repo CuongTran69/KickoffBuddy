@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/network/error_messages.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/premium_screen_background.dart';
@@ -126,7 +127,7 @@ class StandingsScreen extends ConsumerWidget {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        err.toString(),
+                        friendlyErrorMessage(l10n, err),
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: isDark ? AppColors.darkOnSurfaceMuted : AppColors.lightOnSurfaceMuted,
                         ),

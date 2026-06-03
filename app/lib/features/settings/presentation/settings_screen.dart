@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/routing/routes.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_decorations.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/premium_screen_background.dart';
 import '../application/settings_providers.dart';
@@ -113,7 +114,7 @@ class SettingsScreen extends ConsumerWidget {
 
             // Resources Section Card
             _PremiumSettingsCard(
-              title: locale?.languageCode == 'vi' ? 'Tài nguyên & Tra cứu' : 'Resources & Reference',
+              title: l10n.settings_resources_title,
               icon: Icons.menu_book_outlined,
               child: Column(
                 children: [
@@ -180,30 +181,9 @@ class _PremiumSettingsCard extends StatelessWidget {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    final backgroundColor = isDark
-        ? const Color(0x991E293B) // Slate-800 with 60% opacity
-        : const Color(0xD9FFFFFF); // White with 85% opacity
-    final borderColor = isDark
-        ? AppColors.darkPrimary.withValues(alpha: 0.2)
-        : Colors.white.withValues(alpha: 0.9);
-    final double borderWidth = isDark ? 1.0 : 1.5;
-
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: borderColor, width: borderWidth),
-        boxShadow: [
-          BoxShadow(
-            color: isDark
-                ? Colors.black.withValues(alpha: 0.2)
-                : AppColors.lightPrimary.withValues(alpha: 0.04),
-            blurRadius: 14,
-            offset: const Offset(0, 6),
-          ),
-        ],
-      ),
+      decoration: AppDecorations.glassCard(context),
       child: Padding(
         padding: const EdgeInsets.all(18),
         child: Column(

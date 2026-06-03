@@ -9,6 +9,7 @@ import '../../../../core/theme/app_typography.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../application/team_lookup_service.dart';
 import '../../data/match.dart';
+import '../../data/match_status.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../features/replay_planner/application/shield_status_provider.dart';
 import '../../../../features/replay_planner/presentation/widgets/spoiler_badge.dart';
@@ -55,7 +56,7 @@ class MatchCard extends ConsumerWidget {
 
     final isDark = theme.brightness == Brightness.dark;
     final hasScore = match.scoreA != null && match.scoreB != null;
-    final isLive = match.matchStatus == 'in_progress';
+    final isLive = MatchStatus.fromApi(match.matchStatus).isLive;
     final amberColor =
         isDark ? AppColors.darkAccent : AppColors.lightAccent;
 
@@ -64,7 +65,7 @@ class MatchCard extends ConsumerWidget {
         : const Color(0xD9FFFFFF); // Translucent White
     final cardBorderColor = isToday
         ? amberColor.withValues(alpha: 0.6)
-        : (isDark ? const Color(0x2694A3B8) : const Color(0x2664748B));
+        : (isDark ? AppColors.mutedBorderDark : const Color(0x2664748B));
 
     final double borderWidth = isToday ? 1.8 : (isDark ? 1.0 : 1.5);
 
@@ -175,7 +176,7 @@ class MatchCard extends ConsumerWidget {
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                 decoration: isLive
                                     ? BoxDecoration(
-                                        color: isDark ? const Color(0x33DC2626) : const Color(0x1FDC2626),
+                                        color: isDark ? AppColors.liveIndicatorBgDark : AppColors.liveIndicatorBgLight,
                                         borderRadius: BorderRadius.circular(8),
                                         border: Border.all(color: Colors.redAccent.withValues(alpha: 0.5)),
                                       )

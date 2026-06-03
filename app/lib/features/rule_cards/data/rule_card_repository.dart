@@ -1,8 +1,6 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/data/bundled_json_repository.dart';
 import 'rule_card.dart';
 
 /// Repository for rule cards loaded from the bundled JSON asset.
@@ -10,40 +8,14 @@ import 'rule_card.dart';
 /// Design decisions:
 /// - D1: No Isar — content is read-only and small (~21 cards).
 /// - Lazy load on first [getAll] call; subsequent calls use in-memory cache.
-class RuleCardRepository {
-  List<RuleCard>? _cache;
-
-  /// Load all 21 rule cards from the bundled JSON asset.
-  ///
-  /// First call reads `assets/data/rule_cards.json` via [rootBundle].
-  /// Subsequent calls return the cached list.
-  Future<List<RuleCard>> getAll() async {
-    if (_cache != null) return _cache!;
-
-    try {
-      final jsonString =
-          await rootBundle.loadString('assets/data/rule_cards.json');
-      final jsonMap = json.decode(jsonString) as Map<String, dynamic>;
-      final cardsJson = jsonMap['cards'] as List<dynamic>;
-      _cache = cardsJson
-          .map((e) => RuleCard.fromJson(e as Map<String, dynamic>))
-          .toList();
-      return _cache!;
-    } catch (e) {
-      // Surface error to caller — AsyncValue.error will handle UI state.
-      rethrow;
-    }
-  }
-
-  /// Returns the card with the given [id], or null if not found.
-  Future<RuleCard?> getById(String id) async {
-    final cards = await getAll();
-    try {
-      return cards.firstWhere((c) => c.id == id);
-    } catch (_) {
-      return null;
-    }
-  }
+class RuleCardRepository extends BundledJsonRepository<RuleCard> {
+  RuleCardRepository()
+      : super(
+          assetPath: 'assets/data/rule_cards.json',
+          rootKey: 'cards',
+          fromJson: RuleCard.fromJson,
+          idOf: (card) => card.id,
+        );
 
   /// Returns all cards for the given [topic] (3 cards: newbie, casual, advanced).
   Future<List<RuleCard>> getByTopic(String topic) async {

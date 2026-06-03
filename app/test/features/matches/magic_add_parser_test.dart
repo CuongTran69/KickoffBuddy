@@ -157,4 +157,44 @@ void main() {
       expect(result.originalText, input);
     });
   });
+
+  group('MagicAddParser — date bounds (no silent rollover)', () {
+    test('rejects out-of-range day 6/32 (slash path)', () {
+      final result = parser.parse('Spain vs Portugal, 6/32, 8 PM ET');
+      expect(result.date, isNull);
+    });
+
+    test('rejects day 0 in 6/0 (slash path)', () {
+      final result = parser.parse('Spain vs Portugal, 6/0, 8 PM ET');
+      expect(result.date, isNull);
+    });
+
+    test('rejects day 0 in 6-0 (dash path)', () {
+      final result = parser.parse('Spain vs Portugal, 6-0, 8 PM ET');
+      expect(result.date, isNull);
+    });
+
+    test('rejects out-of-range day in named-month path (June 32)', () {
+      final result = parser.parse('Spain vs Portugal, June 32, 8 PM ET');
+      expect(result.date, isNull);
+    });
+
+    test('accepts boundary day 6/30', () {
+      final result = parser.parse('Spain vs Portugal, 6/30, 8 PM ET');
+      expect(result.date?.month, 6);
+      expect(result.date?.day, 30);
+    });
+
+    test('accepts boundary day 1/1', () {
+      final result = parser.parse('Spain vs Portugal, 1/1, 8 PM ET');
+      expect(result.date?.month, 1);
+      expect(result.date?.day, 1);
+    });
+
+    test('accepts boundary day 1/31', () {
+      final result = parser.parse('Spain vs Portugal, 1/31, 8 PM ET');
+      expect(result.date?.month, 1);
+      expect(result.date?.day, 31);
+    });
+  });
 }

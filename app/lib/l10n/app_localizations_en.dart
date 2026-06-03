@@ -354,7 +354,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get magicAdd_snackbar_saved => 'Match added';
 
   @override
-  String get magicAdd_snackbar_error => 'Error saving: ';
+  String get magicAdd_snackbar_error =>
+      'Could not save the match. Please try again.';
 
   @override
   String get reminder_sheet_title => 'Remind before kickoff';
@@ -764,4 +765,110 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get formatGuide_btn_back => 'Back';
+
+  @override
+  String get home_dashboard_title => 'Kickoff Buddy';
+
+  @override
+  String get home_dashboard_subtitle => 'Your football schedule & guide';
+
+  @override
+  String get home_action_matches => 'Schedule';
+
+  @override
+  String get home_action_standings => 'Standings';
+
+  @override
+  String get home_action_rules => 'Rules';
+
+  @override
+  String get home_action_vocabulary => 'Vocabulary';
+
+  @override
+  String get home_action_magicAdd => 'Quick Add';
+
+  @override
+  String get home_action_manualAdd => 'Manual Add';
+
+  @override
+  String get home_quickLearn_offside_label => 'Offside';
+
+  @override
+  String get home_quickLearn_offside_desc =>
+      'Basic offside rule for beginners.';
+
+  @override
+  String get home_quickLearn_penalty_label => 'Penalty';
+
+  @override
+  String get home_quickLearn_penalty_desc =>
+      'Learn when a penalty kick occurs.';
+
+  @override
+  String get home_quickLearn_var_label => 'VAR';
+
+  @override
+  String get home_quickLearn_var_desc => 'How does VAR work in a match?';
+
+  @override
+  String get home_quickLearn_vocabulary_label => 'Vocabulary';
+
+  @override
+  String get home_quickLearn_vocabulary_desc =>
+      'Look up common football terms.';
+
+  @override
+  String get settings_resources_title => 'Resources & Reference';
+
+  @override
+  String reminder_notification_title(String label) {
+    return 'Match reminder: $label to go';
+  }
+
+  @override
+  String reminder_notification_body(String teamA, String teamB) {
+    return '$teamA vs $teamB';
+  }
+
+  @override
+  String get replay_notification_title => 'Replay time coming up';
+
+  @override
+  String replay_notification_body(String teamA, String teamB) {
+    return '$teamA vs $teamB';
+  }
+
+  @override
+  String get reminder_unit_day => 'day';
+
+  @override
+  String get reminder_unit_days => 'days';
+
+  @override
+  String get reminder_unit_hour => 'hour';
+
+  @override
+  String get reminder_unit_hours => 'hours';
+
+  @override
+  String get reminder_unit_minute => 'minute';
+
+  @override
+  String get reminder_unit_minutes => 'minutes';
+
+  @override
+  String get spoiler_badge_label => 'Protected';
+
+  @override
+  String get rules_empty_state => 'No rule cards available for this level.';
+
+  @override
+  String get vocabulary_search_clear_tooltip => 'Clear search';
+
+  @override
+  String get common_error_network =>
+      'Network error. Please check your connection and try again.';
+
+  @override
+  String get common_error_generic => 'Something went wrong. Please try again.';
 }

@@ -8,6 +8,26 @@ abstract final class Routes {
   static const String matchesAdd = '/matches/add';
   static const String matchesMagicAdd = '/matches/magic-add';
 
+  /// Returns the manual-add route with optional prefill query params.
+  ///
+  /// All values are URL-encoded via [Uri] so team names / source text with
+  /// special characters navigate safely.
+  static String matchesAddWith({
+    String? home,
+    String? away,
+    String? sourceText,
+    String? editMatchId,
+  }) {
+    final params = <String, String>{
+      if (home != null) 'home': home,
+      if (away != null) 'away': away,
+      if (sourceText != null) 'sourceText': sourceText,
+      if (editMatchId != null) 'edit': editMatchId,
+    };
+    if (params.isEmpty) return matchesAdd;
+    return Uri(path: matchesAdd, queryParameters: params).toString();
+  }
+
   /// Returns the path for a match detail screen.
   static String matchDetail(String matchId) => '/matches/$matchId';
 

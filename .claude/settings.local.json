@@ -93,7 +93,11 @@
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\({'incoming_imports': [x['filePath'] for x in d.get\\('incoming',{}\\).get\\('imports',[]\\)], 'incoming_calls': [x['filePath'] for x in d.get\\('incoming',{}\\).get\\('calls',[]\\)]}, indent=2\\)\\)\")",
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); keys=[k for k in d if not k.startswith\\('@'\\)]; print\\(f'Total keys: {len\\(keys\\)}'\\); print\\('Prefixes:'\\); from collections import Counter; c=Counter\\(k.split\\('_'\\)[0] for k in keys\\); [print\\(f'  {p}: {n}'\\) for p,n in sorted\\(c.items\\(\\)\\)]\")",
       "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); keys=[k for k in d if not k.startswith\\('@'\\)]; print\\(f'Total VI keys: {len\\(keys\\)}'\\)\")",
-      "Bash(dart analyze *)"
+      "Bash(dart analyze *)",
+      "Bash(awk 'NR>91')",
+      "Bash(sed -n '86,160p' openspec/specs/live-score-sync/spec.md)",
+      "Bash(sed -n '86,124p' openspec/specs/match-reminders/spec.md)",
+      "Bash(sed -n '6,60p' openspec/specs/replay-planner/spec.md)"
     ]
   }
 }

@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 import '../../../core/routing/routes.dart';
+import '../../../core/network/error_messages.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../l10n/app_localizations.dart';
@@ -13,6 +14,7 @@ import '../../../shared/widgets/premium_screen_background.dart';
 import '../../matches/application/match_mapping.dart';
 import '../../matches/application/team_lookup_service.dart';
 import '../../matches/data/match.dart';
+import '../../matches/data/match_status.dart';
 import '../../matches/presentation/widgets/flag_avatar.dart';
 import '../../reminders/presentation/reminder_sheet.dart';
 import '../../replay_planner/application/shield_status_provider.dart';
@@ -30,6 +32,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final nextMatchAsync = ref.watch(nextMatchProvider);
+    final l10n = AppLocalizations.of(context);
 
     return PremiumScreenBackground(
       child: Scaffold(
@@ -47,10 +50,49 @@ class HomeScreen extends ConsumerWidget {
         ),
         body: nextMatchAsync.when(
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (e, _) => Center(
-            child: Text(e.toString()),
-          ),
+          error: (e, _) {
+            debugPrint('[HomeScreen] nextMatch error: $e');
+            return _HomeErrorState(
+              message: friendlyErrorMessage(l10n, e),
+              onRetry: () => ref.invalidate(nextMatchProvider),
+            );
+          },
           data: (match) => _HomeBody(match: match),
+        ),
+      ),
+    );
+  }
+}
+
+/// Centered error state with a retry button, used for failed home fetches.
+class _HomeErrorState extends StatelessWidget {
+  const _HomeErrorState({required this.message, required this.onRetry});
+
+  final String message;
+  final VoidCallback onRetry;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.cloud_off_outlined, size: 40),
+            const SizedBox(height: 12),
+            Text(
+              message,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            const SizedBox(height: 16),
+            FilledButton.tonal(
+              onPressed: onRetry,
+              child: Text(l10n.formatGuide_btn_retry),
+            ),
+          ],
         ),
       ),
     );
@@ -108,6 +150,11 @@ class _HomeBody extends ConsumerWidget {
     final currentMatches = currentMatchesAsync.valueOrNull ?? [];
     final todayMatches = todayMatchesAsync.valueOrNull ?? [];
 
+    // Surface live-score fetch failures with a retry, distinct from a genuinely
+    // empty result (design D1). The next-match hero still falls back to the
+    // locally-stored match below, so this is a non-blocking inline banner.
+    final liveError = currentMatchesAsync.hasError || todayMatchesAsync.hasError;
+
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 20), // regular padding
       child: Column(
@@ -123,6 +170,18 @@ class _HomeBody extends ConsumerWidget {
           else
             _NoMatchHeroCard(),
 
+          if (liveError)
+            _LiveScoresErrorBanner(
+              message: friendlyErrorMessage(
+                l10n,
+                currentMatchesAsync.error ?? todayMatchesAsync.error ?? Object(),
+              ),
+              onRetry: () {
+                ref.invalidate(currentMatchesProvider);
+                ref.invalidate(todayMatchesProvider);
+              },
+            ),
+
           const SizedBox(height: 16),
 
           if (todayMatches.isNotEmpty)
@@ -131,6 +190,48 @@ class _HomeBody extends ConsumerWidget {
           _SectionHeader(title: l10n.home_section_quickLearn),
           _QuickLearnSection(),
         ],
+      ),
+    );
+  }
+}
+
+/// Inline, dismissible-style banner shown when live/today score fetches fail.
+class _LiveScoresErrorBanner extends StatelessWidget {
+  const _LiveScoresErrorBanner({required this.message, required this.onRetry});
+
+  final String message;
+  final VoidCallback onRetry;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        decoration: BoxDecoration(
+          color: AppColors.errorRed.withValues(alpha: 0.08),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: AppColors.errorRed.withValues(alpha: 0.3)),
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.cloud_off_outlined,
+                size: 18, color: AppColors.errorRed),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                message,
+                style: theme.textTheme.bodySmall,
+              ),
+            ),
+            TextButton(
+              onPressed: onRetry,
+              child: Text(l10n.formatGuide_btn_retry),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -146,6 +247,7 @@ class _DashboardHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
@@ -153,7 +255,7 @@ class _DashboardHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Kickoff Buddy',
+            l10n.home_dashboard_title,
             style: theme.textTheme.headlineMedium?.copyWith(
               fontWeight: FontWeight.w800,
               color: theme.colorScheme.onSurface,
@@ -162,7 +264,7 @@ class _DashboardHeader extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            'Cẩm nang & lịch thi đấu bóng đá tiện ích',
+            l10n.home_dashboard_subtitle,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
               fontWeight: FontWeight.w500,
@@ -179,10 +281,11 @@ class _QuickActionsGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     itemsBuilder(BuildContext context) => [
       _QuickActionItem(
         icon: Icons.calendar_month_outlined,
-        label: 'Lịch thi đấu',
+        label: l10n.home_action_matches,
         onTap: () {
           final shell = StatefulNavigationShell.of(context);
           shell.goBranch(1);
@@ -190,7 +293,7 @@ class _QuickActionsGrid extends StatelessWidget {
       ),
       _QuickActionItem(
         icon: Icons.emoji_events_outlined,
-        label: 'BXH bảng',
+        label: l10n.home_action_standings,
         onTap: () {
           final shell = StatefulNavigationShell.of(context);
           shell.goBranch(2);
@@ -198,7 +301,7 @@ class _QuickActionsGrid extends StatelessWidget {
       ),
       _QuickActionItem(
         icon: Icons.menu_book_outlined,
-        label: 'Cẩm nang luật',
+        label: l10n.home_action_rules,
         onTap: () {
           final shell = StatefulNavigationShell.of(context);
           shell.goBranch(3);
@@ -206,17 +309,17 @@ class _QuickActionsGrid extends StatelessWidget {
       ),
       _QuickActionItem(
         icon: Icons.translate,
-        label: 'Từ vựng',
+        label: l10n.home_action_vocabulary,
         onTap: () => context.push(Routes.vocabulary),
       ),
       _QuickActionItem(
         icon: Icons.auto_fix_high,
-        label: 'Thêm nhanh',
+        label: l10n.home_action_magicAdd,
         onTap: () => context.push(Routes.matchesMagicAdd),
       ),
       _QuickActionItem(
         icon: Icons.add_circle_outline,
-        label: 'Thêm thủ công',
+        label: l10n.home_action_manualAdd,
         onTap: () => context.push(Routes.matchesAdd),
       ),
     ];
@@ -695,20 +798,6 @@ class _QuickLearnCard extends StatelessWidget {
 
   final String ruleId;
 
-  static const _labels = {
-    'offside_newbie': 'Việt vị',
-    'penalty_newbie': 'Phạt đền',
-    'var_newbie': 'VAR',
-    'vocabulary': 'Từ vựng',
-  };
-
-  static const _descriptions = {
-    'offside_newbie': 'Luật việt vị cơ bản cho người mới bắt đầu.',
-    'penalty_newbie': 'Tìm hiểu khi nào phạt đền xảy ra.',
-    'var_newbie': 'VAR hoạt động như thế nào trong trận?',
-    'vocabulary': 'Tra cứu các thuật ngữ bóng đá thông dụng.',
-  };
-
   static const _icons = {
     'offside_newbie': Icons.sports,
     'penalty_newbie': Icons.sports_soccer,
@@ -716,11 +805,42 @@ class _QuickLearnCard extends StatelessWidget {
     'vocabulary': Icons.translate,
   };
 
+  String _labelFor(AppLocalizations l10n) {
+    switch (ruleId) {
+      case 'offside_newbie':
+        return l10n.home_quickLearn_offside_label;
+      case 'penalty_newbie':
+        return l10n.home_quickLearn_penalty_label;
+      case 'var_newbie':
+        return l10n.home_quickLearn_var_label;
+      case 'vocabulary':
+        return l10n.home_quickLearn_vocabulary_label;
+      default:
+        return ruleId;
+    }
+  }
+
+  String _descriptionFor(AppLocalizations l10n) {
+    switch (ruleId) {
+      case 'offside_newbie':
+        return l10n.home_quickLearn_offside_desc;
+      case 'penalty_newbie':
+        return l10n.home_quickLearn_penalty_desc;
+      case 'var_newbie':
+        return l10n.home_quickLearn_var_desc;
+      case 'vocabulary':
+        return l10n.home_quickLearn_vocabulary_desc;
+      default:
+        return '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final label = _labels[ruleId] ?? ruleId;
-    final desc = _descriptions[ruleId] ?? '';
+    final l10n = AppLocalizations.of(context);
+    final label = _labelFor(l10n);
+    final desc = _descriptionFor(l10n);
     final icon = _icons[ruleId] ?? Icons.menu_book_outlined;
     final isDark = theme.brightness == Brightness.dark;
 
@@ -1223,7 +1343,7 @@ class _TodayMatchCard extends ConsumerWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    if (match.status != 'future_scheduled')
+                    if (!MatchStatus.fromApi(match.status).isScheduled)
                       Text(
                         '${match.homeTeam.goals}',
                         style: AppTypography.tabularNumbers(
@@ -1249,7 +1369,7 @@ class _TodayMatchCard extends ConsumerWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    if (match.status != 'future_scheduled')
+                    if (!MatchStatus.fromApi(match.status).isScheduled)
                       Text(
                         '${match.awayTeam.goals}',
                         style: AppTypography.tabularNumbers(
@@ -1270,23 +1390,27 @@ class _TodayMatchCard extends ConsumerWidget {
   Widget _buildStatusPill(BuildContext context, ApiMatch match, String timeStr) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context);
+    final status = MatchStatus.fromApi(match.status);
 
-    if (match.status == 'in_progress') {
+    if (status.isLive) {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
         decoration: BoxDecoration(
-          color: isDark ? const Color(0x33DC2626) : const Color(0x1FDC2626),
+          color: isDark
+              ? AppColors.liveIndicatorBgDark
+              : AppColors.liveIndicatorBgLight,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(color: Colors.redAccent.withValues(alpha: 0.5)),
         ),
-        child: const Row(
+        child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _PulsingDot(color: Colors.red),
-            SizedBox(width: 4),
+            const _PulsingDot(color: Colors.red),
+            const SizedBox(width: 4),
             Text(
-              'LIVE',
-              style: TextStyle(
+              l10n.matchDetail_status_live,
+              style: const TextStyle(
                 color: Colors.redAccent,
                 fontSize: 9,
                 fontWeight: FontWeight.bold,
@@ -1297,15 +1421,17 @@ class _TodayMatchCard extends ConsumerWidget {
       );
     }
 
-    if (match.status == 'completed') {
+    if (status.isCompleted) {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
         decoration: BoxDecoration(
-          color: isDark ? const Color(0x2694A3B8) : const Color(0x1F64748B),
+          color: isDark
+              ? AppColors.mutedBorderDark
+              : AppColors.mutedBorderLight,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Text(
-          'FT',
+          l10n.matchDetail_status_ft,
           style: theme.textTheme.bodySmall?.copyWith(
             color: isDark ? AppColors.darkOnSurfaceMuted : AppColors.lightOnSurfaceMuted,
             fontSize: 9,

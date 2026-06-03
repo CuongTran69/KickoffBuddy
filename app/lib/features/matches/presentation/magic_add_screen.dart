@@ -12,7 +12,6 @@ import '../application/magic_add_parser.dart';
 import '../data/match.dart';
 import '../data/match_repository.dart';
 import '../../../features/reminders/application/reminder_scheduler.dart';
-import 'manual_add_screen.dart';
 
 /// Magic Add screen — paste a match snippet and let the regex parser extract it.
 ///
@@ -178,13 +177,11 @@ class _MagicAddScreenState extends ConsumerState<MagicAddScreen> {
   }
 
   void _goToManualAdd(BuildContext context, MagicAddResult result) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => ManualAddScreen(
-          prefillHome: result.teamA,
-          prefillAway: result.teamB,
-          prefillSourceText: result.originalText,
-        ),
+    context.push(
+      Routes.matchesAddWith(
+        home: result.teamA,
+        away: result.teamB,
+        sourceText: result.originalText,
       ),
     );
   }
@@ -294,22 +291,21 @@ class _ConfirmationCard extends ConsumerWidget {
         context.go(Routes.matches);
       }
     } catch (e) {
+      debugPrint('[MagicAddScreen] save error: $e');
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${AppLocalizations.of(context).magicAdd_snackbar_error}$e')),
+          SnackBar(content: Text(AppLocalizations.of(context).magicAdd_snackbar_error)),
         );
       }
     }
   }
 
   void _edit(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => ManualAddScreen(
-          prefillHome: result.teamA,
-          prefillAway: result.teamB,
-          prefillSourceText: result.originalText,
-        ),
+    context.push(
+      Routes.matchesAddWith(
+        home: result.teamA,
+        away: result.teamB,
+        sourceText: result.originalText,
       ),
     );
   }

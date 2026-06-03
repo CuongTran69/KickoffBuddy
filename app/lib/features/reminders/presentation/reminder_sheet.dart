@@ -9,6 +9,7 @@ import '../../../features/matches/data/match.dart';
 import '../../../l10n/app_localizations.dart';
 import '../application/reminder_controller.dart';
 import '../application/reminder_scheduler.dart';
+import 'reminder_l10n.dart';
 import 'widgets/reminder_offset_chip.dart';
 
 const _kPermissionKey = 'notification_permission_decision';
@@ -137,13 +138,23 @@ Future<void> _showExactAlarmDialog(BuildContext context) async {
 }
 
 /// The actual bottom sheet content widget.
-class _ReminderSheetContent extends ConsumerWidget {
+class _ReminderSheetContent extends ConsumerStatefulWidget {
   const _ReminderSheetContent({required this.match});
 
   final Match match;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_ReminderSheetContent> createState() =>
+      _ReminderSheetContentState();
+}
+
+class _ReminderSheetContentState extends ConsumerState<_ReminderSheetContent> {
+  bool _isSaving = false;
+
+  Match get match => widget.match;
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(reminderControllerProvider(match.matchId));
     final controller =
         ref.read(reminderControllerProvider(match.matchId).notifier);
@@ -184,7 +195,7 @@ class _ReminderSheetContent extends ConsumerWidget {
               return ReminderOffsetChip(
                 offsetMinutes: offset,
                 selected: state.selectedOffsets.contains(offset),
-                onTap: () => controller.toggleOffset(offset),
+                onTap: _isSaving ? () {} : () => controller.toggleOffset(offset),
               );
             }).toList(),
           ),
@@ -193,15 +204,22 @@ class _ReminderSheetContent extends ConsumerWidget {
             children: [
               Expanded(
                 child: OutlinedButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed:
+                      _isSaving ? null : () => Navigator.pop(context),
                   child: Text(l10n.reminder_btn_cancel),
                 ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: FilledButton(
-                  onPressed: () => _save(context, ref, l10n),
-                  child: Text(l10n.reminder_btn_save),
+                  onPressed: _isSaving ? null : () => _save(l10n),
+                  child: _isSaving
+                      ? const SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : Text(l10n.reminder_btn_save),
                 ),
               ),
             ],
@@ -211,12 +229,35 @@ class _ReminderSheetContent extends ConsumerWidget {
     );
   }
 
-  Future<void> _save(BuildContext context, WidgetRef ref, AppLocalizations l10n) async {
+  Future<void> _save(AppLocalizations l10n) async {
+    if (_isSaving) return;
+    setState(() => _isSaving = true);
+
     final controller =
         ref.read(reminderControllerProvider(match.matchId).notifier);
-    final result = await controller.save(match.matchId);
 
-    if (!context.mounted) return;
+    ReminderSaveResult result;
+    try {
+      result = await controller.save(
+        match.matchId,
+        notificationTitleBuilder: (label) =>
+            l10n.reminder_notification_title(label),
+        notificationBody:
+            l10n.reminder_notification_body(match.teamA, match.teamB),
+        labelFor: l10n.offsetLabelLocalized,
+      );
+    } catch (e) {
+      debugPrint('[ReminderSheet] save error: $e');
+      if (mounted) {
+        setState(() => _isSaving = false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.common_error_generic)),
+        );
+      }
+      return;
+    }
+
+    if (!mounted) return;
     Navigator.pop(context);
 
     if (result.scheduled.isEmpty && result.skipped.isEmpty) {
@@ -226,7 +267,7 @@ class _ReminderSheetContent extends ConsumerWidget {
       );
     } else if (result.skipped.isNotEmpty) {
       final skippedLabels =
-          result.skipped.map(offsetLabel).join(', ');
+          result.skipped.map(l10n.offsetLabelLocalized).join(', ');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(l10n.reminder_snackbar_skipped(skippedLabels)),

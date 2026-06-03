@@ -758,10 +758,10 @@ abstract class AppLocalizations {
   /// **'Match added'**
   String get magicAdd_snackbar_saved;
 
-  /// Magic Add snackbar error prefix
+  /// Magic Add snackbar error message shown when saving a match fails
   ///
   /// In en, this message translates to:
-  /// **'Error saving: '**
+  /// **'Could not save the match. Please try again.'**
   String get magicAdd_snackbar_error;
 
   /// Reminder bottom sheet title
@@ -1525,6 +1525,198 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Back'**
   String get formatGuide_btn_back;
+
+  /// home_dashboard_purpose: Dashboard header title shown on the home screen
+  ///
+  /// In en, this message translates to:
+  /// **'Kickoff Buddy'**
+  String get home_dashboard_title;
+
+  /// home_dashboard_purpose: Dashboard header subtitle tagline on the home screen
+  ///
+  /// In en, this message translates to:
+  /// **'Your football schedule & guide'**
+  String get home_dashboard_subtitle;
+
+  /// home_quickAction_purpose: Quick action label for match schedule
+  ///
+  /// In en, this message translates to:
+  /// **'Schedule'**
+  String get home_action_matches;
+
+  /// home_quickAction_purpose: Quick action label for standings
+  ///
+  /// In en, this message translates to:
+  /// **'Standings'**
+  String get home_action_standings;
+
+  /// home_quickAction_purpose: Quick action label for football rules
+  ///
+  /// In en, this message translates to:
+  /// **'Rules'**
+  String get home_action_rules;
+
+  /// home_quickAction_purpose: Quick action label for vocabulary
+  ///
+  /// In en, this message translates to:
+  /// **'Vocabulary'**
+  String get home_action_vocabulary;
+
+  /// home_quickAction_purpose: Quick action label for magic add
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Add'**
+  String get home_action_magicAdd;
+
+  /// home_quickAction_purpose: Quick action label for manual add
+  ///
+  /// In en, this message translates to:
+  /// **'Manual Add'**
+  String get home_action_manualAdd;
+
+  /// home_quickLearn_purpose: Quick learn card label for offside rule
+  ///
+  /// In en, this message translates to:
+  /// **'Offside'**
+  String get home_quickLearn_offside_label;
+
+  /// home_quickLearn_purpose: Quick learn card description for offside
+  ///
+  /// In en, this message translates to:
+  /// **'Basic offside rule for beginners.'**
+  String get home_quickLearn_offside_desc;
+
+  /// home_quickLearn_purpose: Quick learn card label for penalty rule
+  ///
+  /// In en, this message translates to:
+  /// **'Penalty'**
+  String get home_quickLearn_penalty_label;
+
+  /// home_quickLearn_purpose: Quick learn card description for penalty
+  ///
+  /// In en, this message translates to:
+  /// **'Learn when a penalty kick occurs.'**
+  String get home_quickLearn_penalty_desc;
+
+  /// home_quickLearn_purpose: Quick learn card label for VAR
+  ///
+  /// In en, this message translates to:
+  /// **'VAR'**
+  String get home_quickLearn_var_label;
+
+  /// home_quickLearn_purpose: Quick learn card description for VAR
+  ///
+  /// In en, this message translates to:
+  /// **'How does VAR work in a match?'**
+  String get home_quickLearn_var_desc;
+
+  /// home_quickLearn_purpose: Quick learn card label for vocabulary
+  ///
+  /// In en, this message translates to:
+  /// **'Vocabulary'**
+  String get home_quickLearn_vocabulary_label;
+
+  /// home_quickLearn_purpose: Quick learn card description for vocabulary
+  ///
+  /// In en, this message translates to:
+  /// **'Look up common football terms.'**
+  String get home_quickLearn_vocabulary_desc;
+
+  /// settings_resources_purpose: Settings screen section title for resources and reference links
+  ///
+  /// In en, this message translates to:
+  /// **'Resources & Reference'**
+  String get settings_resources_title;
+
+  /// reminder_notification_purpose: Notification title for a match reminder, with time label
+  ///
+  /// In en, this message translates to:
+  /// **'Match reminder: {label} to go'**
+  String reminder_notification_title(String label);
+
+  /// reminder_notification_purpose: Notification body for a match reminder showing the teams
+  ///
+  /// In en, this message translates to:
+  /// **'{teamA} vs {teamB}'**
+  String reminder_notification_body(String teamA, String teamB);
+
+  /// replay_notification_purpose: Notification title for an upcoming replay reminder
+  ///
+  /// In en, this message translates to:
+  /// **'Replay time coming up'**
+  String get replay_notification_title;
+
+  /// replay_notification_purpose: Notification body for an upcoming replay showing the teams
+  ///
+  /// In en, this message translates to:
+  /// **'{teamA} vs {teamB}'**
+  String replay_notification_body(String teamA, String teamB);
+
+  /// reminder_offset_purpose: Unit word for a single day in offset labels
+  ///
+  /// In en, this message translates to:
+  /// **'day'**
+  String get reminder_unit_day;
+
+  /// reminder_offset_purpose: Unit word for multiple days in offset labels
+  ///
+  /// In en, this message translates to:
+  /// **'days'**
+  String get reminder_unit_days;
+
+  /// reminder_offset_purpose: Unit word for a single hour in offset labels
+  ///
+  /// In en, this message translates to:
+  /// **'hour'**
+  String get reminder_unit_hour;
+
+  /// reminder_offset_purpose: Unit word for multiple hours in offset labels
+  ///
+  /// In en, this message translates to:
+  /// **'hours'**
+  String get reminder_unit_hours;
+
+  /// reminder_offset_purpose: Unit word for a single minute in offset labels
+  ///
+  /// In en, this message translates to:
+  /// **'minute'**
+  String get reminder_unit_minute;
+
+  /// reminder_offset_purpose: Unit word for multiple minutes in offset labels
+  ///
+  /// In en, this message translates to:
+  /// **'minutes'**
+  String get reminder_unit_minutes;
+
+  /// spoiler_badge_purpose: Label shown on the spoiler protection badge
+  ///
+  /// In en, this message translates to:
+  /// **'Protected'**
+  String get spoiler_badge_label;
+
+  /// rules_emptyState_purpose: Empty state message when no rule cards exist for the selected level
+  ///
+  /// In en, this message translates to:
+  /// **'No rule cards available for this level.'**
+  String get rules_empty_state;
+
+  /// vocabulary_search_purpose: Accessibility tooltip for the clear button in the vocabulary search bar
+  ///
+  /// In en, this message translates to:
+  /// **'Clear search'**
+  String get vocabulary_search_clear_tooltip;
+
+  /// common_error_purpose: User-facing message for network connectivity failures
+  ///
+  /// In en, this message translates to:
+  /// **'Network error. Please check your connection and try again.'**
+  String get common_error_network;
+
+  /// common_error_purpose: User-facing message for generic unexpected errors
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get common_error_generic;
 }
 
 class _AppLocalizationsDelegate

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../../../../l10n/app_localizations.dart';
+
 /// Small badge shown on match cards when the spoiler shield is active.
 ///
-/// Displays a shield icon and "Bảo vệ" label with neutral surface styling.
+/// Displays a shield icon and a "protected" label with neutral surface styling.
 class SpoilerBadge extends StatelessWidget {
   const SpoilerBadge({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
@@ -28,7 +31,7 @@ class SpoilerBadge extends StatelessWidget {
           ),
           const SizedBox(width: 3),
           Text(
-            'Bảo vệ',
+            l10n.spoiler_badge_label,
             style: theme.textTheme.labelSmall?.copyWith(
               color: theme.colorScheme.onSurfaceVariant,
               fontSize: 10,

@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,7 +30,9 @@ class UserMatchesController extends Notifier<Set<String>> {
   void add(String matchId) {
     final updated = {...state, matchId};
     state = updated;
-    _persist(updated);
+    // Fire-and-forget but observed: failures are logged (design D12). State is
+    // updated optimistically — acceptable tradeoff for a local selection set.
+    unawaited(_persist(updated));
     // Fire analytics event.
     ref
         .read(analyticsServiceProvider)
@@ -38,7 +43,7 @@ class UserMatchesController extends Notifier<Set<String>> {
   void remove(String matchId) {
     final updated = {...state}..remove(matchId);
     state = updated;
-    _persist(updated);
+    unawaited(_persist(updated));
   }
 
   /// Toggles [matchId] in the selection.
@@ -53,8 +58,17 @@ class UserMatchesController extends Notifier<Set<String>> {
   /// Returns true if [matchId] is in the selection.
   bool contains(String matchId) => state.contains(matchId);
 
-  void _persist(Set<String> ids) {
-    _prefs.setStringList(_myMatchesKey, ids.toList());
+  /// Persists [ids] to SharedPreferences, awaiting the write and logging on
+  /// failure (design D12). Returns when the write completes or fails.
+  Future<void> _persist(Set<String> ids) async {
+    try {
+      final ok = await _prefs.setStringList(_myMatchesKey, ids.toList());
+      if (!ok) {
+        debugPrint('[UserMatchesController] _persist returned false');
+      }
+    } catch (e) {
+      debugPrint('[UserMatchesController] _persist error: $e');
+    }
   }
 }
 
